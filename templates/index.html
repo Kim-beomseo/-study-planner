@@ -3,122 +3,736 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 맞춤형 학습 플래너 (AI Study Planner)</title>
+    <title>에듀윌 AI 맞춤형 학습 플래너 | 단기합격 커리큘럼 & 종합 수험센터</title>
+    <!-- Favicon -->
+    <link rel="icon" href="//img.eduwill.net/Img2/Common/favicon/favicon.svg" type="image/x-icon">
+    <!-- Web Font (Pretendard) -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <!-- 마크다운 렌더링 라이브러리 (Marked.js) -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <!-- 헤더 영역 -->
-        <header class="header">
-            <div class="badge">Google Gemini 3.5 Flash Lite & Serper API</div>
-            <h1>📚 AI 학습 플래너</h1>
-            <p class="subtitle">최신 시험 경향과 실시간 검색 데이터를 반영한 나만의 맞춤형 공부 로드맵</p>
-        </header>
+    <!-- 1. 에듀윌 최상단 유틸리티 GNB 바 -->
+    <div class="top-util-bar">
+        <div class="container util-container">
+            <div class="util-left">
+                <span class="cert-badge">🏆 합격자 수 1위 에듀윌</span>
+                <span class="util-notice">2026 국가공인 자격증 & 공무원 최신 출제기준 100% 반영</span>
+            </div>
+            <div class="util-right" id="userUtilArea">
+                <!-- 비로그인 상태 기본 UI -->
+                <a href="javascript:void(0);" id="openLoginBtn">로그인</a>
+                <span class="bar">|</span>
+                <a href="javascript:void(0);" id="openRegisterBtn">회원가입</a>
+                <span class="bar">|</span>
+                <a href="javascript:void(0);" id="openCsBtn">고객만족센터 <strong>1600-6700</strong></a>
+                <span class="bar">|</span>
+                <a href="javascript:void(0);" class="nav-tab-trigger highlight" data-target="view-reviews">실시간 합격수기</a>
+            </div>
+        </div>
+    </div>
 
-        <!-- 메인 콘텐츠 그리드 -->
-        <div class="main-layout">
-            <!-- 입력 폼 카드 -->
+    <!-- 2. 에듀윌 메인 헤더 & 네비게이션 -->
+    <header class="eduwill-header">
+        <div class="container gnb-container">
+            <div class="logo-area">
+                <a href="javascript:void(0);" class="logo-link nav-tab-trigger" data-target="view-planner">
+                    <span class="logo-symbol">eduwill</span>
+                    <span class="logo-service">AI 학습플래너</span>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <a href="javascript:void(0);" class="nav-item nav-tab-trigger active" data-target="view-planner">AI 맞춤 플래너</a>
+                <a href="javascript:void(0);" class="nav-item nav-tab-trigger" data-target="view-license">자격증 과정</a>
+                <a href="javascript:void(0);" class="nav-item nav-tab-trigger" data-target="view-gov">공무원 과정</a>
+                <a href="javascript:void(0);" class="nav-item nav-tab-trigger" data-target="view-toeic">토익/취업</a>
+                <a href="javascript:void(0);" class="nav-item nav-tab-trigger" data-target="view-books">교재/수험서</a>
+                <a href="javascript:void(0);" class="nav-item nav-tab-trigger" data-target="view-predict">합격예측 풀서비스</a>
+            </nav>
+            <div class="header-right">
+                <span class="badge-gemini">Gemini 3.5 & Serper 연동</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. 에듀윌 시그니처 옐로우 히어로 배너 -->
+    <section class="hero-banner">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <div class="hero-tag" id="heroTag">2026 합격의 공식, 에듀윌 AI 케어</div>
+                <h2 id="heroTitle">합격까지 가장 빠른 지름길,<br><span class="hero-highlight">AI 1:1 맞춤 단기합격 플래너</span></h2>
+                <p id="heroDesc">빅데이터 분석과 실시간 기출 트렌드(Serper API)를 결합하여<br>에빙하우스 망각곡선 기반 최적의 합격 로드맵을 즉시 설계해 드립니다.</p>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-box">
+                    <span class="stat-num">98.4%</span>
+                    <span class="stat-label">목표 달성 만족도</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num">1:1 맞춤</span>
+                    <span class="stat-label">AI 수험 멘토링</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-num">실시간</span>
+                    <span class="stat-label">최신 시험정보 반영</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 메인 탭 콘텐츠 뷰 (각 메뉴 클릭 시 노출) -->
+    <!-- ========================================================================= -->
+
+    <!-- [뷰 1] AI 맞춤 플래너 (기존 메인) -->
+    <main id="view-planner" class="tab-view active">
+        <div class="container main-layout">
+            <!-- 왼쪽: 합격 설계 입력 폼 -->
             <section class="card form-card">
-                <h2>✍️ 학습 정보 입력</h2>
+                <div class="form-header">
+                    <span class="section-badge">STEP 01</span>
+                    <h2>📋 합격 진단 및 학습 정보 입력</h2>
+                    <p class="section-desc">정확한 정보를 입력할수록 나에게 최적화된 플랜이 완성됩니다.</p>
+                </div>
+
                 <form id="plannerForm">
                     <!-- 1. 학습 목표 -->
                     <div class="form-group">
-                        <label for="goal">1. 학습 목표 (시험 / 과목명)</label>
-                        <input type="text" id="goal" name="goal" placeholder="예: 토익 850점 달성, 정보처리기사 실기, 수능 수학 1등급" required>
+                        <label for="goal">
+                            <span class="req">*</span> 1. 목표 시험 / 과정명
+                        </label>
+                        <input type="text" id="goal" name="goal" placeholder="예: 재경관리사, 공인중개사, 9급 일반행정직, 토익 850+" required>
                     </div>
 
-                    <!-- 2. 목표 시험일/마감일 -->
+                    <!-- 2. 목표 시험일 -->
                     <div class="form-group">
-                        <label for="exam_date">2. 목표 시험일 / 마감일</label>
+                        <label for="exam_date">
+                            <span class="req">*</span> 2. 목표 시험일 / D-Day
+                        </label>
                         <input type="date" id="exam_date" name="exam_date" required>
                     </div>
 
                     <!-- 3. 현재 수준 -->
                     <div class="form-group">
-                        <label for="current_level">3. 현재 수준 및 상태</label>
-                        <input type="text" id="current_level" name="current_level" placeholder="예: 노베이스, 기본 개념만 1회독, 최근 모의고사 650점" required>
+                        <label for="current_level">
+                            <span class="req">*</span> 3. 현재 수험 수준 및 학습 베이스
+                        </label>
+                        <input type="text" id="current_level" name="current_level" placeholder="예: 비전공자 노베이스, 기본서 1회독 완료, 모의고사 60점대" required>
                     </div>
 
                     <!-- 4. 하루 가능시간 -->
                     <div class="form-group">
-                        <label for="daily_time">4. 하루 투자 가능 시간</label>
-                        <input type="text" id="daily_time" name="daily_time" placeholder="예: 평일 3시간 / 주말 6시간, 하루 순공 4시간" required>
+                        <label for="daily_time">
+                            <span class="req">*</span> 4. 하루 순수 공부 가능 시간 (순공시간)
+                        </label>
+                        <input type="text" id="daily_time" name="daily_time" placeholder="예: 직장인 평일 3시간 / 주말 7시간, 전업 수험생 8시간" required>
                     </div>
 
                     <!-- 5. 취약영역 -->
                     <div class="form-group">
-                        <label for="weak_point">5. 가장 취약한 영역 / 고민</label>
-                        <input type="text" id="weak_point" name="weak_point" placeholder="예: Part 7 독해 시간 부족, 알고리즘 구현력, 킬러 문항" required>
+                        <label for="weak_point">
+                            <span class="req">*</span> 5. 가장 취약한 영역 / 과목별 고민
+                        </label>
+                        <input type="text" id="weak_point" name="weak_point" placeholder="예: 원가관리회계 계산문제, 민법 판례 암기, 영단어 어휘력 부족" required>
                     </div>
 
                     <!-- 6. 선호 학습방식 -->
                     <div class="form-group">
-                        <label for="study_style">6. 선호하는 학습 방식</label>
-                        <select id="study_style" name="study_style" required>
-                            <option value="인강 + 핵심 요약 복습">인터넷 강의 중심 + 핵심 요약 복습</option>
-                            <option value="기출문제 다회독 + 오답노트">기출문제 다회독 + 철저한 오답노트</option>
-                            <option value="기본서 정독 + 문제풀이 병행">기본서 정독 + 챕터별 문제풀이 병행</option>
-                            <option value="요약본 암기 + 실전 모의고사 반복">요약본 단권화 암기 + 실전 모의고사 집중</option>
-                        </select>
+                        <label for="study_style">
+                            <span class="req">*</span> 6. 선호하는 합격 커리큘럼 방식
+                        </label>
+                        <div class="select-wrapper">
+                            <select id="study_style" name="study_style" required>
+                                <option value="인강 + 핵심 요약 복습">에듀윌 교수진 인강 중심 + 핵심 요약 복습</option>
+                                <option value="기출문제 다회독 + 오답노트">기출 5개년 무한 다회독 + 철저한 오답 단권화</option>
+                                <option value="기본서 정독 + 문제풀이 병행">기본서 정독 + 진도별 기출 풀이 병행</option>
+                                <option value="요약본 암기 + 실전 모의고사 반복">핵심 요약노트 암기 + 실전 모의고사 풀서비스</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <!-- 코칭 스타일 선택 (페르소나) -->
+                    <!-- 코칭 스타일 (페르소나) -->
                     <div class="form-group">
-                        <label>7. 코칭 스타일 선택</label>
-                        <div class="radio-group">
-                            <label class="radio-card">
+                        <label>
+                            <span class="req">*</span> 7. AI 수험 교수진 코칭 모드 선택
+                        </label>
+                        <div class="persona-grid">
+                            <label class="persona-card">
                                 <input type="radio" name="persona" value="mentor" checked>
-                                <div class="radio-content">
-                                    <span class="radio-title">🌱 따뜻한 멘토</span>
-                                    <span class="radio-desc">공감과 격려, 현실적인 페이스 메이커</span>
+                                <div class="persona-inner">
+                                    <div class="persona-icon">🌱</div>
+                                    <div class="persona-text">
+                                        <strong>합격 페이스 메이커</strong>
+                                        <span>지치지 않는 멘탈 관리 & 현실적 페이스 조율</span>
+                                    </div>
                                 </div>
                             </label>
-                            <label class="radio-card">
+                            <label class="persona-card">
                                 <input type="radio" name="persona" value="sparta">
-                                <div class="radio-content">
-                                    <span class="radio-title">⚡ 스파르타 코치</span>
-                                    <span class="radio-desc">타협 없는 실행력, 극도의 시간 효율</span>
+                                <div class="persona-inner">
+                                    <div class="persona-icon">⚡</div>
+                                    <div class="persona-text">
+                                        <strong>1타 스파르타 코치</strong>
+                                        <span>타협 없는 순공 확보 & 고밀도 족집게 트레이닝</span>
+                                    </div>
                                 </div>
                             </label>
                         </div>
                     </div>
 
-                    <button type="submit" id="submitBtn" class="btn primary-btn">
-                        🚀 실시간 맞춤 학습 플랜 생성하기
+                    <!-- 에듀윌 시그니처 옐로우 CTA 버튼 -->
+                    <button type="submit" id="submitBtn" class="btn-eduwill-cta">
+                        <span class="btn-icon">⚡</span>
+                        <span class="btn-text">에듀윌 AI 맞춤 합격 플랜 생성하기</span>
                     </button>
                 </form>
             </section>
 
-            <!-- 결과 표시 카드 -->
+            <!-- 오른쪽: 플랜 결과 카드 -->
             <section class="card result-card">
-                <div class="result-header">
-                    <h2>📋 생성된 학습 플랜</h2>
+                <div class="result-top-bar">
+                    <div class="result-title-wrap">
+                        <span class="section-badge badge-black">STEP 02</span>
+                        <h2>🎓 AI 합격 전략 리포트</h2>
+                    </div>
                     <div class="btn-group" id="actionButtons" style="display: none;">
-                        <button id="copyBtn" class="btn secondary-btn" title="마크다운 복사">📋 내용 복사</button>
-                        <button id="downloadBtn" class="btn secondary-btn" title="MD 파일 다운로드">💾 .md 다운로드</button>
+                        <button id="copyBtn" class="btn-sub" title="마크다운 복사">📋 내용 복사</button>
+                        <button id="downloadBtn" class="btn-sub btn-download" title="MD 다운로드">💾 플랜 다운로드 (.md)</button>
                     </div>
                 </div>
 
-                <!-- 로딩 인디케이터 -->
-                <div id="loading" class="loading-state" style="display: none;">
-                    <div class="spinner"></div>
-                    <p class="loading-title">최신 시험 정보 검색 및 플랜 수립 중...</p>
-                    <p class="loading-desc">Serper API로 최신 정보를 탐색하고 Gemini 3.5가 정밀한 주간/일일 로드맵을 작성하고 있습니다.</p>
+                <!-- 로딩 상태 -->
+                <div id="loading" class="loading-wrap" style="display: none;">
+                    <div class="eduwill-spinner"></div>
+                    <h3>실시간 최신 기출 정보 분석 및 커리큘럼 생성 중</h3>
+                    <p class="loading-sub">Serper 실시간 웹 검색과 Gemini 3.5 Flash Lite가 망각곡선 기반 맞춤형 로드맵을 설계하고 있습니다.</p>
+                    <div class="loading-progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
                 </div>
 
-                <!-- 비어있을 때 표시 -->
-                <div id="placeholder" class="placeholder-state">
-                    <div class="placeholder-icon">📖</div>
-                    <p>좌측 양식을 작성하고 버튼을 누르면<br><strong>주간계획, 일일계획, 복습주기, 점검문항, 진도체크, 학습회고</strong>가 포함된<br>전용 학습 플랜이 이곳에 생성됩니다.</p>
+                <!-- 안내 플레이스홀더 -->
+                <div id="placeholder" class="placeholder-wrap">
+                    <div class="pass-seal">
+                        <span class="seal-inner">합격 보장<br>플랜</span>
+                    </div>
+                    <h3>나만의 에듀윌 맞춤 합격 플랜을 확인하세요</h3>
+                    <p>좌측 양식을 작성하고 신청 버튼을 누르시면<br><strong>주간 로드맵, 일일 루틴, 망각곡선 복습 주기, 셀프 테스트, 진도 체크, 합격 회고</strong>가<br>종합 리포트 형태로 즉시 생성됩니다.</p>
                 </div>
 
-                <!-- 실제 결과 렌더링 영역 -->
+                <!-- 마크다운 렌더링 영역 -->
                 <div id="resultContent" class="markdown-body" style="display: none;"></div>
             </section>
         </div>
+    </main>
+
+    <!-- [뷰 2] 자격증 과정 상세 안내 및 1-Click 연동 -->
+    <section id="view-license" class="tab-view">
+        <div class="container section-inner">
+            <div class="section-heading">
+                <span class="section-badge">국가공인 자격증</span>
+                <h2>🏆 에듀윌 대표 자격증 단기합격 커리큘럼</h2>
+                <p>원하는 자격증을 선택하면 [AI 플래너]에 시험 정보가 자동 입력되어 즉시 맞춤 계획을 세울 수 있습니다.</p>
+            </div>
+
+            <div class="course-grid">
+                <!-- 카드 1: 재경관리사 -->
+                <div class="course-card">
+                    <div class="card-tag tag-hot">인기 급상승</div>
+                    <h3>재경관리사 (재무·세무·원가)</h3>
+                    <p class="card-desc">삼일회계법인 공인 시험. 비전공자도 2개월 단기합격 가능한 핵심 3과목 압축 커리큘럼.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 주기:</strong> 연 8회 시행 (1·3·5·6·7·9·11·12월)</li>
+                        <li><strong>합격 기준:</strong> 전 과목 70점 이상 합격</li>
+                        <li><strong>추천 대상:</strong> 대기업/공기업 재무팀 취업 준비생</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="재경관리사 (삼일회계법인)" data-date="2026-11-21" data-weak="원가관리회계 계산식, 세무조정">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 카드 2: 공인중개사 -->
+                <div class="course-card best-seller">
+                    <div class="card-tag tag-best">에듀윌 1위</div>
+                    <h3>공인중개사 1·2차 동차</h3>
+                    <p class="card-desc">대한민국 최다 합격자 배출! 10개년 기출 빅데이터와 부동산학개론/민법 1타 교수진 라인업.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 주기:</strong> 매년 10월 마지막 주 토요일</li>
+                        <li><strong>합격 기준:</strong> 매 과목 40점 이상, 전 과목 평균 60점</li>
+                        <li><strong>추천 대상:</strong> 평생 전문직 및 창업/이직 희망자</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="공인중개사 동차합격" data-date="2026-10-31" data-weak="민법 판례 암기, 부동산공법">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 카드 3: 정보처리기사 -->
+                <div class="course-card">
+                    <div class="card-tag tag-it">IT/공기업 필수</div>
+                    <h3>정보처리기사 (필기/실기)</h3>
+                    <p class="card-desc">NCS 개정 최신 기준 완벽 반영. C/Java/Python 프로그래밍 및 SQL 완벽 대비.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 주기:</strong> 정기기사 연 3회 시행</li>
+                        <li><strong>합격 기준:</strong> 필기 평균 60점 / 실기 60점 이상</li>
+                        <li><strong>추천 대상:</strong> 공기업 가산점 및 IT 개발 직군 취업자</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="정보처리기사 실기" data-date="2026-10-18" data-weak="프로그래밍 코드 해석, SQL문 작성">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 카드 4: 전기기사 -->
+                <div class="course-card">
+                    <div class="card-tag tag-power">취업 프리패스</div>
+                    <h3>전기기사 (전기자기학·회로이론)</h3>
+                    <p class="card-desc">이공계 최고 취업률 자격증! 수포자도 이해하는 회로 해석법과 실기 시퀀스 완벽 특강.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 주기:</strong> 정기기사 연 3회</li>
+                        <li><strong>합격 기준:</strong> 과목당 40점 이상, 평균 60점</li>
+                        <li><strong>추천 대상:</strong> 전기안전관리자 선임 및 공기업 준비생</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="전기기사 필기/실기" data-date="2026-10-25" data-weak="전기자기학 수학공식, 수변전설비">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 카드 5: 소방설비기사 -->
+                <div class="course-card">
+                    <div class="card-tag">선임 유망직종</div>
+                    <h3>소방설비기사 (기계 / 전기)</h3>
+                    <p class="card-desc">소방안전관리 강화로 채용 급증! 핵심 화재안전기준(NFPC/NFTC) 완벽 정리.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 주기:</strong> 정기기사 연 3회</li>
+                        <li><strong>합격 기준:</strong> 평균 60점 이상</li>
+                        <li><strong>추천 대상:</strong> 안전관리자 및 건설/설비 분야</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="소방설비기사(전기/기계)" data-date="2026-11-08" data-weak="소방원론, 구조원리 암기">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 카드 6: 주택관리사 -->
+                <div class="course-card">
+                    <div class="card-tag">정년 없는 평생직</div>
+                    <h3>주택관리사(보)</h3>
+                    <p class="card-desc">아파트 관리소장 채용 의무화. 상대평가 체제에서도 안정적 상위 10% 진입 보장 전략.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 주기:</strong> 1차 7월 / 2차 9월 (연 1회)</li>
+                        <li><strong>합격 기준:</strong> 1차 절대평가, 2차 고득점자순 선발</li>
+                        <li><strong>추천 대상:</strong> 4060 세컨드 라이프 설계자</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="주택관리사 1차/2차" data-date="2026-09-26" data-weak="공동주택관리실무, 회계원리">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [뷰 3] 공무원 과정 상세 안내 -->
+    <section id="view-gov" class="tab-view">
+        <div class="container section-inner">
+            <div class="section-heading">
+                <span class="section-badge badge-black">공무원 합격관</span>
+                <h2>🏛️ 2026 공무원 단기합격 전문 패스</h2>
+                <p>국가직, 지방직, 경찰, 소방 최신 출제 트렌드를 분석하여 과목별 고득점 플랜을 완성합니다.</p>
+            </div>
+
+            <div class="gov-grid">
+                <div class="gov-card">
+                    <div class="gov-badge">국가직 / 지방직</div>
+                    <h3>9급 일반행정직</h3>
+                    <p class="gov-desc">공시생 최선호 직렬! 국어·영어·한국사 + 행정법총론·행정학개론 고득점 5과목 집중 완성.</p>
+                    <div class="gov-info">
+                        <span>🎯 2026 국가직 4월 / 지방직 6월 예정</span>
+                        <span>📈 최근 합격선: 89~92점 형성</span>
+                    </div>
+                    <button class="btn-apply-plan" data-goal="9급 일반행정직 합격" data-date="2026-06-13" data-weak="행정법 판례 최신 지문, 영어 독해">
+                        ⚡ 일반행정 AI 플랜 세우기
+                    </button>
+                </div>
+
+                <div class="gov-card">
+                    <div class="gov-badge">워라밸 1위</div>
+                    <h3>9급 교육행정직</h3>
+                    <p class="gov-desc">학교 및 교육청 근무로 높은 인기. 교육학개론 및 행정법총론 필수 공략 커리큘럼.</p>
+                    <div class="gov-info">
+                        <span>🎯 매년 6월 지방직 동시 시행</span>
+                        <span>📈 최근 합격선: 90점 이상</span>
+                    </div>
+                    <button class="btn-apply-plan" data-goal="9급 교육행정직" data-date="2026-06-13" data-weak="교육학개론 이론 암기, 국어 문법">
+                        ⚡ 교육행정 AI 플랜 세우기
+                    </button>
+                </div>
+
+                <div class="gov-card">
+                    <div class="gov-badge">전문 공직자</div>
+                    <h3>7급 국가직 / 외무영사</h3>
+                    <p class="gov-desc">PSAT(언어논리/자료해석/상황판단) 1차 통과부터 2차 전공 4과목 킬러문항까지 완벽 관리.</p>
+                    <div class="gov-info">
+                        <span>🎯 1차 PSAT 7월 / 2차 10월</span>
+                        <span>📈 한능검 2급 + 토익 790점 사전 필수</span>
+                    </div>
+                    <button class="btn-apply-plan" data-goal="7급 국가직 공무원 (PSAT)" data-date="2026-10-17" data-weak="PSAT 자료해석 연산 속도, 헌법 판례">
+                        ⚡ 7급 국가직 AI 플랜 세우기
+                    </button>
+                </div>
+
+                <div class="gov-card">
+                    <div class="gov-badge">체력·필기 동시관리</div>
+                    <h3>경찰공무원 (순경공채)</h3>
+                    <p class="gov-desc">형사법, 경찰학, 헌법 최신 기출 변형 훈련 및 체력검정 루틴 결합 패스.</p>
+                    <div class="gov-info">
+                        <span>🎯 상반기 3월 / 하반기 8월</span>
+                        <span>📈 검정제(한능검/토익) 사전 충족반</span>
+                    </div>
+                    <button class="btn-apply-plan" data-goal="경찰공무원 순경공채" data-date="2026-08-22" data-weak="형사법 판례 요령, 경찰학 조직법">
+                        ⚡ 경찰 순경 AI 플랜 세우기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [뷰 4] 토익/취업 자격증 -->
+    <section id="view-toeic" class="tab-view">
+        <div class="container section-inner">
+            <div class="section-heading">
+                <span class="section-badge">어학 & 공기업·대기업 취업</span>
+                <h2>📈 스펙 완성! 토익 & 취업 올인원</h2>
+                <p>단기간에 목표 점수를 취득할 수 있는 스펙 완성 코칭을 제공합니다.</p>
+            </div>
+
+            <div class="toeic-grid">
+                <div class="toeic-item">
+                    <div class="toeic-header">
+                        <span class="icon">🎯</span>
+                        <h4>토익 (TOEIC) 850+ 단기 완성</h4>
+                    </div>
+                    <p>Part 5/6 문법 10초 풀이법과 Part 7 이중/삼중 지문 시간 관리 훈련.</p>
+                    <button class="btn-apply-plan btn-sm" data-goal="토익 850점 달성" data-date="2026-11-15" data-weak="Part 7 긴 독해 시간 부족, LC 호주/영국 발음">
+                        플랜 생성
+                    </button>
+                </div>
+
+                <div class="toeic-item">
+                    <div class="toeic-header">
+                        <span class="icon">📜</span>
+                        <h4>한국사능력검정시험 (한능검 1급)</h4>
+                    </div>
+                    <p>2주 초단기 완성! 시대별 흐름 마인드맵과 빈출 사료 100선 완벽 정리.</p>
+                    <button class="btn-apply-plan btn-sm" data-goal="한국사능력검정시험 심화 1급" data-date="2026-10-24" data-weak="근현대사 단체명 암기, 조선후기 문화사">
+                        플랜 생성
+                    </button>
+                </div>
+
+                <div class="toeic-item">
+                    <div class="toeic-header">
+                        <span class="icon">💻</span>
+                        <h4>컴퓨터활용능력 1급 (컴활 실기)</h4>
+                    </div>
+                    <p>엑셀 함수식 계산작업 및 액세스 프로시저 1:1 오류 디버깅 맞춤 코칭.</p>
+                    <button class="btn-apply-plan btn-sm" data-goal="컴퓨터활용능력 1급 실기" data-date="2026-10-30" data-weak="엑셀 배열수식/Lookup 함수, 액세스 쿼리">
+                        플랜 생성
+                    </button>
+                </div>
+
+                <div class="toeic-item">
+                    <div class="toeic-header">
+                        <span class="icon">🏢</span>
+                        <h4>NCS 직업기초능력평가 (공기업)</h4>
+                    </div>
+                    <p>의사소통·수리·문제해결능력 1문항 1분 돌파 스킬 및 모듈형 완벽 대비.</p>
+                    <button class="btn-apply-plan btn-sm" data-goal="공기업 NCS 직업기초능력" data-date="2026-11-28" data-weak="수리능력 응용수리 계산, 문제해결 조건추리">
+                        플랜 생성
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [뷰 5] 교재/수험서 베스트셀러 스토어 -->
+    <section id="view-books" class="tab-view">
+        <div class="container section-inner">
+            <div class="section-heading">
+                <span class="section-badge">예스24 / 교보문고 1위</span>
+                <h2>📚 2026 에듀윌 합격 수험서 베스트셀러</h2>
+                <p>10년 연속 합격자 수 1위 에듀윌의 적중률 높은 수험서 라인업을 만나보세요.</p>
+            </div>
+
+            <div class="book-grid">
+                <div class="book-card">
+                    <div class="book-cover book-c1">
+                        <span class="book-label">2026 신간</span>
+                        <h4>재경관리사<br>한권끝장 기본서</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>2026 에듀윌 재경관리사 3과목 한권끝장</h5>
+                        <p class="book-author">에듀윌 세무/회계 교수진 편저</p>
+                        <p class="book-price"><strong>34,200원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="2026 에듀윌 재경관리사 한권끝장">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-cover book-c2">
+                        <span class="book-label">베스트 1위</span>
+                        <h4>공인중개사<br>1차 핵심요약집</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>2026 공인중개사 1차 단기완성 핵심요약집</h5>
+                        <p class="book-author">부동산학개론 이영방 / 민법 심정욱</p>
+                        <p class="book-price"><strong>28,800원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="2026 공인중개사 1차 핵심요약집">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-cover book-c3">
+                        <span class="book-label">실기적중</span>
+                        <h4>정보처리기사<br>실기 기출 10회</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>정보처리기사 실기 기출변형 10회 모의고사</h5>
+                        <p class="book-author">에듀윌 IT자격연구소</p>
+                        <p class="book-price"><strong>26,100원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="정보처리기사 실기 기출 10회">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+
+                <div class="book-card">
+                    <div class="book-cover book-c4">
+                        <span class="book-label">공시생 필독</span>
+                        <h4>9급 공무원<br>행정법총론 기본서</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>2026 에듀윌 9급 행정법총론 기출 OX 2000제</h5>
+                        <p class="book-author">행정법 1타 강성민 편저</p>
+                        <p class="book-price"><strong>31,500원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="2026 9급 행정법총론 기출 OX">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [뷰 6] 합격예측 풀서비스 & 가채점 시뮬레이터 -->
+    <section id="view-predict" class="tab-view">
+        <div class="container section-inner">
+            <div class="section-heading">
+                <span class="section-badge badge-black">빅데이터 합격예측</span>
+                <h2>📊 2026 실시간 가채점 & 합격 확률 시뮬레이터</h2>
+                <p>수험생 수만 명의 점수 빅데이터를 기반으로 실시간 백분위와 합격 가능성을 정밀 진단합니다.</p>
+            </div>
+
+            <div class="predict-box">
+                <div class="predict-inputs">
+                    <div class="form-group">
+                        <label>응시 시험 선택</label>
+                        <select id="predExam">
+                            <option value="재경관리사">재경관리사 (합격선 70점)</option>
+                            <option value="공인중개사">공인중개사 (평균 60점, 과락 40점)</option>
+                            <option value="9급일반행정">9급 일반행정직 (예상 합격선 90점)</option>
+                            <option value="정보처리기사">정보처리기사 (실기 60점)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>내 예상 점수 (또는 모의고사 평균)</label>
+                        <input type="number" id="predScore" placeholder="점수 입력 (예: 76)" min="0" max="100">
+                    </div>
+                    <button id="calcPredictBtn" class="btn-eduwill-cta">
+                        📈 실시간 합격 확률 진단하기
+                    </button>
+                </div>
+
+                <div class="predict-result" id="predictResultBox" style="display: none;">
+                    <div class="result-badge" id="predBadge">합격 안정권</div>
+                    <h3 id="predTitle">합격 확률 87% 예상</h3>
+                    <p id="predComment">상위 12.4% 수준입니다. 현재 페이스를 유지하면서 취약 단원 오답 정리만 집중하면 무난한 합격이 기대됩니다.</p>
+                    <div class="pred-meter">
+                        <div class="meter-bar" id="predMeterBar" style="width: 87%;"></div>
+                    </div>
+                    <button class="btn-sub" id="predToPlanBtn" style="margin-top: 15px;">이 결과로 AI 보완 플랜 세우기</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- [뷰 7] 실시간 합격수기 게시판 -->
+    <section id="view-reviews" class="tab-view">
+        <div class="container section-inner">
+            <div class="section-heading">
+                <span class="section-badge">선배들의 합격 노하우</span>
+                <h2>🎉 에듀윌 30만 동문 리얼 합격수기</h2>
+                <p>실제 합격생들이 실천했던 하루 순공 시간과 취약점 극복 전략을 확인하세요.</p>
+            </div>
+
+            <div class="review-grid">
+                <div class="review-card">
+                    <div class="review-meta">
+                        <span class="review-target">재경관리사</span>
+                        <span class="review-date">2026.08 합격</span>
+                    </div>
+                    <h4>비전공자 직장인, 2달 만에 재경관리사 84점으로 합격했습니다!</h4>
+                    <p class="review-text">"회계의 'ㅎ'도 모르던 제가 에듀윌 인강과 망각곡선 복습 플랜 덕분에 원가관리회계 킬러문항까지 다 맞혔습니다. 하루 순공 3시간씩 AI 플래너가 짜준 주간 루틴만 정확히 지켰습니다."</p>
+                    <div class="review-user">김○진 합격생 (직장인 3년차)</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-meta">
+                        <span class="review-target">공인중개사</span>
+                        <span class="review-date">제35회 동차합격</span>
+                    </div>
+                    <h4>아이 키우며 주부 5개월 만에 1·2차 동차 합격 성공기</h4>
+                    <p class="review-text">"민법 판례가 너무 막막했는데, 스파르타 코치 모드로 오전 자투리 시간 2시간을 타이트하게 활용했습니다. 기출 회독 체크리스트가 성취감을 주는 데 큰 도움이 되었습니다."</p>
+                    <div class="review-user">이○영 합격생 (주부)</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-meta">
+                        <span class="review-target">9급 일반행정</span>
+                        <span class="review-date">2026 국가직 합격</span>
+                    </div>
+                    <h4>노베이스 공시생, 1년 만에 필기 합격권 돌파 비결</h4>
+                    <p class="review-text">"행정법총론 10개년 기출 OX를 매일 아침 루틴으로 넣고, 저녁에는 영어 하프모의고사를 풀었습니다. 멘토 모드의 따뜻한 피드백이 슬럼프 극복에 일등공신이었습니다."</p>
+                    <div class="review-user">박○수 합격생 (수험기간 11개월)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- 모달 팝업들 (로그인, 회원가입, 고객만족센터) -->
+    <!-- ========================================================================= -->
+
+    <!-- 로그인 모달 -->
+    <div id="loginModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>에듀윌 회원 로그인</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>아이디</label>
+                        <input type="text" id="loginId" placeholder="아이디 입력 (예: eduwill_pass)" required>
+                    </div>
+                    <div class="form-group">
+                        <label>비밀번호</label>
+                        <input type="password" id="loginPw" placeholder="비밀번호 입력" required>
+                    </div>
+                    <button type="submit" class="btn-eduwill-cta">로그인</button>
+                    <div class="modal-sublink">
+                        <a href="javascript:void(0);" id="switchToRegister">아직 회원이 아니신가요? <strong>간편 회원가입</strong></a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+
+    <!-- 회원가입 모달 -->
+    <div id="registerModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>에듀윌 간편 회원가입</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label>이름</label>
+                        <input type="text" id="regName" placeholder="실명 입력" required>
+                    </div>
+                    <div class="form-group">
+                        <label>아이디</label>
+                        <input type="text" id="regId" placeholder="사용할 아이디" required>
+                    </div>
+                    <div class="form-group">
+                        <label>비밀번호</label>
+                        <input type="password" id="regPw" placeholder="비밀번호 (8자 이상)" required>
+                    </div>
+                    <div class="form-group">
+                        <label>관심 수험 분야</label>
+                        <select id="regCategory">
+                            <option value="자격증">국가공인 자격증 (공인중개사, 재경관리사 등)</option>
+                            <option value="공무원">9급/7급 공무원 (일반행정, 경찰, 소방)</option>
+                            <option value="취업">토익 / 한국사 / 공기업 NCS</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-eduwill-cta">가입 완료하고 혜택 받기</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 고객만족센터 모달 -->
+    <div id="csModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>📞 에듀윌 고객만족센터</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="cs-contact-info">
+                    <div class="cs-phone">1600-6700</div>
+                    <p>평일 09:00 ~ 21:00 | 주말 및 공휴일 09:00 ~ 17:00</p>
+                </div>
+                <hr style="margin: 16px 0; border: none; border-top: 1px solid #e5e8eb;">
+                <h4>1:1 합격 전문 상담 예약</h4>
+                <form id="csForm" style="margin-top: 10px;">
+                    <div class="form-group">
+                        <label>연락처</label>
+                        <input type="tel" id="csPhone" placeholder="010-0000-0000" required>
+                    </div>
+                    <div class="form-group">
+                        <label>상담 희망 과정</label>
+                        <input type="text" id="csSubject" placeholder="예: 재경관리사 인강 환급반 문의" required>
+                    </div>
+                    <button type="submit" class="btn-eduwill-cta">상담 신청 접수</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. 에듀윌 스타일 푸터 -->
+    <footer class="eduwill-footer">
+        <div class="container footer-container">
+            <div class="footer-top">
+                <div class="footer-links">
+                    <a href="javascript:void(0);">회사소개</a>
+                    <a href="javascript:void(0);">이용약관</a>
+                    <a href="javascript:void(0);" class="bold">개인정보처리방침</a>
+                    <a href="javascript:void(0);" class="nav-tab-trigger" data-target="view-reviews">합격자 인증센터</a>
+                    <a href="javascript:void(0);" id="footerCsBtn">고객센터 1600-6700</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-info">
+                    <p><strong>(주)에듀윌</strong> | 대표자 : 양형남 | 서울시 구로구 디지털로 26길 38 에듀윌빌딩</p>
+                    <p>고객만족센터 : 1600-6700 (평일 09:00 ~ 21:00, 주말/공휴일 09:00 ~ 17:00)</p>
+                    <p class="copyright">Copyright © (주)에듀윌 All rights reserved. 본 서비스는 Google Gemini AI 기술을 활용한 학습 플래너입니다.</p>
+                </div>
+                <div class="footer-cs">
+                    <span class="cs-label">합격 상담 고객센터</span>
+                    <strong class="cs-tel">1600-6700</strong>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
