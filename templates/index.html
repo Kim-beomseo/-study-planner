@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 맞춤형 학습 플래너 (AI Study Planner)</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- 마크다운 렌더링 라이브러리 (Marked.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 영역 -->
+        <header class="header">
+            <div class="badge">Google Gemini 3.5 Flash Lite & Serper API</div>
+            <h1>📚 AI 학습 플래너</h1>
+            <p class="subtitle">최신 시험 경향과 실시간 검색 데이터를 반영한 나만의 맞춤형 공부 로드맵</p>
+        </header>
+
+        <!-- 메인 콘텐츠 그리드 -->
+        <div class="main-layout">
+            <!-- 입력 폼 카드 -->
+            <section class="card form-card">
+                <h2>✍️ 학습 정보 입력</h2>
+                <form id="plannerForm">
+                    <!-- 1. 학습 목표 -->
+                    <div class="form-group">
+                        <label for="goal">1. 학습 목표 (시험 / 과목명)</label>
+                        <input type="text" id="goal" name="goal" placeholder="예: 토익 850점 달성, 정보처리기사 실기, 수능 수학 1등급" required>
+                    </div>
+
+                    <!-- 2. 목표 시험일/마감일 -->
+                    <div class="form-group">
+                        <label for="exam_date">2. 목표 시험일 / 마감일</label>
+                        <input type="date" id="exam_date" name="exam_date" required>
+                    </div>
+
+                    <!-- 3. 현재 수준 -->
+                    <div class="form-group">
+                        <label for="current_level">3. 현재 수준 및 상태</label>
+                        <input type="text" id="current_level" name="current_level" placeholder="예: 노베이스, 기본 개념만 1회독, 최근 모의고사 650점" required>
+                    </div>
+
+                    <!-- 4. 하루 가능시간 -->
+                    <div class="form-group">
+                        <label for="daily_time">4. 하루 투자 가능 시간</label>
+                        <input type="text" id="daily_time" name="daily_time" placeholder="예: 평일 3시간 / 주말 6시간, 하루 순공 4시간" required>
+                    </div>
+
+                    <!-- 5. 취약영역 -->
+                    <div class="form-group">
+                        <label for="weak_point">5. 가장 취약한 영역 / 고민</label>
+                        <input type="text" id="weak_point" name="weak_point" placeholder="예: Part 7 독해 시간 부족, 알고리즘 구현력, 킬러 문항" required>
+                    </div>
+
+                    <!-- 6. 선호 학습방식 -->
+                    <div class="form-group">
+                        <label for="study_style">6. 선호하는 학습 방식</label>
+                        <select id="study_style" name="study_style" required>
+                            <option value="인강 + 핵심 요약 복습">인터넷 강의 중심 + 핵심 요약 복습</option>
+                            <option value="기출문제 다회독 + 오답노트">기출문제 다회독 + 철저한 오답노트</option>
+                            <option value="기본서 정독 + 문제풀이 병행">기본서 정독 + 챕터별 문제풀이 병행</option>
+                            <option value="요약본 암기 + 실전 모의고사 반복">요약본 단권화 암기 + 실전 모의고사 집중</option>
+                        </select>
+                    </div>
+
+                    <!-- 코칭 스타일 선택 (페르소나) -->
+                    <div class="form-group">
+                        <label>7. 코칭 스타일 선택</label>
+                        <div class="radio-group">
+                            <label class="radio-card">
+                                <input type="radio" name="persona" value="mentor" checked>
+                                <div class="radio-content">
+                                    <span class="radio-title">🌱 따뜻한 멘토</span>
+                                    <span class="radio-desc">공감과 격려, 현실적인 페이스 메이커</span>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="persona" value="sparta">
+                                <div class="radio-content">
+                                    <span class="radio-title">⚡ 스파르타 코치</span>
+                                    <span class="radio-desc">타협 없는 실행력, 극도의 시간 효율</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="btn primary-btn">
+                        🚀 실시간 맞춤 학습 플랜 생성하기
+                    </button>
+                </form>
+            </section>
+
+            <!-- 결과 표시 카드 -->
+            <section class="card result-card">
+                <div class="result-header">
+                    <h2>📋 생성된 학습 플랜</h2>
+                    <div class="btn-group" id="actionButtons" style="display: none;">
+                        <button id="copyBtn" class="btn secondary-btn" title="마크다운 복사">📋 내용 복사</button>
+                        <button id="downloadBtn" class="btn secondary-btn" title="MD 파일 다운로드">💾 .md 다운로드</button>
+                    </div>
+                </div>
+
+                <!-- 로딩 인디케이터 -->
+                <div id="loading" class="loading-state" style="display: none;">
+                    <div class="spinner"></div>
+                    <p class="loading-title">최신 시험 정보 검색 및 플랜 수립 중...</p>
+                    <p class="loading-desc">Serper API로 최신 정보를 탐색하고 Gemini 3.5가 정밀한 주간/일일 로드맵을 작성하고 있습니다.</p>
+                </div>
+
+                <!-- 비어있을 때 표시 -->
+                <div id="placeholder" class="placeholder-state">
+                    <div class="placeholder-icon">📖</div>
+                    <p>좌측 양식을 작성하고 버튼을 누르면<br><strong>주간계획, 일일계획, 복습주기, 점검문항, 진도체크, 학습회고</strong>가 포함된<br>전용 학습 플랜이 이곳에 생성됩니다.</p>
+                </div>
+
+                <!-- 실제 결과 렌더링 영역 -->
+                <div id="resultContent" class="markdown-body" style="display: none;"></div>
+            </section>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
