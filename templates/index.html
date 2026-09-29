@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>에듀윌 AI 맞춤형 학습 플래너 | 단기합격 커리큘럼 & 종합 수험센터</title>
+    <title>에듀위 AI 맞춤형 학습 플래너 | 단기합격 커리큘럼 & 종합 수험센터</title>
     <!-- Favicon -->
-    <link rel="icon" href="//img.eduwill.net/Img2/Common/favicon/favicon.svg" type="image/x-icon">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23ffd200'/><text x='50' y='68' font-size='56' font-weight='900' font-family='sans-serif' text-anchor='middle' fill='%23111111'>W</text></svg>" type="image/x-icon">
     <!-- Web Font (Pretendard) -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -13,11 +13,11 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-    <!-- 1. 에듀윌 최상단 유틸리티 GNB 바 -->
+    <!-- 1. 에듀위 최상단 유틸리티 GNB 바 -->
     <div class="top-util-bar">
         <div class="container util-container">
             <div class="util-left">
-                <span class="cert-badge">🏆 합격자 수 1위 에듀윌</span>
+                <span class="cert-badge">🏆 합격자 수 1위 에듀위</span>
                 <span class="util-notice">2026 국가공인 자격증 & 공무원 최신 출제기준 100% 반영</span>
             </div>
             <div class="util-right" id="userUtilArea">
@@ -33,12 +33,12 @@
         </div>
     </div>
 
-    <!-- 2. 에듀윌 메인 헤더 & 네비게이션 -->
-    <header class="eduwill-header">
+    <!-- 2. 에듀위 메인 헤더 & 네비게이션 -->
+    <header class="eduwe-header">
         <div class="container gnb-container">
             <div class="logo-area">
                 <a href="javascript:void(0);" class="logo-link nav-tab-trigger" data-target="view-planner">
-                    <span class="logo-symbol">eduwill</span>
+                    <span class="logo-symbol">eduwe</span>
                     <span class="logo-service">AI 학습플래너</span>
                 </a>
             </div>
@@ -56,11 +56,11 @@
         </div>
     </header>
 
-    <!-- 3. 에듀윌 시그니처 옐로우 히어로 배너 -->
+    <!-- 3. 에듀위 시그니처 옐로우 히어로 배너 -->
     <section class="hero-banner">
         <div class="container hero-container">
             <div class="hero-content">
-                <div class="hero-tag" id="heroTag">2026 합격의 공식, 에듀윌 AI 케어</div>
+                <div class="hero-tag" id="heroTag">2026 합격의 공식, 에듀위 AI 케어</div>
                 <h2 id="heroTitle">합격까지 가장 빠른 지름길,<br><span class="hero-highlight">AI 1:1 맞춤 단기합격 플래너</span></h2>
                 <p id="heroDesc">빅데이터 분석과 실시간 기출 트렌드(Serper API)를 결합하여<br>에빙하우스 망각곡선 기반 최적의 합격 로드맵을 즉시 설계해 드립니다.</p>
             </div>
@@ -144,7 +144,7 @@
                         </label>
                         <div class="select-wrapper">
                             <select id="study_style" name="study_style" required>
-                                <option value="인강 + 핵심 요약 복습">에듀윌 교수진 인강 중심 + 핵심 요약 복습</option>
+                                <option value="인강 + 핵심 요약 복습">에듀위 교수진 인강 중심 + 핵심 요약 복습</option>
                                 <option value="기출문제 다회독 + 오답노트">기출 5개년 무한 다회독 + 철저한 오답 단권화</option>
                                 <option value="기본서 정독 + 문제풀이 병행">기본서 정독 + 진도별 기출 풀이 병행</option>
                                 <option value="요약본 암기 + 실전 모의고사 반복">핵심 요약노트 암기 + 실전 모의고사 풀서비스</option>
@@ -181,10 +181,10 @@
                         </div>
                     </div>
 
-                    <!-- 에듀윌 시그니처 옐로우 CTA 버튼 -->
-                    <button type="submit" id="submitBtn" class="btn-eduwill-cta">
+                    <!-- 에듀위 시그니처 옐로우 CTA 버튼 -->
+                    <button type="submit" id="submitBtn" class="btn-eduwe-cta">
                         <span class="btn-icon">⚡</span>
-                        <span class="btn-text">에듀윌 AI 맞춤 합격 플랜 생성하기</span>
+                        <span class="btn-text">에듀위 AI 맞춤 합격 플랜 생성하기</span>
                     </button>
                 </form>
             </section>
@@ -204,7 +204,7 @@
 
                 <!-- 로딩 상태 -->
                 <div id="loading" class="loading-wrap" style="display: none;">
-                    <div class="eduwill-spinner"></div>
+                    <div class="eduwe-spinner"></div>
                     <h3>실시간 최신 기출 정보 분석 및 커리큘럼 생성 중</h3>
                     <p class="loading-sub">Serper 실시간 웹 검색과 Gemini 3.5 Flash Lite가 망각곡선 기반 맞춤형 로드맵을 설계하고 있습니다.</p>
                     <div class="loading-progress-bar">
@@ -217,7 +217,7 @@
                     <div class="pass-seal">
                         <span class="seal-inner">합격 보장<br>플랜</span>
                     </div>
-                    <h3>나만의 에듀윌 맞춤 합격 플랜을 확인하세요</h3>
+                    <h3>나만의 에듀위 맞춤 합격 플랜을 확인하세요</h3>
                     <p>좌측 양식을 작성하고 신청 버튼을 누르시면<br><strong>주간 로드맵, 일일 루틴, 망각곡선 복습 주기, 셀프 테스트, 진도 체크, 합격 회고</strong>가<br>종합 리포트 형태로 즉시 생성됩니다.</p>
                 </div>
 
@@ -232,7 +232,7 @@
         <div class="container section-inner">
             <div class="section-heading">
                 <span class="section-badge">국가공인 자격증</span>
-                <h2>🏆 에듀윌 전체 자격증 단기합격 커리큘럼</h2>
+                <h2>🏆 에듀위 전체 자격증 단기합격 커리큘럼</h2>
                 <p>원하는 자격증을 선택하면 [AI 플래너]에 시험 정보와 취약 과목이 자동 입력되어 즉시 맞춤 계획을 세울 수 있습니다.</p>
             </div>
 
@@ -282,7 +282,7 @@
 
                 <!-- 1. 공인중개사 동차 -->
                 <div class="course-card best-seller" data-sub="lic-real">
-                    <div class="card-tag tag-best">에듀윌 1위</div>
+                    <div class="card-tag tag-best">에듀위 1위</div>
                     <h3>공인중개사 (1·2차 동차)</h3>
                     <p class="card-desc">대한민국 최다 합격자 배출! 부동산학개론, 민법 및 2차 실무 6과목 동차 합격 커리큘럼.</p>
                     <ul class="card-specs">
@@ -560,7 +560,7 @@
         <div class="container section-inner">
             <div class="section-heading">
                 <span class="section-badge badge-black">공무원 전 직렬 합격관</span>
-                <h2>🏛️ 2026 에듀윌 공무원 단기합격 전문 패스</h2>
+                <h2>🏛️ 2026 에듀위 공무원 단기합격 전문 패스</h2>
                 <p>9급 세무직, 일반행정, 교육행정, 교정직부터 7급 PSAT, 경찰, 소방, 군무원까지 완벽한 직렬별 합격 커리큘럼을 제공합니다.</p>
             </div>
 
@@ -963,8 +963,8 @@
         <div class="container section-inner">
             <div class="section-heading">
                 <span class="section-badge">예스24 / 교보문고 1위</span>
-                <h2>📚 2026 에듀윌 전 과정 합격 수험서 베스트셀러</h2>
-                <p>10년 연속 합격자 수 1위 에듀윌의 적중률 높은 수험서 라인업을 만나보세요. 교재 선택 시 맞춤 플랜이 자동 연동됩니다.</p>
+                <h2>📚 2026 에듀위 전 과정 합격 수험서 베스트셀러</h2>
+                <p>10년 연속 합격자 수 1위 에듀위의 적중률 높은 수험서 라인업을 만나보세요. 교재 선택 시 맞춤 플랜이 자동 연동됩니다.</p>
             </div>
 
             <!-- 교재 서브 필터 -->
@@ -983,7 +983,7 @@
                         <h4>세무사 1차<br>재정학+세법학개론</h4>
                     </div>
                     <div class="book-body">
-                        <h5>2026 에듀윌 세무사 1차 재정학 핵심이론+기출 OX</h5>
+                        <h5>2026 에듀위 세무사 1차 재정학 핵심이론+기출 OX</h5>
                         <p class="book-author">세무사 시험연구소 편저</p>
                         <p class="book-price"><strong>38,700원</strong> <span class="discount">10%↓</span></p>
                         <div class="book-action-row">
@@ -1017,12 +1017,12 @@
                         <h4>재경관리사<br>한권끝장 기본서</h4>
                     </div>
                     <div class="book-body">
-                        <h5>2026 에듀윌 재경관리사 3과목 한권끝장</h5>
-                        <p class="book-author">에듀윌 세무/회계 교수진 편저</p>
+                        <h5>2026 에듀위 재경관리사 3과목 한권끝장</h5>
+                        <p class="book-author">에듀위 세무/회계 교수진 편저</p>
                         <p class="book-price"><strong>34,200원</strong> <span class="discount">10%↓</span></p>
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EC%9E%AC%EA%B2%BD%EA%B4%80%EB%A6%AC%EC%82%AC+%ED%95%9C%EA%B5%8C%EB%81%9D%EC%9E%A5" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
-                            <button class="btn-book-plan" data-title="2026 에듀윌 재경관리사 한권끝장">⚡ AI 플랜 연동</button>
+                            <button class="btn-book-plan" data-title="2026 에듀위 재경관리사 한권끝장">⚡ AI 플랜 연동</button>
                         </div>
                     </div>
                 </div>
@@ -1068,7 +1068,7 @@
                         <h4>주택관리사<br>1차 회계원리 기본서</h4>
                     </div>
                     <div class="book-body">
-                        <h5>2026 에듀윌 주택관리사 1차 회계원리</h5>
+                        <h5>2026 에듀위 주택관리사 1차 회계원리</h5>
                         <p class="book-author">회계원리 윤재옥 편저</p>
                         <p class="book-price"><strong>29,700원</strong> <span class="discount">10%↓</span></p>
                         <div class="book-action-row">
@@ -1086,7 +1086,7 @@
                     </div>
                     <div class="book-body">
                         <h5>정보처리기사 실기 기출변형 10회 모의고사</h5>
-                        <p class="book-author">에듀윌 IT자격연구소</p>
+                        <p class="book-author">에듀위 IT자격연구소</p>
                         <p class="book-price"><strong>26,100원</strong> <span class="discount">10%↓</span></p>
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC+%EC%8B%A4%EA%B8%B0" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
@@ -1102,7 +1102,7 @@
                         <h4>전기기사 필기<br>CBT 7개년 기출</h4>
                     </div>
                     <div class="book-body">
-                        <h5>2026 에듀윌 전기기사 필기 CBT 기출문제집</h5>
+                        <h5>2026 에듀위 전기기사 필기 CBT 기출문제집</h5>
                         <p class="book-author">전기공학 김영복 / 이찬우</p>
                         <p class="book-price"><strong>35,100원</strong> <span class="discount">10%↓</span></p>
                         <div class="book-action-row">
@@ -1119,7 +1119,7 @@
                         <h4>소방설비기사<br>전기분야 필기+실기</h4>
                     </div>
                     <div class="book-body">
-                        <h5>2026 에듀윌 소방설비기사(전기) 초단기완성</h5>
+                        <h5>2026 에듀위 소방설비기사(전기) 초단기완성</h5>
                         <p class="book-author">소방기술연구소 유정석 편저</p>
                         <p class="book-price"><strong>33,300원</strong> <span class="discount">10%↓</span></p>
                         <div class="book-action-row">
@@ -1153,7 +1153,7 @@
                         <h4>9급 세무직<br>세법개론 기본서</h4>
                     </div>
                     <div class="book-body">
-                        <h5>2026 에듀윌 공무원 세법개론 이론+기출 1500제</h5>
+                        <h5>2026 에듀위 공무원 세법개론 이론+기출 1500제</h5>
                         <p class="book-author">세법 1타 노희양 편저</p>
                         <p class="book-price"><strong>36,000원</strong> <span class="discount">10%↓</span></p>
                         <div class="book-action-row">
@@ -1170,7 +1170,7 @@
                         <h4>9급 공무원<br>행정법총론 기출 OX</h4>
                     </div>
                     <div class="book-body">
-                        <h5>2026 에듀윌 9급 행정법총론 기출 OX 2000제</h5>
+                        <h5>2026 에듀위 9급 행정법총론 기출 OX 2000제</h5>
                         <p class="book-author">행정법 1타 강성민 편저</p>
                         <p class="book-price"><strong>31,500원</strong> <span class="discount">10%↓</span></p>
                         <div class="book-action-row">
@@ -1187,7 +1187,7 @@
                         <h4>경찰공무원<br>형사법 핵심판례 1000</h4>
                     </div>
                     <div class="book-body">
-                        <h5>2026 에듀윌 경찰 형사법 최신 3개년 판례정리</h5>
+                        <h5>2026 에듀위 경찰 형사법 최신 3개년 판례정리</h5>
                         <p class="book-author">형사법 정주형 교수</p>
                         <p class="book-price"><strong>30,600원</strong> <span class="discount">10%↓</span></p>
                         <div class="book-action-row">
@@ -1204,8 +1204,8 @@
                         <h4>7급 국가직<br>PSAT 10개년 기출</h4>
                     </div>
                     <div class="book-body">
-                        <h5>2026 에듀윌 7급 국가직 PSAT 3영역 기출해설</h5>
-                        <p class="book-author">에듀윌 공무원 PSAT 연구소</p>
+                        <h5>2026 에듀위 7급 국가직 PSAT 3영역 기출해설</h5>
+                        <p class="book-author">에듀위 공무원 PSAT 연구소</p>
                         <p class="book-price"><strong>38,700원</strong> <span class="discount">10%↓</span></p>
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+7%EA%B8%89+PSAT" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
@@ -1221,12 +1221,12 @@
                         <h4>토익 실전 LC+RC<br>모의고사 5회분</h4>
                     </div>
                     <div class="book-body">
-                        <h5>에듀윌 토익 실전 1000제 (LC/RC 최신 기출경향)</h5>
-                        <p class="book-author">에듀윌 어학연구소 편저</p>
+                        <h5>에듀위 토익 실전 1000제 (LC/RC 최신 기출경향)</h5>
+                        <p class="book-author">에듀위 어학연구소 편저</p>
                         <p class="book-price"><strong>19,800원</strong> <span class="discount">10%↓</span></p>
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%ED%86%A0%EC%9D%B5+%EC%8B%A4%EC%A0%84" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
-                            <button class="btn-book-plan" data-title="에듀윌 토익 실전 1000제">⚡ AI 플랜 연동</button>
+                            <button class="btn-book-plan" data-title="에듀위 토익 실전 1000제">⚡ AI 플랜 연동</button>
                         </div>
                     </div>
                 </div>
@@ -1238,7 +1238,7 @@
                         <h4>한국사능력검정시험<br>심화(1·2·3급) 2주끝장</h4>
                     </div>
                     <div class="book-body">
-                        <h5>2026 에듀윌 한능검 심화(1·2·3급) 2주끝장 기본서</h5>
+                        <h5>2026 에듀위 한능검 심화(1·2·3급) 2주끝장 기본서</h5>
                         <p class="book-author">한국사 은동진 / 조현수</p>
                         <p class="book-price"><strong>23,400원</strong> <span class="discount">10%↓</span></p>
                         <div class="book-action-row">
@@ -1255,7 +1255,7 @@
                         <h4>컴퓨터활용능력<br>1급 실기 3주완성</h4>
                     </div>
                     <div class="book-body">
-                        <h5>2026 에듀윌 컴활 1급 실기 스프레드시트/DB</h5>
+                        <h5>2026 에듀위 컴활 1급 실기 스프레드시트/DB</h5>
                         <p class="book-author">컴퓨터자격연구팀 편저</p>
                         <p class="book-price"><strong>27,000원</strong> <span class="discount">10%↓</span></p>
                         <div class="book-action-row">
@@ -1272,8 +1272,8 @@
                         <h4>NCS 직업기초능력<br>통합 기본서+기출</h4>
                     </div>
                     <div class="book-body">
-                        <h5>2026 에듀윌 공기업 NCS 통합기본서 (모듈+PSAT형)</h5>
-                        <p class="book-author">에듀윌 취업연구소</p>
+                        <h5>2026 에듀위 공기업 NCS 통합기본서 (모듈+PSAT형)</h5>
+                        <p class="book-author">에듀위 취업연구소</p>
                         <p class="book-price"><strong>25,200원</strong> <span class="discount">10%↓</span></p>
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EA%B3%B5%EA%B8%B0%EC%97%85+NCS" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
@@ -1289,7 +1289,7 @@
     <section id="view-predict" class="tab-view">
         <div class="container section-inner">
             <div class="section-heading">
-                <span class="section-badge badge-black">에듀윌 빅데이터 수험연구소</span>
+                <span class="section-badge badge-black">에듀위 빅데이터 수험연구소</span>
                 <h2>📊 2026 실시간 가채점 & 합격예측 풀서비스</h2>
                 <p>수험생 34,812명의 실시간 가채점 데이터와 전년도 합격선을 분석하여 과목별 과락 및 백분위 석차를 정밀 판독합니다.</p>
             </div>
@@ -1337,8 +1337,8 @@
                         <!-- JS에서 동적으로 채워짐 -->
                     </div>
 
-                    <button id="runFullPredictBtn" class="btn-eduwill-cta" style="margin-top: 20px;">
-                        🎯 에듀윌 실시간 합격예측 정밀 진단
+                    <button id="runFullPredictBtn" class="btn-eduwe-cta" style="margin-top: 20px;">
+                        🎯 에듀위 실시간 합격예측 정밀 진단
                     </button>
                 </div>
 
@@ -1403,11 +1403,11 @@
 
                     <!-- 교수진 총평 및 맞춤형 AI 보완 처방 -->
                     <div class="professor-advice-box" id="adviceBox" style="display: none;">
-                        <h4>💡 에듀윌 전문 연구소 총평 & 합격 처방전</h4>
+                        <h4>💡 에듀위 전문 연구소 총평 & 합격 처방전</h4>
                         <p id="profCommentText" class="prof-comment">
                             전반적으로 합격선 이상의 안정적인 점수를 기록하고 있습니다. 특히 취약 과목의 계산 문항 연습만 보완하면 무난한 최종 합격이 기대됩니다.
                         </p>
-                        <button id="applyDeficitPlanBtn" class="btn-eduwill-cta" style="margin-top: 14px;">
+                        <button id="applyDeficitPlanBtn" class="btn-eduwe-cta" style="margin-top: 14px;">
                             ⚡ 취약 과목 집중 보완 AI 학습 플랜 생성하기
                         </button>
                     </div>
@@ -1421,7 +1421,7 @@
         <div class="container section-inner">
             <div class="section-heading">
                 <span class="section-badge">선배 30만 동문의 증명</span>
-                <h2>🎉 에듀윌 실시간 명예의 전당 (합격수기)</h2>
+                <h2>🎉 에듀위 실시간 명예의 전당 (합격수기)</h2>
                 <p>선배 합격생들의 과목별 점수, 실제 하루 순공 시간, 슬럼프 극복기를 확인하고 내 플랜에 직접 적용해 보세요.</p>
             </div>
 
@@ -1441,7 +1441,7 @@
                         <span class="review-date">2026.08 합격</span>
                     </div>
                     <h4>비전공자 직장인, 2달 만에 재경관리사 84점으로 합격했습니다!</h4>
-                    <p class="review-text">"회계의 'ㅎ'도 모르던 제가 에듀윌 인강과 망각곡선 복습 플랜 덕분에 원가관리회계 킬러문항까지 다 맞혔습니다. 하루 순공 3시간씩 AI 플래너가 짜준 주간 루틴만 정확히 지켰습니다."</p>
+                    <p class="review-text">"회계의 'ㅎ'도 모르던 제가 에듀위 인강과 망각곡선 복습 플랜 덕분에 원가관리회계 킬러문항까지 다 맞혔습니다. 하루 순공 3시간씩 AI 플래너가 짜준 주간 루틴만 정확히 지켰습니다."</p>
                     <div class="review-card-footer">
                         <span class="review-user">김○진 합격생 (직장인 3년차)</span>
                         <button class="btn-read-review" data-id="1">📖 수기 전문 읽기</button>
@@ -1483,7 +1483,7 @@
                         <span class="review-date">2026 정기 2회 실기 합격</span>
                     </div>
                     <h4>비전공 문과생의 정처기 실기 76점 4주 단기합격 전략</h4>
-                    <p class="review-text">"프로그래밍 언어와 SQL 문법이 생소했지만, 에듀윌 족집게 기출 변형 특강으로 약술형과 코드 해석 문항을 완전 정복했습니다."</p>
+                    <p class="review-text">"프로그래밍 언어와 SQL 문법이 생소했지만, 에듀위 족집게 기출 변형 특강으로 약술형과 코드 해석 문항을 완전 정복했습니다."</p>
                     <div class="review-card-footer">
                         <span class="review-user">정○호 합격생 (취업준비생)</span>
                         <button class="btn-read-review" data-id="4">📖 수기 전문 읽기</button>
@@ -1511,7 +1511,7 @@
                         <span class="review-date">동차합격</span>
                     </div>
                     <h4>수포자 문과 출신의 전기기사 필기+실기 6개월 동차 정복</h4>
-                    <p class="review-text">"전기자기학 공식 암기보다 회로 이해 중심으로 학습했습니다. 에듀윌 교수진의 기출 회독 체크리스트가 합격의 결정타였습니다."</p>
+                    <p class="review-text">"전기자기학 공식 암기보다 회로 이해 중심으로 학습했습니다. 에듀위 교수진의 기출 회독 체크리스트가 합격의 결정타였습니다."</p>
                     <div class="review-card-footer">
                         <span class="review-user">한○우 합격생 (이직 성공)</span>
                         <button class="btn-read-review" data-id="6">📖 수기 전문 읽기</button>
@@ -1559,7 +1559,7 @@
 
                 <!-- 합격생 루틴 복사 버튼 -->
                 <div class="review-modal-actions">
-                    <button id="copyReviewerRoutineBtn" class="btn-eduwill-cta">
+                    <button id="copyReviewerRoutineBtn" class="btn-eduwe-cta">
                         ⚡ 이 합격생의 공부 루틴으로 내 AI 플랜 세우기
                     </button>
                 </div>
@@ -1575,20 +1575,20 @@
     <div id="loginModal" class="modal-overlay">
         <div class="modal-box">
             <div class="modal-header">
-                <h3>에듀윌 회원 로그인</h3>
+                <h3>에듀위 회원 로그인</h3>
                 <button class="modal-close">&times;</button>
             </div>
             <div class="modal-body">
                 <form id="loginForm">
                     <div class="form-group">
                         <label>아이디</label>
-                        <input type="text" id="loginId" placeholder="아이디 입력 (예: eduwill_pass)" required>
+                        <input type="text" id="loginId" placeholder="아이디 입력 (예: eduwe_pass)" required>
                     </div>
                     <div class="form-group">
                         <label>비밀번호</label>
                         <input type="password" id="loginPw" placeholder="비밀번호 입력" required>
                     </div>
-                    <button type="submit" class="btn-eduwill-cta">로그인</button>
+                    <button type="submit" class="btn-eduwe-cta">로그인</button>
                     <div class="modal-sublink">
                         <a href="javascript:void(0);" id="switchToRegister">아직 회원이 아니신가요? <strong>간편 회원가입</strong></a>
                     </div>
@@ -1601,7 +1601,7 @@
     <div id="registerModal" class="modal-overlay">
         <div class="modal-box">
             <div class="modal-header">
-                <h3>에듀윌 간편 회원가입</h3>
+                <h3>에듀위 간편 회원가입</h3>
                 <button class="modal-close">&times;</button>
             </div>
             <div class="modal-body">
@@ -1626,7 +1626,7 @@
                             <option value="취업">토익 / 한국사 / 공기업 NCS</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn-eduwill-cta">가입 완료하고 혜택 받기</button>
+                    <button type="submit" class="btn-eduwe-cta">가입 완료하고 혜택 받기</button>
                 </form>
             </div>
         </div>
@@ -1636,7 +1636,7 @@
     <div id="csModal" class="modal-overlay">
         <div class="modal-box">
             <div class="modal-header">
-                <h3>📞 에듀윌 고객만족센터</h3>
+                <h3>📞 에듀위 고객만족센터</h3>
                 <button class="modal-close">&times;</button>
             </div>
             <div class="modal-body">
@@ -1655,14 +1655,14 @@
                         <label>상담 희망 과정</label>
                         <input type="text" id="csSubject" placeholder="예: 재경관리사 인강 환급반 문의" required>
                     </div>
-                    <button type="submit" class="btn-eduwill-cta">상담 신청 접수</button>
+                    <button type="submit" class="btn-eduwe-cta">상담 신청 접수</button>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- 5. 에듀윌 스타일 푸터 -->
-    <footer class="eduwill-footer">
+    <!-- 5. 에듀위 스타일 푸터 -->
+    <footer class="eduwe-footer">
         <div class="container footer-container">
             <div class="footer-top">
                 <div class="footer-links">
@@ -1675,9 +1675,9 @@
             </div>
             <div class="footer-bottom">
                 <div class="footer-info">
-                    <p><strong>(주)에듀윌</strong> | 대표자 : 양형남 | 서울시 구로구 디지털로 26길 38 에듀윌빌딩</p>
+                    <p><strong>(주)에듀위 (eduwe)</strong> | 대표자 : 에듀위 AI 혁신 LAB | 서울시 영등포구 여의대로 에듀위 스마트타워</p>
                     <p>고객만족센터 : 1600-6700 (평일 09:00 ~ 21:00, 주말/공휴일 09:00 ~ 17:00)</p>
-                    <p class="copyright">Copyright © (주)에듀윌 All rights reserved. 본 서비스는 Google Gemini AI 기술을 활용한 학습 플래너입니다.</p>
+                    <p class="copyright">Copyright © eduwe Corp. All rights reserved. 본 서비스는 Google Gemini AI 기술을 활용한 학습 플래너입니다.</p>
                 </div>
                 <div class="footer-cs">
                     <span class="cs-label">합격 상담 고객센터</span>

@@ -11,13 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const heroContents = {
         "view-planner": {
-            tag: "2026 합격의 공식, 에듀윌 AI 케어",
+            tag: "2026 합격의 공식, 에듀위 AI 케어",
             title: "합격까지 가장 빠른 지름길,<br><span class='hero-highlight'>AI 1:1 맞춤 단기합격 플래너</span>",
             desc: "빅데이터 분석과 실시간 기출 트렌드(Serper API)를 결합하여<br>에빙하우스 망각곡선 기반 최적의 합격 로드맵을 즉시 설계해 드립니다."
         },
         "view-license": {
             tag: "10년 연속 합격자 수 1위",
-            title: "대한민국 대표 국가공인 자격증,<br><span class='hero-highlight'>에듀윌 단기합격 커리큘럼</span>",
+            title: "대한민국 대표 국가공인 자격증,<br><span class='hero-highlight'>에듀위 단기합격 커리큘럼</span>",
             desc: "공인중개사, 재경관리사, 정보처리기사 등 국가자격증 시험 정보와<br>과정별 1-Click AI 맞춤 플랜 생성을 즉시 이용하실 수 있습니다."
         },
         "view-gov": {
@@ -32,17 +32,17 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         "view-books": {
             tag: "예스24 / 교보문고 베스트셀러 1위",
-            title: "기출 적중률 99.8%의 신화,<br><span class='hero-highlight'>2026 에듀윌 합격 수험서 라인업</span>",
+            title: "기출 적중률 99.8%의 신화,<br><span class='hero-highlight'>2026 에듀위 합격 수험서 라인업</span>",
             desc: "10개년 기출 빅데이터를 단권화한 핵심 기본서와 문제집을 확인하고<br>교재 맞춤형 AI 공부 플랜을 연동해 보세요."
         },
         "view-predict": {
-            tag: "에듀윌 빅데이터 연구소",
+            tag: "에듀위 빅데이터 연구소",
             title: "실시간 합격선 & 백분위 진단,<br><span class='hero-highlight'>2026 합격예측 풀서비스</span>",
             desc: "내 모의고사 또는 가채점 점수를 입력하면 합격 확률을 정밀 분석하고<br>취약점을 보완할 수 있는 AI 플랜을 도출합니다."
         },
         "view-reviews": {
             tag: "선배 30만 동문의 증명",
-            title: "꿈을 현실로 만든 생생한 기록,<br><span class='hero-highlight'>에듀윌 실시간 합격수기</span>",
+            title: "꿈을 현실로 만든 생생한 기록,<br><span class='hero-highlight'>에듀위 실시간 합격수기</span>",
             desc: "비전공자, 직장인, 주부 수험생들의 실제 공부시간과<br>합격 비결을 확인하고 동기부여를 얻으세요."
         }
     };
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // -------------------------------------------------------------
-    // 3. 에듀윌 합격예측 풀서비스 실시간 다과목 정밀 진단 시스템
+    // 3. 에듀위 합격예측 풀서비스 실시간 다과목 정밀 진단 시스템
     // -------------------------------------------------------------
     const examConfigs = {
         "gov_tax": {
@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
             advice: {
                 high: "회계학 과락을 방어하고 선택법과 재정학에서 고득점을 받아 세무사 1차 합격이 확실시됩니다. 2차 주관식을 즉시 시작하세요!",
                 border: "회계학개론 점수가 50점대 초반으로 불안합니다. 재정학에서 75점 이상을 확보하는 전략적 시간 배분이 필요합니다.",
-                low: "세법학과 회계학 기본서 예제 회독 수가 부족합니다. 에듀윌 세무사 1차 파이널 모의고사로 실전 감각을 끌어올리세요."
+                low: "세법학과 회계학 기본서 예제 회독 수가 부족합니다. 에듀위 세무사 1차 파이널 모의고사로 실전 감각을 끌어올리세요."
             }
         },
         "financial_mgr": {
@@ -253,7 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
             advice: {
                 high: "전력공학과 법규에서 75점 이상을 확보하여 전기기사 필기 합격이 확정적입니다. 즉시 2차 실기 시퀀스 도면을 준비하세요!",
                 border: "전기자기학 40점 과락 경계선입니다. 유도 공식은 과감히 생략하고 최종 결과 공식 암기 위주로 선회하세요.",
-                low: "회로이론 교류 전력 계산과 자기학 기초가 흔들리고 있습니다. 에듀윌 기초수학/CBT 기출 5개년 반복이 필수입니다."
+                low: "회로이론 교류 전력 계산과 자기학 기초가 흔들리고 있습니다. 에듀위 기초수학/CBT 기출 5개년 반복이 필수입니다."
             }
         }
     };
@@ -439,7 +439,7 @@ document.addEventListener("DOMContentLoaded", () => {
             switchTab("view-planner");
             document.getElementById("goal").value = `${currentExamName} 합격선 돌파`;
             document.getElementById("weak_point").value = `${currentLowestSubject} 점수 향상 및 킬러문항 보완`;
-            document.getElementById("current_level").value = "에듀윌 실시간 합격예측 가채점 완료 (취약 단원 보완 필요)";
+            document.getElementById("current_level").value = "에듀위 실시간 합격예측 가채점 완료 (취약 단원 보완 필요)";
             alert(`🎯 [${currentExamName}]의 취약 과목인 [${currentLowestSubject}] 정보가 AI 플래너 폼에 자동으로 채워졌습니다!\n세부 플랜을 생성해 보세요.`);
         });
     }
@@ -506,11 +506,11 @@ document.addEventListener("DOMContentLoaded", () => {
             weak: "원가관리회계 계산식, 부가가치세 세무조정",
             story: `
                 <h4>📌 베이스 및 수험 계기</h4>
-                <p>경영 비전공자이자 이직을 준비하던 일반 회사원이었습니다. 재무제표의 기본 원리도 몰랐기에 처음에는 차변, 대변부터 막막했습니다. 하지만 에듀윌 환급반과 AI 플래너를 통해 60일 단기 합격 커리큘럼을 시작했습니다.</p>
+                <p>경영 비전공자이자 이직을 준비하던 일반 회사원이었습니다. 재무제표의 기본 원리도 몰랐기에 처음에는 차변, 대변부터 막막했습니다. 하지만 에듀위 환급반과 AI 플래너를 통해 60일 단기 합격 커리큘럼을 시작했습니다.</p>
                 
                 <h4>⏱️ 하루 순공 시간 및 루틴</h4>
                 <ul>
-                    <li><strong>오전 출근길 (40분):</strong> 에듀윌 스마트폰 앱으로 전날 들은 핵심 요약 인강 1.4배속 복습</li>
+                    <li><strong>오전 출근길 (40분):</strong> 에듀위 스마트폰 앱으로 전날 들은 핵심 요약 인강 1.4배속 복습</li>
                     <li><strong>퇴근 후 저녁 (2시간 30분):</strong> 기본서 챕터별 인강 수강 후 진도별 연습문제 30문항 풀이</li>
                     <li><strong>주말 (토/일 각 6시간):</strong> 평일 누적 오답 5회독 + 기출 5개년 타이머 실전 모의고사</li>
                 </ul>
@@ -539,7 +539,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p>초등학생 아이 둘을 케어하며 동차를 준비하느라 책상에 길게 앉아있을 수 없었습니다. 대신 아이들이 등교한 오전 9시부터 오후 1시까지를 '스파르타 순공 시간'으로 정하고 스마트폰을 금고에 넣었습니다.</p>
                 
                 <h4>💡 1차 합격의 열쇠: 민법 판례 정복</h4>
-                <p>민법은 조문보다 판례의 결론('유효/무효', '취소 가능 여부')을 키워드로 묶어서 외웠습니다. 에듀윌 심정욱 교수님의 그림 판례집을 식탁에 두고 설거지할 때도 인강 오디오를 귀에 꽂고 살았습니다.</p>
+                <p>민법은 조문보다 판례의 결론('유효/무효', '취소 가능 여부')을 키워드로 묶어서 외웠습니다. 에듀위 심정욱 교수님의 그림 판례집을 식탁에 두고 설거지할 때도 인강 오디오를 귀에 꽂고 살았습니다.</p>
 
                 <h4>💡 2차 합격의 열쇠: 중개사법 고득점 (85점)</h4>
                 <p>공법이 과락만 면하자는 전략이었기 때문에, 중개사법에서 85점 이상을 받아 점수를 메워야 했습니다. 서식과 벌칙 조항을 손바닥 수첩에 적어 마트 갈 때나 신호 대기 중에도 회독했습니다.</p>
@@ -557,7 +557,7 @@ document.addEventListener("DOMContentLoaded", () => {
             weak: "행정법총론 각론 판례, 영어 어휘 및 빈칸추론",
             story: `
                 <h4>📌 1년 1회독 무한 루틴</h4>
-                <p>공무원 시험은 머리가 아니라 '회독의 싸움'입니다. 첫 3개월은 전 과목 기본이론 완강, 이후 5개월은 10개년 기출문제집 7회독, 마지막 3개월은 에듀윌 동형 모의고사로 시간 안배 훈련을 했습니다.</p>
+                <p>공무원 시험은 머리가 아니라 '회독의 싸움'입니다. 첫 3개월은 전 과목 기본이론 완강, 이후 5개월은 10개년 기출문제집 7회독, 마지막 3개월은 에듀위 동형 모의고사로 시간 안배 훈련을 했습니다.</p>
                 
                 <h4>💡 슬럼프 극복 비결</h4>
                 <p>공부가 안 될 때는 무리해서 책을 보지 않고, 합격생 수기와 멘토 플래너의 격려 조언을 읽으며 마음을 다잡았습니다. 일요일 오후는 반드시 온전한 휴식을 취해 월요일 번아웃을 예방했습니다.</p>
@@ -683,7 +683,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("daily_time").value = data.time;
             document.getElementById("weak_point").value = data.weak;
 
-            alert(`🏆 [${data.author}]의 합격 루틴이 AI 플래너 폼에 완벽히 복사되었습니다!\n아래 [에듀윌 AI 맞춤 합격 플랜 생성하기] 버튼을 눌러 나만의 로드맵을 완성하세요.`);
+            alert(`🏆 [${data.author}]의 합격 루틴이 AI 플래너 폼에 완벽히 복사되었습니다!\n아래 [에듀위 AI 맞춤 합격 플랜 생성하기] 버튼을 눌러 나만의 로드맵을 완성하세요.`);
         });
     }
 
@@ -705,7 +705,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span class="bar">|</span>
                 <a href="javascript:void(0);" class="nav-tab-trigger highlight" data-target="view-reviews">합격수기</a>
             `;
-            alert(`🎉 환영합니다, ${id} 님! 에듀윌 AI 수험케어 서비스에 로그인되었습니다.`);
+            alert(`🎉 환영합니다, ${id} 님! 에듀위 AI 수험케어 서비스에 로그인되었습니다.`);
 
             // 동적으로 생성된 로그아웃 및 고객센터 버튼 이벤트 바인딩
             document.getElementById("logoutBtn").addEventListener("click", () => {
@@ -725,7 +725,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const name = document.getElementById("regName").value.trim();
             const cat = document.getElementById("regCategory").value;
             closeModal();
-            alert(`👏 ${name} 님의 에듀윌 회원가입이 완료되었습니다!\n관심 분야 [${cat}] 30% 합격 지원 쿠폰이 발급되었습니다. 로그인해 주세요.`);
+            alert(`👏 ${name} 님의 에듀위 회원가입이 완료되었습니다!\n관심 분야 [${cat}] 30% 합격 지원 쿠폰이 발급되었습니다. 로그인해 주세요.`);
             loginModal.classList.add("show");
         });
     }
@@ -783,7 +783,7 @@ document.addEventListener("DOMContentLoaded", () => {
             actionButtons.style.display = "none";
             loading.style.display = "block";
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="btn-icon">⏳</span><span class="btn-text">에듀윌 AI가 플랜 수립 및 실시간 검색 중...</span>';
+            submitBtn.innerHTML = '<span class="btn-icon">⏳</span><span class="btn-text">에듀위 AI가 플랜 수립 및 실시간 검색 중...</span>';
 
             try {
                 const response = await fetch("/generate", {
@@ -824,7 +824,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 placeholder.style.display = "block";
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<span class="btn-icon">⚡</span><span class="btn-text">에듀윌 AI 맞춤 합격 플랜 생성하기</span>';
+                submitBtn.innerHTML = '<span class="btn-icon">⚡</span><span class="btn-text">에듀위 AI 맞춤 합격 플랜 생성하기</span>';
             }
         });
     }
@@ -855,7 +855,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // 파일명 생성 (특수문자 정제)
             const safeGoalName = currentGoal.replace(/[^a-zA-Z0-9가-힣]/g, "_");
-            const fileName = `에듀윌_${safeGoalName}_합격플랜.md`;
+            const fileName = `에듀위_${safeGoalName}_합격플랜.md`;
 
             const blob = new Blob([currentMarkdownText], { type: "text/markdown;charset=utf-8" });
             const downloadUrl = URL.createObjectURL(blob);
