@@ -28,7 +28,9 @@
                 <span class="bar">|</span>
                 <a href="javascript:void(0);" id="openCsBtn">고객만족센터 <strong>1600-6700</strong></a>
                 <span class="bar">|</span>
-                <a href="javascript:void(0);" class="nav-tab-trigger highlight" data-target="view-reviews">실시간 합격수기</a>
+                <a href="javascript:void(0);" class="nav-tab-trigger" data-target="view-reviews">실시간 합격수기</a>
+                <span class="bar">|</span>
+                <a href="javascript:void(0);" class="nav-tab-trigger highlight mypage-quick-link" data-target="view-mypage">🎓 마이학습룸</a>
             </div>
         </div>
     </div>
@@ -49,6 +51,8 @@
                 <a href="javascript:void(0);" class="nav-item nav-tab-trigger" data-target="view-toeic">토익/취업</a>
                 <a href="javascript:void(0);" class="nav-item nav-tab-trigger" data-target="view-books">교재/수험서</a>
                 <a href="javascript:void(0);" class="nav-item nav-tab-trigger" data-target="view-predict">합격예측 풀서비스</a>
+                <a href="javascript:void(0);" class="nav-item nav-tab-trigger" data-target="view-reviews">합격수기</a>
+                <a href="javascript:void(0);" class="nav-item nav-tab-trigger nav-mypage-tab" data-target="view-mypage">마이학습룸 🎓</a>
             </nav>
             <div class="header-right">
                 <span class="badge-gemini">Gemini 3.5 & Serper 연동</span>
@@ -80,6 +84,24 @@
             </div>
         </div>
     </section>
+
+    <!-- 3-1. 실시간 소셜 프루프 & 합격 인증 티커 바 -->
+    <div class="social-proof-bar">
+        <div class="container social-proof-container">
+            <div class="sp-live-badge">
+                <span class="pulse-dot"></span> LIVE 수험 현황
+            </div>
+            <div class="sp-ticker-wrap">
+                <div class="sp-ticker-item active" id="spTickerActive">
+                    🔥 지금 <strong class="text-gold">3,428명</strong>의 수험생이 에듀위 AI 플랜으로 열공 중입니다.
+                </div>
+            </div>
+            <div class="sp-trust-badges">
+                <span class="trust-item">🔒 AI 수험 케어 보장</span>
+                <span class="trust-item">⭐ 수험생 만족도 4.95 / 5.0</span>
+            </div>
+        </div>
+    </div>
 
     <!-- ========================================================================= -->
     <!-- 메인 탭 콘텐츠 뷰 (각 메뉴 클릭 시 노출) -->
@@ -225,6 +247,93 @@
                 <div id="resultContent" class="markdown-body" style="display: none;"></div>
             </section>
         </div>
+
+        <!-- 실시간 합격생 점수 상승 사례 (Social Proof Cards) -->
+        <div class="sp-proof-section">
+            <div class="sp-proof-header">
+                <span class="sp-pill">VERIFIED PROOF</span>
+                <h3>📈 에듀위 AI 플래너로 만든 실제 점수 상승 신화</h3>
+                <p>에빙하우스 망각곡선 주기 복습과 1:1 맞춤 일일 루틴으로 합격한 선배들의 성적표 인증 내역입니다.</p>
+            </div>
+            <div class="sp-proof-grid">
+                <div class="sp-proof-card">
+                    <div class="sp-proof-top">
+                        <span class="sp-proof-cat">공인중개사 동차</span>
+                        <span class="sp-proof-auth">인증 합격생</span>
+                    </div>
+                    <div class="sp-score-bar">
+                        <span class="sc-before">초시 42.5점</span>
+                        <span class="sc-arrow">➔</span>
+                        <span class="sc-after">최종 82.5점</span>
+                        <span class="sc-badge">+40점 상승</span>
+                    </div>
+                    <h4>"직장인 하루 3시간, 망각곡선 루틴이 합격을 갈랐습니다"</h4>
+                    <p class="sp-proof-text">"민법 물권법이 늘 과락 근처였는데, AI 플래너가 1일/3일/7일 단위로 족집게 기출을 복습시켜주어 시험장에서는 판례가 바로 보였습니다."</p>
+                    <div class="sp-proof-footer">
+                        <span class="sp-user-info">김○진 님 (30대 직장인)</span>
+                        <button class="btn-sp-use" data-goal="공인중개사 1차 단기합격" data-date="2026-10-31" data-weak="민법 물권법 판례, 부동산학개론 계산문제">⚡ 이 루틴 적용</button>
+                    </div>
+                </div>
+
+                <div class="sp-proof-card">
+                    <div class="sp-proof-top">
+                        <span class="sp-proof-cat">세무사 1차 (CTA)</span>
+                        <span class="sp-proof-auth">인증 합격생</span>
+                    </div>
+                    <div class="sp-score-bar">
+                        <span class="sc-before">과락 35점</span>
+                        <span class="sc-arrow">➔</span>
+                        <span class="sc-after">최종 75.0점</span>
+                        <span class="sc-badge">+40점 상승</span>
+                    </div>
+                    <h4>"비전공자 회계학 과락 탈출! 계산 드릴 반복의 힘"</h4>
+                    <p class="sp-proof-text">"복합금융상품 분개와 세법학 계산문제를 집중 보완하도록 플랜을 짠 뒤, 매일 아침 40분씩 단원별 OX를 돌려 90일 만에 안정권에 진입했습니다."</p>
+                    <div class="sp-proof-footer">
+                        <span class="sp-user-info">이○석 님 (경영 비전공자)</span>
+                        <button class="btn-sp-use" data-goal="세무사(CTA) 1차 합격" data-date="2026-05-09" data-weak="회계학 재무제표 분개, 세법학개론 계산특강">⚡ 이 루틴 적용</button>
+                    </div>
+                </div>
+
+                <div class="sp-proof-card">
+                    <div class="sp-proof-top">
+                        <span class="sp-proof-cat">9급 세무직 공무원</span>
+                        <span class="sp-proof-auth">인증 합격생</span>
+                    </div>
+                    <div class="sp-score-bar">
+                        <span class="sc-before">평균 64점</span>
+                        <span class="sc-arrow">➔</span>
+                        <span class="sc-after">최종 88.5점</span>
+                        <span class="sc-badge">+24.5점 상승</span>
+                    </div>
+                    <h4>"스파르타 모드로 순공 10시간 유지, 국가직 필기 합격"</h4>
+                    <p class="sp-proof-text">"세법개론과 회계학을 잡지 못해 재수를 결심했었습니다. 에듀위 AI 스파르타 모드로 일일 기출 50제와 약점 단원 누적 회독을 끝까지 지켰습니다."</p>
+                    <div class="sp-proof-footer">
+                        <span class="sp-user-info">박○우 님 (공시생 1년차)</span>
+                        <button class="btn-sp-use" data-goal="9급 세무직 공무원 합격" data-date="2026-04-05" data-weak="세법개론 부가가치세법, 회계학 원가관리회계">⚡ 이 루틴 적용</button>
+                    </div>
+                </div>
+
+                <div class="sp-proof-card">
+                    <div class="sp-proof-top">
+                        <span class="sp-proof-cat">토익 850+ 단기완성</span>
+                        <span class="sp-proof-auth">인증 합격생</span>
+                    </div>
+                    <div class="sp-score-bar">
+                        <span class="sc-before">기존 610점</span>
+                        <span class="sc-arrow">➔</span>
+                        <span class="sc-after">최종 895점</span>
+                        <span class="sc-badge">+285점 폭등</span>
+                    </div>
+                    <h4>"파트5 시간 단축 + LC 쉐도잉 3주 집중 완성"</h4>
+                    <p class="sp-proof-text">"취업 서류 마감이 코앞이라 3주 벼락치기가 필요했습니다. 파트5 문법 빈출 공식과 파트3/4 패러프레이징 집중 훈련으로 895점 찍고 공기업 서류 통과했습니다!"</p>
+                    <div class="sp-proof-footer">
+                        <span class="sp-user-info">정○연 님 (취업준비생)</span>
+                        <button class="btn-sp-use" data-goal="토익 850+ 완성" data-date="2026-03-31" data-weak="RC 파트5 문법 풀이 시간 단축, LC 파트3 패러프레이징">⚡ 이 루틴 적용</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- [뷰 2] 자격증 과정 상세 안내 및 1-Click 연동 -->
@@ -252,9 +361,9 @@
                     <h3>세무사 (CTA 1차·2차 전문직)</h3>
                     <p class="card-desc">세무법인 개업 및 컨설팅 최고 권위! 1차(재정학·세법학개론·회계학·선택법) 및 2차 주관식 세법학/세무회계 단기 동차 합격 커리큘럼.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 1차 5월 9일 / 2차 8월 예정</li>
-                        <li><strong>합격 기준:</strong> 1차 평균 60점 / 2차 고득점자순 선발</li>
-                        <li><strong>사전 요건:</strong> 공인어학성적(토익 700점 등) 필수</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">1차 5월 9일 / 2차 8월 예정</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">🎯</i> 합격 기준</span><span class="spec-val">1차 평균 60점 / 2차 고득점자순 선발</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">📋</i> 사전 요건</span><span class="spec-val">공인어학성적(토익 700점 등) 필수</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="세무사(CTA) 1차/2차 합격" data-date="2026-05-09" data-weak="세법학 1·2부 판례 논술, 세무회계 계산연습, 재정학 수식 유도">
@@ -269,9 +378,9 @@
                     <h3>공인회계사 (KICPA 1차·2차)</h3>
                     <p class="card-desc">빅4 회계법인(삼일·삼정·안진·한영) 입사 필수! 1차 5과목(경영·경제·상법·세법·회계학) + 2차 부분합격제 완벽 대비 패스.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 1차 매년 2월 말 / 2차 6월 말</li>
-                        <li><strong>응시 자격:</strong> 학점 이수(회계 12, 경영 9, 경제 3) + 공인영어</li>
-                        <li><strong>추천 대상:</strong> 회계법인 감사, IB 증권사, 금융공기업 희망자</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">1차 매년 2월 말 / 2차 6월 말</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">📋</i> 응시 자격</span><span class="spec-val">학점 이수(회계 12, 경영 9, 경제 3) + 공인영어</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">💡</i> 추천 대상</span><span class="spec-val">회계법인 감사, IB 증권사, 금융공기업 희망자</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="공인회계사(CPA) 1차 합격" data-date="2026-02-28" data-weak="중급/고급회계 복합금융상품 분개, 경제원론 미시수식, 재무관리 공식">
@@ -286,9 +395,9 @@
                     <h3>공인중개사 (1·2차 동차)</h3>
                     <p class="card-desc">대한민국 최다 합격자 배출! 부동산학개론, 민법 및 2차 실무 6과목 동차 합격 커리큘럼.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 2026년 10월 31일(토)</li>
-                        <li><strong>합격 기준:</strong> 매 과목 40점 이상, 전 과목 평균 60점</li>
-                        <li><strong>추천 대상:</strong> 평생 전문직 및 은퇴/이직 대비</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">2026년 10월 31일(토)</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">🎯</i> 합격 기준</span><span class="spec-val">매 과목 40점 이상, 전 과목 평균 60점</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">💡</i> 추천 대상</span><span class="spec-val">평생 전문직 및 은퇴/이직 대비</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="공인중개사 동차합격" data-date="2026-10-31" data-weak="민법 판례 암기, 부동산공법 체계도">
@@ -303,9 +412,9 @@
                     <h3>공인중개사 (1차 합격반)</h3>
                     <p class="card-desc">시간이 부족한 직장인을 위한 1차 2과목(부동산학개론, 민법 및 민사특별법) 우선 합격 전략.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 2026년 10월 31일(토)</li>
-                        <li><strong>합격 기준:</strong> 1차 2과목 평균 60점</li>
-                        <li><strong>추천 대상:</strong> 하루 2~3시간 투자 직장인 수험생</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">2026년 10월 31일(토)</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">🎯</i> 합격 기준</span><span class="spec-val">1차 2과목 평균 60점</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">💡</i> 추천 대상</span><span class="spec-val">하루 2~3시간 투자 직장인 수험생</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="공인중개사 1차 단기합격" data-date="2026-10-31" data-weak="부동산학개론 계산문제, 민법 물권법">
@@ -320,9 +429,9 @@
                     <h3>주택관리사(보) (1·2차)</h3>
                     <p class="card-desc">아파트 관리소장 채용 의무화! 회계원리, 공동주택시설개론, 민법 1차 및 2차 실무 상대평가 대비.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 1차 7월 / 2차 9월 시행</li>
-                        <li><strong>합격 기준:</strong> 1차 절대평가(60점), 2차 고득점순</li>
-                        <li><strong>추천 대상:</strong> 4060 세컨드 라이프 설계자</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">1차 7월 / 2차 9월 시행</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">🎯</i> 합격 기준</span><span class="spec-val">1차 절대평가(60점), 2차 고득점순</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">💡</i> 추천 대상</span><span class="spec-val">4060 세컨드 라이프 설계자</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="주택관리사 1차/2차" data-date="2026-09-26" data-weak="회계원리 분개, 공동주택관리실무">
@@ -337,9 +446,9 @@
                     <h3>재경관리사 (재무·세무·원가)</h3>
                     <p class="card-desc">삼일회계법인 주관. 비전공자도 2달 완성 가능한 핵심 재무회계, 세무회계, 원가관리회계 3과목 패스.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 연 8회 시행 (11월 21일 예정)</li>
-                        <li><strong>합격 기준:</strong> 전 과목 70점 이상</li>
-                        <li><strong>추천 대상:</strong> 대기업/공기업 재무팀 취업 준비생</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">연 8회 시행 (11월 21일 예정)</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">🎯</i> 합격 기준</span><span class="spec-val">전 과목 70점 이상</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">💡</i> 추천 대상</span><span class="spec-val">대기업/공기업 재무팀 취업 준비생</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="재경관리사 (삼일회계법인)" data-date="2026-11-21" data-weak="원가관리회계 CVP 분석, 법인세 세무조정">
@@ -354,9 +463,9 @@
                     <h3>회계관리 1급 (재무·세무)</h3>
                     <p class="card-desc">재경관리사 전 단계 필수 자격증! 재무회계와 세무회계 기초 실무 이론을 4주 만에 마스터.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 연 8회 시행</li>
-                        <li><strong>합격 기준:</strong> 전 과목 70점 이상</li>
-                        <li><strong>추천 대상:</strong> 전공 무관 회계 입문자</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">연 8회 시행</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">🎯</i> 합격 기준</span><span class="spec-val">전 과목 70점 이상</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">💡</i> 추천 대상</span><span class="spec-val">전공 무관 회계 입문자</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="회계관리 1급" data-date="2026-11-21" data-weak="부가가치세 신고서 작성, 재고자산 평가">
@@ -371,9 +480,9 @@
                     <h3>회계관리 2급 (회계원리 입문)</h3>
                     <p class="card-desc">회계의 기초 원리(차변, 대변, 분개, 결산)를 가장 쉽고 빠르게 정리하는 기초 자격증.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 연 8회 시행</li>
-                        <li><strong>합격 기준:</strong> 회계원리 70점 이상</li>
-                        <li><strong>추천 대상:</strong> 회포자(회계 포기자) 및 특성화고</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">연 8회 시행</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">🎯</i> 합격 기준</span><span class="spec-val">회계원리 70점 이상</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">💡</i> 추천 대상</span><span class="spec-val">회포자(회계 포기자) 및 특성화고</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="회계관리 2급 회계원리" data-date="2026-11-21" data-weak="결산 수정분개, 감가상각비 계산">
@@ -388,9 +497,9 @@
                     <h3>전산세무 1급 / 2급 (실무)</h3>
                     <p class="card-desc">한국세무사회 주관. 케이렙(KcLep) 프로그램을 활용한 부가가치세, 원천징수, 법인세 실무 집중 훈련.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 짝수달 연 6회 시행</li>
-                        <li><strong>합격 기준:</strong> 100점 만점 70점 이상</li>
-                        <li><strong>추천 대상:</strong> 세무사사무소 및 일반기업 경리팀</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">짝수달 연 6회 시행</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">🎯</i> 합격 기준</span><span class="spec-val">100점 만점 70점 이상</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">💡</i> 추천 대상</span><span class="spec-val">세무사사무소 및 일반기업 경리팀</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="전산세무 2급/1급 합격" data-date="2026-10-11" data-weak="케이렙 부가세 가산세 계산, 연말정산 실무">
@@ -405,9 +514,9 @@
                     <h3>전산회계 1급 / 2급</h3>
                     <p class="card-desc">이론(30%) + 실무프로그램(70%) 배점으로 전표입력, 고정자산등록, 결산자료 입력을 완벽 마스터.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 짝수달 연 6회 시행</li>
-                        <li><strong>합격 기준:</strong> 70점 이상 합격</li>
-                        <li><strong>추천 대상:</strong> 사무직 취업을 위한 기초 자격증</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">짝수달 연 6회 시행</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">🎯</i> 합격 기준</span><span class="spec-val">70점 이상 합격</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">💡</i> 추천 대상</span><span class="spec-val">사무직 취업을 위한 기초 자격증</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="전산회계 1급" data-date="2026-10-11" data-weak="일반전표 분개오류 수정, 매입매출전표 유형">
@@ -422,9 +531,9 @@
                     <h3>전기기사 / 전기산업기사</h3>
                     <p class="card-desc">이공계 최고 취업률! 전기자기학, 전력공학, 회로이론, 전기기기, 전기설비 5과목 수포자 맞춤 풀이.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 정기기사 연 3회 (10월 25일 실기)</li>
-                        <li><strong>합격 기준:</strong> 과목당 40점 이상, 평균 60점</li>
-                        <li><strong>추천 대상:</strong> 전기시설관리인 선임 및 공기업</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">정기기사 연 3회 (10월 25일 실기)</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">🎯</i> 합격 기준</span><span class="spec-val">과목당 40점 이상, 평균 60점</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">💡</i> 추천 대상</span><span class="spec-val">전기시설관리인 선임 및 공기업</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="전기기사 필기/실기" data-date="2026-10-25" data-weak="전기자기학 미적분 공식, 수변전설비 도면">
@@ -439,9 +548,9 @@
                     <h3>전기공사기사 / 산업기사</h3>
                     <p class="card-desc">전기기사 취득 후 전기응용 및 공사재료 1과목만 추가 응시하여 취득하는 '전기 쌍기사' 패스.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 정기기사 연 3회</li>
-                        <li><strong>합격 기준:</strong> 평균 60점 이상</li>
-                        <li><strong>추천 대상:</strong> 한국전력공사 등 에너지 공기업 가산점</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">정기기사 연 3회</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">🎯</i> 합격 기준</span><span class="spec-val">평균 60점 이상</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">💡</i> 추천 대상</span><span class="spec-val">한국전력공사 등 에너지 공기업 가산점</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="전기공사기사" data-date="2026-10-25" data-weak="전기응용 조명계산, 시퀀스 배선 실기">
@@ -456,9 +565,9 @@
                     <h3>정보처리기사 / 산업기사</h3>
                     <p class="card-desc">NCS 개정 최신 기준 100% 반영. C, Java, Python 프로그래밍 언어와 SQL, 소프트웨어 설계/구축.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 정기 3회 (10월 18일 실기)</li>
-                        <li><strong>합격 기준:</strong> 필기 60점 / 실기 60점</li>
-                        <li><strong>추천 대상:</strong> IT 개발자 및 공기업 일반직 가산점</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">정기 3회 (10월 18일 실기)</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">🎯</i> 합격 기준</span><span class="spec-val">필기 60점 / 실기 60점</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">💡</i> 추천 대상</span><span class="spec-val">IT 개발자 및 공기업 일반직 가산점</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="정보처리기사 실기" data-date="2026-10-18" data-weak="프로그래밍 코드 해석, SQL Join 쿼리">
@@ -473,9 +582,9 @@
                     <h3>소방설비기사 (전기 / 기계)</h3>
                     <p class="card-desc">소방안전관리자 선임 의무화로 수요 폭발! 소방원론, 소방관계법규, 구조원리 완벽 압축 특강.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 정기기사 연 3회 (11월 실기)</li>
-                        <li><strong>합격 기준:</strong> 과목당 40점 이상, 평균 60점</li>
-                        <li><strong>추천 대상:</strong> 소방시설 시공 및 건축설비 안전관리</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">정기기사 연 3회 (11월 실기)</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">🎯</i> 합격 기준</span><span class="spec-val">과목당 40점 이상, 평균 60점</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">💡</i> 추천 대상</span><span class="spec-val">소방시설 시공 및 건축설비 안전관리</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="소방설비기사(전기/기계)" data-date="2026-11-08" data-weak="소방원론 화재역학, 경보설비 가닥수 산출">
@@ -490,9 +599,9 @@
                     <h3>산업안전기사 / 건설안전기사</h3>
                     <p class="card-desc">안전관리자 채용 의무화로 전 산업군 인기 1위! 필답형+작업형 동영상 시험까지 빈출 500제 엄선.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 정기기사 연 3회</li>
-                        <li><strong>합격 기준:</strong> 평균 60점 이상</li>
-                        <li><strong>추천 대상:</strong> 제조업, 건설업, 화학공장 안전관리자</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">정기기사 연 3회</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">🎯</i> 합격 기준</span><span class="spec-val">평균 60점 이상</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">💡</i> 추천 대상</span><span class="spec-val">제조업, 건설업, 화학공장 안전관리자</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="산업안전기사 필답형/작업형" data-date="2026-10-18" data-weak="안전관리론 암기, 위험기계 방호장치 실기">
@@ -507,9 +616,9 @@
                     <h3>위험물산업기사 / 위험물기능사</h3>
                     <p class="card-desc">제1류~제6류 위험물의 성상과 화학반응식 완전 정복. 정유, 배터리, 석유화학 대기업 생산기술직 필수.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 연 3~4회 시행</li>
-                        <li><strong>합격 기준:</strong> 평균 60점 이상</li>
-                        <li><strong>추천 대상:</strong> 2차전지, 정유, 반도체 생산/공정관리</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">연 3~4회 시행</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">🎯</i> 합격 기준</span><span class="spec-val">평균 60점 이상</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">💡</i> 추천 대상</span><span class="spec-val">2차전지, 정유, 반도체 생산/공정관리</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="위험물산업기사" data-date="2026-11-01" data-weak="위험물 제1~6류 반응식, 소화설비 기준">
@@ -524,9 +633,9 @@
                     <h3>물류관리사 / 유통관리사 2급</h3>
                     <p class="card-desc">이커머스/풀필먼트 시대의 필수 자격! 물류관리론, 화물운송론, 보관하역론 및 유통마케팅 단기 완성.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 물류관리사 연 1회(7월) / 유통 연 3회</li>
-                        <li><strong>합격 기준:</strong> 과목당 40점 이상, 평균 60점</li>
-                        <li><strong>추천 대상:</strong> 쿠팡, CJ대한통운 등 물류·유통 MD</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">물류관리사 연 1회(7월) / 유통 연 3회</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">🎯</i> 합격 기준</span><span class="spec-val">과목당 40점 이상, 평균 60점</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">💡</i> 추천 대상</span><span class="spec-val">쿠팡, CJ대한통운 등 물류·유통 MD</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="물류관리사/유통관리사" data-date="2026-11-08" data-weak="물류관련법규 암기, 보관하역 설비계산">
@@ -541,9 +650,9 @@
                     <h3>행정사 / 경비지도사 (일반)</h3>
                     <p class="card-desc">민원행정 대리 및 특수경비 보안 총괄 자격증! 법학 기초부터 2차 논술/상대평가 고득점 전략.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 일정:</strong> 매년 가을 시행</li>
-                        <li><strong>합격 기준:</strong> 1차 60점 / 2차 고득점순</li>
-                        <li><strong>추천 대상:</strong> 행정사 사무소 창업 및 공항/항만 보안</li>
+                        <li><span class="spec-label"><i class="spec-ico">📅</i> 시험 일정</span><span class="spec-val">매년 가을 시행</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">🎯</i> 합격 기준</span><span class="spec-val">1차 60점 / 2차 고득점순</span></li>
+                        <li><span class="spec-label"><i class="spec-ico">💡</i> 추천 대상</span><span class="spec-val">행정사 사무소 창업 및 공항/항만 보안</span></li>
                     </ul>
                     <div class="card-footer">
                         <button class="btn-apply-plan" data-goal="행정사/경비지도사" data-date="2026-11-14" data-weak="경비업법 조문 완벽암기, 행정학개론">
@@ -989,6 +1098,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EC%84%B8%EB%AC%B4%EC%82%AC" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="세무사 1차 재정학+세법학">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="세무사 1차 재정학+세법학" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1006,6 +1116,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%ED%9A%8C%EA%B3%84%EC%82%AC+CPA" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="CPA 1차 회계학 10개년 기출해설">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="CPA 1차 회계학 10개년 기출해설" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1023,6 +1134,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EC%9E%AC%EA%B2%BD%EA%B4%80%EB%A6%AC%EC%82%AC+%ED%95%9C%EA%B5%8C%EB%81%9D%EC%9E%A5" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="2026 에듀위 재경관리사 한권끝장">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="2026 에듀위 재경관리사 한권끝장" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1040,6 +1152,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EA%B3%B5%EC%9D%B8%EC%87%A1%EA%B0%9C%EC%82%AC+1%EC%B0%A8+%ED%95%B5%EC%8B%AC%EC%9A%94%EC%95%BD%EC%A7%91" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="2026 공인중개사 1차 핵심요약집">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="2026 공인중개사 1차 핵심요약집" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1057,6 +1170,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EA%B3%B5%EC%9D%B8%EC%87%A1%EA%B0%9C%EC%82%AC+2%EC%B0%A8+%EA%B8%B0%EC%B6%9C%EB%AC%B8%EC%A0%9C%EC%A7%91" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="2026 공인중개사 2차 기출문제집">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="2026 공인중개사 2차 기출문제집" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1074,6 +1188,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EC%A3%BC%ED%83%9D%EA%B4%80%EB%A6%AC%EC%82%AC+%ED%9A%8C%EA%B3%84%EC%9B%90%EB%A6%AC" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="주택관리사 1차 회계원리 기본서">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="주택관리사 1차 회계원리 기본서" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1091,6 +1206,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC+%EC%8B%A4%EA%B8%B0" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="정보처리기사 실기 기출 10회">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="정보처리기사 실기 기출 10회" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1108,6 +1224,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EC%A0%84%EA%B8%B0%EA%B8%B0%EC%82%AC+%ED%95%84%EA%B8%B0" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="2026 전기기사 필기 CBT 7개년">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="2026 전기기사 필기 CBT 7개년" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1125,6 +1242,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EC%86%8C%EB%B0%A9%EC%84%A4%EB%B9%84%EA%B8%B0%EC%82%AC" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="소방설비기사 전기분야 초단기">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="소방설비기사 전기분야 초단기" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1142,6 +1260,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EC%82%B0%EC%97%85%EC%95%88%EC%A0%84%EA%B8%B0%EC%82%AC+%EC%8B%A4%EA%B8%B0" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="산업안전기사 실기 한권끝장">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="산업안전기사 실기 한권끝장" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1159,6 +1278,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EA%B3%B5%EB%AC%B4%EC%9B%90+%EC%84%B8%EB%B2%95" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="2026 9급 세무직 세법개론">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="2026 9급 세무직 세법개론" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1176,6 +1296,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%ED%96%89%EC%A0%95%EB%B2%95%EC%B4%9D%EB%A1%A0" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="2026 9급 행정법총론 기출 OX">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="2026 9급 행정법총론 기출 OX" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1193,6 +1314,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EA%B2%BD%EC%B0%B0+%ED%98%95%EC%82%AC%EB%B2%95" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="2026 경찰 형사법 핵심판례 1000">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="2026 경찰 형사법 핵심판례 1000" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1210,6 +1332,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+7%EA%B8%89+PSAT" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="7급 국가직 PSAT 10개년 기출">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="7급 국가직 PSAT 10개년 기출" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1227,6 +1350,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%ED%86%A0%EC%9D%B5+%EC%8B%A4%EC%A0%84" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="에듀위 토익 실전 1000제">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="에듀위 토익 실전 1000제" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1244,6 +1368,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%ED%95%9C%EB%8A%A5%EA%B2%80+2%EC%A3%BC%EB%81%9D%EC%9E%A5" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="한능검 심화 2주끝장 기본서">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="한능검 심화 2주끝장 기본서" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1261,6 +1386,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EC%BB%B4%ED%99%9C+1%EA%B8%89+%EC%8B%A4%EA%B8%B0" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="컴활 1급 실기 3주완성">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="컴활 1급 실기 3주완성" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1278,6 +1404,7 @@
                         <div class="book-action-row">
                             <a href="https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EA%B3%B5%EA%B8%B0%EC%97%85+NCS" target="_blank" class="btn-buy-yes24">🛒 YES24 최저가 구매</a>
                             <button class="btn-book-plan" data-title="공기업 NCS 통합기본서">⚡ AI 플랜 연동</button>
+    <button class="btn-book-wish" data-title="공기업 NCS 통합기본서" title="마이학습룸에 찜하기">❤️ 찜</button>
                         </div>
                     </div>
                 </div>
@@ -1515,6 +1642,144 @@
                     <div class="review-card-footer">
                         <span class="review-user">한○우 합격생 (이직 성공)</span>
                         <button class="btn-read-review" data-id="6">📖 수기 전문 읽기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- [뷰 7] 마이학습룸 (학습 대시보드 / 마이페이지) -->
+    <!-- ========================================================================= -->
+    <section id="view-mypage" class="tab-view">
+        <div class="container section-inner">
+            <!-- 수험생 대시보드 프로필 헤더 카드 -->
+            <div class="mypage-hero-card">
+                <div class="mypage-user-profile">
+                    <div class="user-avatar-circle">🎓</div>
+                    <div class="user-meta">
+                        <div class="user-badge-row">
+                            <span class="badge-role">2026 합격 목표 수험생</span>
+                            <span class="badge-tier">⭐ PREMIUM AI CARE</span>
+                        </div>
+                        <h2 id="mypageUserName">김에듀 수험생 님의 합격 대시보드</h2>
+                        <p class="mypage-goal-sub">현재 목표: <strong id="mypageTargetExam">2026 세무사 1차 / 공인중개사</strong> | 합격 D-Day: <span class="dday-tag" id="mypageDday">D-42</span></p>
+                    </div>
+                </div>
+                <div class="mypage-stat-summary">
+                    <div class="mstat-item">
+                        <span class="mstat-label">🔥 연속 열공 스트릭</span>
+                        <strong class="mstat-value text-gold" id="myStreakCount">14일 연속</strong>
+                    </div>
+                    <div class="mstat-item">
+                        <span class="mstat-label">⏱️ 이번 주 순공 시간</span>
+                        <strong class="mstat-value" id="myWeeklyHours">28.5 / 35.0 h</strong>
+                        <div class="mstat-progress-bar">
+                            <div class="mstat-progress-fill" style="width: 81%;"></div>
+                        </div>
+                    </div>
+                    <div class="mstat-item">
+                        <span class="mstat-label">📊 평균 합격 확률</span>
+                        <strong class="mstat-value text-pass" id="myAvgPassProb">88.4% (안정권)</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 대시보드 2열 그리드 레이아웃 -->
+            <div class="mypage-grid">
+                <!-- 좌측 컬럼: AI 맞춤 플랜 보관함 & 합격예측 가채점 리포트 -->
+                <div class="mypage-col">
+                    <!-- 1. 내가 생성한 AI 맞춤 플랜 보관함 -->
+                    <div class="mypage-card">
+                        <div class="mypage-card-header">
+                            <div class="mch-title">
+                                <h3>📋 내 AI 맞춤 플랜 보관함</h3>
+                                <span class="mch-count" id="planCountBadge">3개 보관 중</span>
+                            </div>
+                            <button class="btn-create-new-plan nav-tab-trigger" data-target="view-planner">+ 새 플랜 생성</button>
+                        </div>
+                        <div class="plan-history-list" id="planHistoryList">
+                            <!-- JS로 동적 렌더링되거나 기본 샘플 렌더링 -->
+                        </div>
+                    </div>
+
+                    <!-- 2. 나의 최근 합격예측 가채점 리포트 -->
+                    <div class="mypage-card" style="margin-top: 24px;">
+                        <div class="mypage-card-header">
+                            <div class="mch-title">
+                                <h3>🎯 최근 가채점 진단 분석 리포트</h3>
+                                <span class="mch-tag" id="myPredStatusTag">합격 안정권</span>
+                            </div>
+                            <button class="btn-re-predict nav-tab-trigger" data-target="view-predict">다시 채점하기</button>
+                        </div>
+                        <div class="mypage-predict-content" id="mypagePredictContent">
+                            <!-- JS로 렌더링됨 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 우측 컬럼: 관심/찜한 수험서 & 오늘의 합격 루틴 체크리스트 -->
+                <div class="mypage-col">
+                    <!-- 3. 오늘의 합격 루틴 체크리스트 -->
+                    <div class="mypage-card">
+                        <div class="mypage-card-header">
+                            <div class="mch-title">
+                                <h3>✅ 오늘의 합격 순공 체크리스트</h3>
+                                <span class="mch-rate" id="todoRateText">달성률 75%</span>
+                            </div>
+                            <span class="mch-date" id="todayDateStr">2026.09.29 (화)</span>
+                        </div>
+                        <div class="todo-progress-bar">
+                            <div class="todo-progress-fill" id="todoProgressFill" style="width: 75%;"></div>
+                        </div>
+                        <ul class="todo-list" id="todayTodoList">
+                            <li class="todo-item done">
+                                <label class="todo-label">
+                                    <input type="checkbox" class="todo-check" checked data-idx="0">
+                                    <span class="todo-custom-box"></span>
+                                    <span class="todo-text">핵심이론 인강 2강 완강 및 요약 키워드 노트 정리 (1.4배속)</span>
+                                </label>
+                                <span class="todo-time">09:00</span>
+                            </li>
+                            <li class="todo-item done">
+                                <label class="todo-label">
+                                    <input type="checkbox" class="todo-check" checked data-idx="1">
+                                    <span class="todo-custom-box"></span>
+                                    <span class="todo-text">단원별 기출문제 30문항 풀이 및 오답 선지 OX 체크</span>
+                                </label>
+                                <span class="todo-time">13:30</span>
+                            </li>
+                            <li class="todo-item done">
+                                <label class="todo-label">
+                                    <input type="checkbox" class="todo-check" checked data-idx="2">
+                                    <span class="todo-custom-box"></span>
+                                    <span class="todo-text">취약 파트 공식 유도 & 백지 복습 (회계 분개/민법 조문)</span>
+                                </label>
+                                <span class="todo-time">16:00</span>
+                            </li>
+                            <li class="todo-item">
+                                <label class="todo-label">
+                                    <input type="checkbox" class="todo-check" data-idx="3">
+                                    <span class="todo-custom-box"></span>
+                                    <span class="todo-text">취침 전 에빙하우스 망각곡선 10분 마인드맵 누적 복습</span>
+                                </label>
+                                <span class="todo-time">22:30</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 4. 관심 / 찜한 수험서 보관함 -->
+                    <div class="mypage-card" style="margin-top: 24px;">
+                        <div class="mypage-card-header">
+                            <div class="mch-title">
+                                <h3>📚 찜한 수험서 목록 (장바구니)</h3>
+                                <span class="mch-count" id="wishCountBadge">3권 보관</span>
+                            </div>
+                            <button class="btn-more-books nav-tab-trigger" data-target="view-books">수험서 전체보기</button>
+                        </div>
+                        <div class="wishlist-container" id="wishlistContainer">
+                            <!-- JS로 렌더링됨 -->
+                        </div>
                     </div>
                 </div>
             </div>

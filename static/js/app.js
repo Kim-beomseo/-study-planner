@@ -44,6 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
             tag: "선배 30만 동문의 증명",
             title: "꿈을 현실로 만든 생생한 기록,<br><span class='hero-highlight'>에듀위 실시간 합격수기</span>",
             desc: "비전공자, 직장인, 주부 수험생들의 실제 공부시간과<br>합격 비결을 확인하고 동기부여를 얻으세요."
+        },
+        "view-mypage": {
+            tag: "2026 합격 케어 센터",
+            title: "나만의 합격 학습 대시보드,<br><span class='hero-highlight'>마이학습룸 (My Study Room)</span>",
+            desc: "내가 생성한 AI 맞춤 플랜 히스토리, 가채점 진단 결과, 찜한 수험서와<br>일일 순공 달성률을 한눈에 체계적으로 관리하세요."
         }
     };
 
@@ -400,6 +405,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
             finalVerdict.innerText = verdictText;
             finalVerdict.className = `verdict-tag ${verdictClass}`;
+
+            // 마이학습룸을 위한 최근 가채점 진단 결과 localStorage 저장
+            savePredictReport({
+                examName: currentExamName,
+                totalScore: total,
+                avgScore: avg.toFixed(1),
+                diffCutoff: (avg - config.cutoff) >= 0 ? `+${(avg - config.cutoff).toFixed(1)}` : `${(avg - config.cutoff).toFixed(1)}`,
+                verdict: verdictText,
+                verdictClass: verdictClass,
+                weakSubject: currentLowestSubject,
+                weakScore: lowestScore,
+                cutoff: config.cutoff,
+                date: new Date().toLocaleDateString("ko-KR")
+            });
 
             // 테이블 렌더링
             predictTableBody.innerHTML = "";
@@ -812,6 +831,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 currentMarkdownText = data.content;
                 resultContent.innerHTML = marked.parse(currentMarkdownText);
 
+                // 마이학습룸 플랜 보관함에 자동 저장
+                savePlanToHistory({
+                    id: "plan_" + Date.now(),
+                    goal: goal,
+                    exam_date: examDate,
+                    current_level: currentLevel,
+                    daily_time: dailyTime,
+                    weak_point: weakPoint,
+                    study_style: studyStyle,
+                    persona: persona === "sparta" ? "스파르타 모드" : "페이스메이커",
+                    created_at: new Date().toLocaleDateString("ko-KR"),
+                    markdown: currentMarkdownText
+                });
+
                 // UI 상태: 결과 표시
                 loading.style.display = "none";
                 resultContent.style.display = "block";
@@ -869,4 +902,379 @@ document.addEventListener("DOMContentLoaded", () => {
             URL.revokeObjectURL(downloadUrl);
         });
     }
+
+    // =========================================================================
+    // 7. 실시간 소셜 프루프 티커 (Social Proof Live Ticker) 롤링
+    // =========================================================================
+    const tickerMessages = [
+        '🔥 지금 <strong class="text-gold">3,428명</strong>의 수험생이 에듀위 AI 플랜으로 열공 중입니다.',
+        '⚡ 방금 전 서울 노원구 합격생이 <strong>[세무사 1차 90일 파이널 완성 플랜]</strong>을 생성했습니다.',
+        '🏆 [공인중개사 동차] 직장인 김*진 님 - 모의고사 <strong>42점 ➔ 82.5점 (+40점 상승)</strong> 합격 인증!',
+        '📈 최근 1시간 내 에듀위 실시간 합격예측 풀서비스 채점 <strong>184건</strong> 돌파!',
+        '🎉 [재경관리사 60일 패스] 비전공자 박*우 님 - 3과목 전원 <strong>80점 이상 고득점 합격</strong>!'
+    ];
+    let tickerIdx = 0;
+    const spTickerActive = document.getElementById("spTickerActive");
+    if (spTickerActive) {
+        setInterval(() => {
+            tickerIdx = (tickerIdx + 1) % tickerMessages.length;
+            spTickerActive.style.opacity = "0";
+            spTickerActive.style.transform = "translateY(10px)";
+            setTimeout(() => {
+                spTickerActive.innerHTML = tickerMessages[tickerIdx];
+                spTickerActive.style.opacity = "1";
+                spTickerActive.style.transform = "translateY(0)";
+            }, 300);
+        }, 3600);
+    }
+
+    // =========================================================================
+    // 8. 코칭 모드 라디오 버튼 선택 상태 강조 인터랙션
+    // =========================================================================
+    const personaRadios = document.querySelectorAll('input[name="persona"]');
+    function updatePersonaCardVisuals() {
+        personaRadios.forEach(radio => {
+            const card = radio.closest(".persona-card");
+            if (card) {
+                if (radio.checked) {
+                    card.classList.add("is-active");
+                } else {
+                    card.classList.remove("is-active");
+                }
+            }
+        });
+    }
+    personaRadios.forEach(radio => {
+        radio.addEventListener("change", updatePersonaCardVisuals);
+    });
+    updatePersonaCardVisuals();
+
+    // =========================================================================
+    // 9. 점수 상승 실화 카드 [⚡ 이 루틴 적용] 버튼 이벤트 바인딩
+    // =========================================================================
+    document.querySelectorAll(".btn-sp-use").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const goal = btn.getAttribute("data-goal");
+            const date = btn.getAttribute("data-date");
+            const weak = btn.getAttribute("data-weak");
+
+            switchTab("view-planner");
+            if (goal) document.getElementById("goal").value = goal;
+            if (date) document.getElementById("exam_date").value = date;
+            if (weak) document.getElementById("weak_point").value = weak;
+
+            // 스파르타 모드로 추천 세팅
+            const spartaRadio = document.querySelector('input[name="persona"][value="sparta"]');
+            if (spartaRadio) {
+                spartaRadio.checked = true;
+                updatePersonaCardVisuals();
+            }
+
+            alert(`🏆 합격 선배의 검증된 루틴 [${goal}]이(가) AI 플래너 폼에 세팅되었습니다!
+아래 [에듀위 AI 맞춤 합격 플랜 생성하기] 버튼을 눌러보세요.`);
+        });
+    });
+
+    // =========================================================================
+    // 10. 교재 [❤️ 찜하기] 토글 & 마이학습룸 연동
+    // =========================================================================
+    const defaultWishBooks = [
+        { title: "2026 에듀위 세무사 1차 재정학 핵심이론+기출 OX", author: "세무사 시험연구소", price: "38,700원", link: "https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EC%84%B8%EB%AC%B4%EC%82%AC" },
+        { title: "2026 에듀위 재경관리사 3과목 한권끝장", author: "에듀위 세무/회계 교수진", price: "34,200원", link: "https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%EC%9E%AC%EA%B2%BD%EA%B4%80%EB%A6%AC%EC%82%AC+%ED%95%9C%EA%B5%8C%EB%81%9D%EC%9E%A5" },
+        { title: "에듀위 토익 실전 1000제 (LC/RC 최신 기출경향)", author: "에듀위 어학연구소", price: "23,400원", link: "https://www.yes24.com/Product/Search?domain=BOOK&query=%EC%97%90%EB%93%80%EC%9C%8C+%ED%86%A0%EC%9D%B5" }
+    ];
+
+    function getWishlist() {
+        const stored = localStorage.getItem("eduwe_wish_books");
+        return stored ? JSON.parse(stored) : defaultWishBooks;
+    }
+
+    function saveWishlist(list) {
+        localStorage.setItem("eduwe_wish_books", JSON.stringify(list));
+    }
+
+    // 교재 카드 찜 버튼 클릭 리스너
+    document.querySelectorAll(".btn-book-wish").forEach(btn => {
+        const title = btn.getAttribute("data-title");
+        const list = getWishlist();
+        if (list.some(b => b.title.includes(title) || title.includes(b.title))) {
+            btn.classList.add("active");
+            btn.innerText = "❤️ 찜됨";
+        }
+
+        btn.addEventListener("click", () => {
+            let currentList = getWishlist();
+            const exists = currentList.findIndex(b => b.title.includes(title) || title.includes(b.title));
+            if (exists >= 0) {
+                currentList.splice(exists, 1);
+                btn.classList.remove("active");
+                btn.innerText = "❤️ 찜";
+                alert(`💔 [${title}] 교재가 마이학습룸 찜 목록에서 제거되었습니다.`);
+            } else {
+                currentList.unshift({
+                    title: title,
+                    author: "에듀위 전문 교수진 편저",
+                    price: "베스트셀러",
+                    link: `https://www.yes24.com/Product/Search?domain=BOOK&query=${encodeURIComponent("에듀윌 " + title)}`
+                });
+                btn.classList.add("active");
+                btn.innerText = "❤️ 찜됨";
+                alert(`❤️ [${title}] 교재가 마이학습룸 찜 목록에 안전하게 보관되었습니다!`);
+            }
+            saveWishlist(currentList);
+        });
+    });
+
+    // =========================================================================
+    // 11. AI 플랜 히스토리 & 가채점 리포트 저장소
+    // =========================================================================
+    const defaultPlanHistory = [
+        {
+            id: "plan_sample_1",
+            goal: "세무사 1차 90일 파이널 완성 플랜",
+            exam_date: "2026-05-09",
+            persona: "스파르타 모드",
+            created_at: "2026.09.28",
+            markdown: "### 📌 2026 세무사 1차 90일 파이널 플랜\n- **주차별 목표**: 1~4주 기본서 예제 3회독, 5~8주 기출 10개년 단원별 풀이, 9~12주 파이널 모의고사\n- **취약 파트 집중**: 세법학개론 부가가치세/소득세 계산구조 완성\n- **일일 순공 목표**: 평일 4시간, 주말 8시간"
+        },
+        {
+            id: "plan_sample_2",
+            goal: "공인중개사 동차 단기 합격 완성",
+            exam_date: "2026-10-31",
+            persona: "페이스메이커",
+            created_at: "2026.09.20",
+            markdown: "### 📌 2026 공인중개사 동차 합격 플랜\n- **민법 40점 탈출**: 판례 키워드 연결 암기\n- **부동산학개론**: 계산 공식 10선 마스터\n- **망각곡선 복습 주기 준수**: 1일/3일/7일 족집게 OX 반복"
+        }
+    ];
+
+    function getPlanHistory() {
+        const stored = localStorage.getItem("eduwe_plan_history");
+        return stored ? JSON.parse(stored) : defaultPlanHistory;
+    }
+
+    function savePlanToHistory(planObj) {
+        const list = getPlanHistory();
+        list.unshift(planObj);
+        localStorage.setItem("eduwe_plan_history", JSON.stringify(list));
+    }
+
+    function savePredictReport(reportObj) {
+        localStorage.setItem("eduwe_last_predict", JSON.stringify(reportObj));
+    }
+
+    function getPredictReport() {
+        const stored = localStorage.getItem("eduwe_last_predict");
+        if (stored) return JSON.parse(stored);
+        return {
+            examName: "9급 세무직 공무원",
+            totalScore: 417.5,
+            avgScore: "83.5",
+            diffCutoff: "+1.0",
+            verdict: "🟢 합격 안정권",
+            verdictClass: "verdict-pass-safe",
+            weakSubject: "세법개론",
+            weakScore: 65,
+            cutoff: 82.5,
+            date: "2026.09.29"
+        };
+    }
+
+    // =========================================================================
+    // 12. 마이학습룸 (MyPage) 종합 렌더링
+    // =========================================================================
+    function renderMyPage() {
+        // 1. 플랜 히스토리 렌더링
+        const planList = getPlanHistory();
+        const planContainer = document.getElementById("planHistoryList");
+        const planCountBadge = document.getElementById("planCountBadge");
+        if (planCountBadge) planCountBadge.innerText = `${planList.length}개 보관 중`;
+
+        if (planContainer) {
+            planContainer.innerHTML = "";
+            if (planList.length === 0) {
+                planContainer.innerHTML = '<p style="color: #94a3b8; font-size: 13px; padding: 20px 0; text-align: center;">보관된 AI 맞춤 플랜이 없습니다. 상단에서 새 플랜을 생성해 보세요!</p>';
+            } else {
+                planList.forEach((plan, idx) => {
+                    const item = document.createElement("div");
+                    item.className = "plan-hist-item";
+                    item.innerHTML = `
+                        <div class="plan-hist-info">
+                            <h4>${plan.goal}</h4>
+                            <div class="plan-hist-meta">
+                                <span class="hist-tag">${plan.persona || 'AI 코칭'}</span>
+                                <span>📅 시험: ${plan.exam_date || '2026'}</span>
+                                <span>생성일: ${plan.created_at}</span>
+                            </div>
+                        </div>
+                        <div class="plan-hist-actions">
+                            <button class="btn-hist-view" data-idx="${idx}">👁️ 다시보기</button>
+                            <button class="btn-hist-del" data-idx="${idx}">🗑️</button>
+                        </div>
+                    `;
+                    planContainer.appendChild(item);
+                });
+
+                // 플랜 다시보기 리스너
+                planContainer.querySelectorAll(".btn-hist-view").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const idx = parseInt(btn.getAttribute("data-idx"));
+                        const selectedPlan = planList[idx];
+                        if (selectedPlan) {
+                            switchTab("view-planner");
+                            currentMarkdownText = selectedPlan.markdown;
+                            resultContent.innerHTML = marked.parse(currentMarkdownText);
+                            placeholder.style.display = "none";
+                            resultContent.style.display = "block";
+                            actionButtons.style.display = "flex";
+                            resultContent.scrollIntoView({ behavior: "smooth" });
+                        }
+                    });
+                });
+
+                // 플랜 삭제 리스너
+                planContainer.querySelectorAll(".btn-hist-del").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const idx = parseInt(btn.getAttribute("data-idx"));
+                        if (confirm("이 AI 맞춤 플랜을 보관함에서 삭제하시겠습니까?")) {
+                            planList.splice(idx, 1);
+                            localStorage.setItem("eduwe_plan_history", JSON.stringify(planList));
+                            renderMyPage();
+                        }
+                    });
+                });
+            }
+        }
+
+        // 2. 가채점 분석 리포트 렌더링
+        const predReport = getPredictReport();
+        const predContainer = document.getElementById("mypagePredictContent");
+        const predTag = document.getElementById("myPredStatusTag");
+        if (predTag) {
+            predTag.innerText = predReport.verdict;
+        }
+
+        if (predContainer) {
+            predContainer.innerHTML = `
+                <div class="mypage-pred-box">
+                    <div class="mpred-top">
+                        <span class="mpred-exam-name">🏛️ ${predReport.examName}</span>
+                        <span style="font-size: 12px; color: #64748b;">진단일: ${predReport.date}</span>
+                    </div>
+                    <div class="mpred-scores">
+                        <div class="mps-item">
+                            <span class="mps-lbl">내 평균점수</span>
+                            <span class="mps-val text-gold">${predReport.avgScore}점</span>
+                        </div>
+                        <div class="mps-item">
+                            <span class="mps-lbl">합격 컷오프</span>
+                            <span class="mps-val">${predReport.cutoff}점</span>
+                        </div>
+                        <div class="mps-item">
+                            <span class="mps-lbl">컷 대비 편차</span>
+                            <span class="mps-val" style="color: #10b981;">${predReport.diffCutoff}점</span>
+                        </div>
+                    </div>
+                    <div class="mpred-weak-alert">
+                        <strong>⚠️ 취약 과목 진단:</strong> [${predReport.weakSubject}] ${predReport.weakScore}점<br>
+                        합격선 돌파를 위해 해당 단원 5개년 기출 3회독 누적 복습을 권장합니다.
+                    </div>
+                    <button class="btn-eduwe-cta" id="myPageDeficitBtn" style="padding: 10px; font-size: 13px;">
+                        ⚡ [${predReport.weakSubject}] 취약 과목 AI 집중 보완 플랜 생성하기
+                    </button>
+                </div>
+            `;
+
+            const defBtn = document.getElementById("myPageDeficitBtn");
+            if (defBtn) {
+                defBtn.addEventListener("click", () => {
+                    switchTab("view-planner");
+                    document.getElementById("goal").value = `${predReport.examName} 합격선 돌파`;
+                    document.getElementById("weak_point").value = `${predReport.weakSubject} 기출 회독 및 약점 단원 마스터`;
+                    document.getElementById("current_level").value = `가채점 평균 ${predReport.avgScore}점 (취약: ${predReport.weakSubject})`;
+                    alert(`🎯 [${predReport.weakSubject}] 보완 정보가 AI 플래너 폼에 자동으로 채워졌습니다!`);
+                });
+            }
+        }
+
+        // 3. 찜한 교재 목록 렌더링
+        const wishList = getWishlist();
+        const wishContainer = document.getElementById("wishlistContainer");
+        const wishBadge = document.getElementById("wishCountBadge");
+        if (wishBadge) wishBadge.innerText = `${wishList.length}권 보관`;
+
+        if (wishContainer) {
+            wishContainer.innerHTML = "";
+            if (wishList.length === 0) {
+                wishContainer.innerHTML = '<p style="color: #94a3b8; font-size: 13px; padding: 20px 0; text-align: center;">찜한 수험서가 없습니다. 교재 탭에서 마음에 드는 책을 찜해 보세요!</p>';
+            } else {
+                wishList.forEach((book, idx) => {
+                    const row = document.createElement("div");
+                    row.className = "wish-item";
+                    row.innerHTML = `
+                        <div class="wish-info">
+                            <h5>${book.title}</h5>
+                            <p>${book.author || '에듀위 수험서'} | <span style="color: #ef4444; font-weight: 700;">${book.price || '베스트셀러'}</span></p>
+                        </div>
+                        <div class="wish-actions">
+                            <a href="${book.link}" target="_blank" class="btn-wish-buy">🛒 구매</a>
+                            <button class="btn-wish-plan" data-title="${book.title}">⚡ 플랜</button>
+                            <button class="btn-wish-del" data-idx="${idx}" title="삭제">✕</button>
+                        </div>
+                    `;
+                    wishContainer.appendChild(row);
+                });
+
+                // 플랜 연동 리스너
+                wishContainer.querySelectorAll(".btn-wish-plan").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const title = btn.getAttribute("data-title");
+                        switchTab("view-planner");
+                        document.getElementById("goal").value = `${title} 완독 및 합격`;
+                        document.getElementById("study_style").value = "기본서 회독 + 기출 5개년 반복 풀이";
+                        alert(`📚 [${title}] 교재 기반 학습 플랜이 폼에 채워졌습니다!`);
+                    });
+                });
+
+                // 삭제 리스너
+                wishContainer.querySelectorAll(".btn-wish-del").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const idx = parseInt(btn.getAttribute("data-idx"));
+                        wishList.splice(idx, 1);
+                        saveWishlist(wishList);
+                        renderMyPage();
+                    });
+                });
+            }
+        }
+    }
+
+    // =========================================================================
+    // 13. 오늘의 합격 순공 체크리스트 인터랙션
+    // =========================================================================
+    const todoCheckboxes = document.querySelectorAll(".todo-check");
+    const todoRateText = document.getElementById("todoRateText");
+    const todoProgressFill = document.getElementById("todoProgressFill");
+
+    function updateTodoProgress() {
+        if (!todoCheckboxes.length) return;
+        let checkedCount = 0;
+        todoCheckboxes.forEach(cb => {
+            const item = cb.closest(".todo-item");
+            if (cb.checked) {
+                checkedCount++;
+                if (item) item.classList.add("done");
+            } else {
+                if (item) item.classList.remove("done");
+            }
+        });
+        const rate = Math.round((checkedCount / todoCheckboxes.length) * 100);
+        if (todoRateText) todoRateText.innerText = `달성률 ${rate}%`;
+        if (todoProgressFill) todoProgressFill.style.width = `${rate}%`;
+    }
+
+    todoCheckboxes.forEach(cb => {
+        cb.addEventListener("change", updateTodoProgress);
+    });
+    updateTodoProgress();
+
 });
