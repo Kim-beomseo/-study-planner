@@ -238,14 +238,48 @@
 
             <!-- 자격증 서브 필터 -->
             <div class="sub-filter-bar">
-                <button class="sub-filter-btn active" data-subfilter="all">전체 자격증 (16)</button>
+                <button class="sub-filter-btn active" data-subfilter="all">전체 자격증 (18)</button>
                 <button class="sub-filter-btn" data-subfilter="lic-real">부동산·주택 (3)</button>
-                <button class="sub-filter-btn" data-subfilter="lic-acc">회계·세무·금융 (5)</button>
+                <button class="sub-filter-btn" data-subfilter="lic-acc">회계·세무·금융·전문직 (7)</button>
                 <button class="sub-filter-btn" data-subfilter="lic-tech">전기·IT·소방 (4)</button>
                 <button class="sub-filter-btn" data-subfilter="lic-safe">안전·관리·물류 (4)</button>
             </div>
 
             <div class="course-grid" id="licenseGrid">
+                <!-- 0-1. 세무사 (CTA) 전문직 추가 -->
+                <div class="course-card best-seller" data-sub="lic-acc" style="border: 2px solid #ffd200; background: #fffef8;">
+                    <div class="card-tag tag-hot">8대 전문직 1위</div>
+                    <h3>세무사 (CTA 1차·2차 전문직)</h3>
+                    <p class="card-desc">세무법인 개업 및 컨설팅 최고 권위! 1차(재정학·세법학개론·회계학·선택법) 및 2차 주관식 세법학/세무회계 단기 동차 합격 커리큘럼.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 일정:</strong> 1차 5월 9일 / 2차 8월 예정</li>
+                        <li><strong>합격 기준:</strong> 1차 평균 60점 / 2차 고득점자순 선발</li>
+                        <li><strong>사전 요건:</strong> 공인어학성적(토익 700점 등) 필수</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="세무사(CTA) 1차/2차 합격" data-date="2026-05-09" data-weak="세법학 1·2부 판례 논술, 세무회계 계산연습, 재정학 수식 유도">
+                            ⚡ 세무사(CTA) AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 0-2. 공인회계사 (CPA) 전문직 추가 -->
+                <div class="course-card best-seller" data-sub="lic-acc" style="border: 2px solid #111111; background: #fdfdfd;">
+                    <div class="card-tag tag-best">금융·회계 최고봉</div>
+                    <h3>공인회계사 (KICPA 1차·2차)</h3>
+                    <p class="card-desc">빅4 회계법인(삼일·삼정·안진·한영) 입사 필수! 1차 5과목(경영·경제·상법·세법·회계학) + 2차 부분합격제 완벽 대비 패스.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 일정:</strong> 1차 매년 2월 말 / 2차 6월 말</li>
+                        <li><strong>응시 자격:</strong> 학점 이수(회계 12, 경영 9, 경제 3) + 공인영어</li>
+                        <li><strong>추천 대상:</strong> 회계법인 감사, IB 증권사, 금융공기업 희망자</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="공인회계사(CPA) 1차 합격" data-date="2026-02-28" data-weak="중급/고급회계 복합금융상품 분개, 경제원론 미시수식, 재무관리 공식">
+                            ⚡ 공인회계사(CPA) AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
                 <!-- 1. 공인중개사 동차 -->
                 <div class="course-card best-seller" data-sub="lic-real">
                     <div class="card-tag tag-best">에듀윌 1위</div>
@@ -935,13 +969,41 @@
 
             <!-- 교재 서브 필터 -->
             <div class="sub-filter-bar">
-                <button class="sub-filter-btn active" data-subfilter="all">전체 도서 (16)</button>
-                <button class="sub-filter-btn" data-subfilter="book-lic">자격증 수험서 (8)</button>
+                <button class="sub-filter-btn active" data-subfilter="all">전체 도서 (18)</button>
+                <button class="sub-filter-btn" data-subfilter="book-lic">자격증·전문직 수험서 (10)</button>
                 <button class="sub-filter-btn" data-subfilter="book-gov">공무원 수험서 (4)</button>
                 <button class="sub-filter-btn" data-subfilter="book-toeic">토익·취업·NCS (4)</button>
             </div>
 
             <div class="book-grid" id="bookGrid">
+                <!-- 0-1. 세무사 1차 기본서 -->
+                <div class="book-card" data-sub="book-lic">
+                    <div class="book-cover book-c1" style="background: linear-gradient(135deg, #1e1b4b, #4338ca);">
+                        <span class="book-label">CTA 전문직</span>
+                        <h4>세무사 1차<br>재정학+세법학개론</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>2026 에듀윌 세무사 1차 재정학 핵심이론+기출 OX</h5>
+                        <p class="book-author">세무사 시험연구소 편저</p>
+                        <p class="book-price"><strong>38,700원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="2026 세무사 1차 재정학+세법학개론">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+
+                <!-- 0-2. CPA 공인회계사 1차 기출 -->
+                <div class="book-card" data-sub="book-lic">
+                    <div class="book-cover book-c4" style="background: linear-gradient(135deg, #0f172a, #334155);">
+                        <span class="book-label">KICPA 베스트</span>
+                        <h4>CPA 1차 회계학<br>재무+원가 기출 10년</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>2026 공인회계사 1차 회계학(중급/고급/원가) 단원별 기출해설</h5>
+                        <p class="book-author">회계법인 공인회계사진 편저</p>
+                        <p class="book-price"><strong>43,200원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="CPA 1차 회계학 10개년 기출해설">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+
                 <!-- 1. 재경관리사 한권끝장 -->
                 <div class="book-card" data-sub="book-lic">
                     <div class="book-cover book-c1">
