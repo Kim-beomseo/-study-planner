@@ -575,44 +575,152 @@
     <section id="view-reviews" class="tab-view">
         <div class="container section-inner">
             <div class="section-heading">
-                <span class="section-badge">선배들의 합격 노하우</span>
-                <h2>🎉 에듀윌 30만 동문 리얼 합격수기</h2>
-                <p>실제 합격생들이 실천했던 하루 순공 시간과 취약점 극복 전략을 확인하세요.</p>
+                <span class="section-badge">선배 30만 동문의 증명</span>
+                <h2>🎉 에듀윌 실시간 명예의 전당 (합격수기)</h2>
+                <p>선배 합격생들의 과목별 점수, 실제 하루 순공 시간, 슬럼프 극복기를 확인하고 내 플랜에 직접 적용해 보세요.</p>
             </div>
 
-            <div class="review-grid">
-                <div class="review-card">
+            <!-- 수기 카테고리 필터 바 -->
+            <div class="review-filter-bar">
+                <button class="filter-btn active" data-filter="all">전체 수기</button>
+                <button class="filter-btn" data-filter="license">자격증 (공인중개사·재경·기사)</button>
+                <button class="filter-btn" data-filter="gov">공무원 (일반행정·경찰)</button>
+                <button class="filter-btn" data-filter="toeic">토익 & 취업스펙</button>
+            </div>
+
+            <div class="review-grid" id="reviewGrid">
+                <!-- 수기 1 -->
+                <div class="review-card" data-category="license" data-id="1">
                     <div class="review-meta">
                         <span class="review-target">재경관리사</span>
                         <span class="review-date">2026.08 합격</span>
                     </div>
                     <h4>비전공자 직장인, 2달 만에 재경관리사 84점으로 합격했습니다!</h4>
                     <p class="review-text">"회계의 'ㅎ'도 모르던 제가 에듀윌 인강과 망각곡선 복습 플랜 덕분에 원가관리회계 킬러문항까지 다 맞혔습니다. 하루 순공 3시간씩 AI 플래너가 짜준 주간 루틴만 정확히 지켰습니다."</p>
-                    <div class="review-user">김○진 합격생 (직장인 3년차)</div>
+                    <div class="review-card-footer">
+                        <span class="review-user">김○진 합격생 (직장인 3년차)</span>
+                        <button class="btn-read-review" data-id="1">📖 수기 전문 읽기</button>
+                    </div>
                 </div>
 
-                <div class="review-card">
+                <!-- 수기 2 -->
+                <div class="review-card" data-category="license" data-id="2">
                     <div class="review-meta">
                         <span class="review-target">공인중개사</span>
                         <span class="review-date">제35회 동차합격</span>
                     </div>
                     <h4>아이 키우며 주부 5개월 만에 1·2차 동차 합격 성공기</h4>
                     <p class="review-text">"민법 판례가 너무 막막했는데, 스파르타 코치 모드로 오전 자투리 시간 2시간을 타이트하게 활용했습니다. 기출 회독 체크리스트가 성취감을 주는 데 큰 도움이 되었습니다."</p>
-                    <div class="review-user">이○영 합격생 (주부)</div>
+                    <div class="review-card-footer">
+                        <span class="review-user">이○영 합격생 (주부)</span>
+                        <button class="btn-read-review" data-id="2">📖 수기 전문 읽기</button>
+                    </div>
                 </div>
 
-                <div class="review-card">
+                <!-- 수기 3 -->
+                <div class="review-card" data-category="gov" data-id="3">
                     <div class="review-meta">
                         <span class="review-target">9급 일반행정</span>
                         <span class="review-date">2026 국가직 합격</span>
                     </div>
                     <h4>노베이스 공시생, 1년 만에 필기 합격권 돌파 비결</h4>
                     <p class="review-text">"행정법총론 10개년 기출 OX를 매일 아침 루틴으로 넣고, 저녁에는 영어 하프모의고사를 풀었습니다. 멘토 모드의 따뜻한 피드백이 슬럼프 극복에 일등공신이었습니다."</p>
-                    <div class="review-user">박○수 합격생 (수험기간 11개월)</div>
+                    <div class="review-card-footer">
+                        <span class="review-user">박○수 합격생 (수험기간 11개월)</span>
+                        <button class="btn-read-review" data-id="3">📖 수기 전문 읽기</button>
+                    </div>
+                </div>
+
+                <!-- 수기 4 -->
+                <div class="review-card" data-category="license" data-id="4">
+                    <div class="review-meta">
+                        <span class="review-target">정보처리기사</span>
+                        <span class="review-date">2026 정기 2회 실기 합격</span>
+                    </div>
+                    <h4>비전공 문과생의 정처기 실기 76점 4주 단기합격 전략</h4>
+                    <p class="review-text">"프로그래밍 언어와 SQL 문법이 생소했지만, 에듀윌 족집게 기출 변형 특강으로 약술형과 코드 해석 문항을 완전 정복했습니다."</p>
+                    <div class="review-card-footer">
+                        <span class="review-user">정○호 합격생 (취업준비생)</span>
+                        <button class="btn-read-review" data-id="4">📖 수기 전문 읽기</button>
+                    </div>
+                </div>
+
+                <!-- 수기 5 -->
+                <div class="review-card" data-category="toeic" data-id="5">
+                    <div class="review-meta">
+                        <span class="review-target">토익 890점</span>
+                        <span class="review-date">단 5주 완성</span>
+                    </div>
+                    <h4>토익 600점대 정체기 탈출! Part 7 시간 단축 비법</h4>
+                    <p class="review-text">"지문 읽는 순서와 패러프레이징 패턴을 익힌 후 LC 465점, RC 425점으로 890점 달성했습니다. 하루 4시간 집중 루틴이 효과적이었습니다."</p>
+                    <div class="review-card-footer">
+                        <span class="review-user">최○라 합격생 (대학 4학년)</span>
+                        <button class="btn-read-review" data-id="5">📖 수기 전문 읽기</button>
+                    </div>
+                </div>
+
+                <!-- 수기 6 -->
+                <div class="review-card" data-category="license" data-id="6">
+                    <div class="review-meta">
+                        <span class="review-target">전기기사</span>
+                        <span class="review-date">동차합격</span>
+                    </div>
+                    <h4>수포자 문과 출신의 전기기사 필기+실기 6개월 동차 정복</h4>
+                    <p class="review-text">"전기자기학 공식 암기보다 회로 이해 중심으로 학습했습니다. 에듀윌 교수진의 기출 회독 체크리스트가 합격의 결정타였습니다."</p>
+                    <div class="review-card-footer">
+                        <span class="review-user">한○우 합격생 (이직 성공)</span>
+                        <button class="btn-read-review" data-id="6">📖 수기 전문 읽기</button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- 합격 수기 상세 모달 -->
+    <div id="reviewModal" class="modal-overlay">
+        <div class="modal-box review-modal-box">
+            <div class="modal-header">
+                <div class="modal-title-wrap">
+                    <span class="modal-badge" id="modalReviewBadge">재경관리사 합격</span>
+                    <h3 id="modalReviewTitle">수기 제목</h3>
+                </div>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body review-modal-body">
+                <!-- 합격자 스펙 요약표 -->
+                <div class="reviewer-profile-box">
+                    <div class="prof-item">
+                        <span class="lbl">합격자</span>
+                        <strong id="modalReviewAuthor">김○진 님</strong>
+                    </div>
+                    <div class="prof-item">
+                        <span class="lbl">수험 기간</span>
+                        <strong id="modalReviewPeriod">2개월 (단기완성)</strong>
+                    </div>
+                    <div class="prof-item">
+                        <span class="lbl">하루 순공</span>
+                        <strong id="modalReviewTime">평일 3시간 / 주말 6시간</strong>
+                    </div>
+                    <div class="prof-item">
+                        <span class="lbl">취득 점수</span>
+                        <strong id="modalReviewScore" class="text-gold">평균 84점 (합격)</strong>
+                    </div>
+                </div>
+
+                <!-- 상세 내용 -->
+                <div class="review-full-story" id="modalReviewStory">
+                    <!-- 상세 내용이 JS로 동적 주입됨 -->
+                </div>
+
+                <!-- 합격생 루틴 복사 버튼 -->
+                <div class="review-modal-actions">
+                    <button id="copyReviewerRoutineBtn" class="btn-eduwill-cta">
+                        ⚡ 이 합격생의 공부 루틴으로 내 AI 플랜 세우기
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- ========================================================================= -->
     <!-- 모달 팝업들 (로그인, 회원가입, 고객만족센터) -->
