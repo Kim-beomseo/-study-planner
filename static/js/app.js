@@ -87,7 +87,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // -------------------------------------------------------------
-    // 2. 1-Click AI 플랜 연동 기능 (자격증, 공무원, 토익 카드 버튼)
+    // 2. 서브 카테고리 필터링 (자격증, 공무원, 토익, 교재)
+    // -------------------------------------------------------------
+    const subFilterButtons = document.querySelectorAll(".sub-filter-btn");
+    subFilterButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const parentSection = btn.closest(".tab-view");
+            if (!parentSection) return;
+
+            // 같은 섹션 내의 서브 필터 버튼 활성화 상태 갱신
+            const siblingBtns = parentSection.querySelectorAll(".sub-filter-btn");
+            siblingBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            const filterValue = btn.getAttribute("data-subfilter");
+            const filterableCards = parentSection.querySelectorAll("[data-sub]");
+
+            filterableCards.forEach(card => {
+                const cardSub = card.getAttribute("data-sub");
+                if (filterValue === "all" || cardSub === filterValue) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        });
+    });
+
+    // -------------------------------------------------------------
+    // 2-1. 1-Click AI 플랜 연동 기능 (자격증, 공무원, 토익 카드 버튼)
     // -------------------------------------------------------------
     const applyPlanBtns = document.querySelectorAll(".btn-apply-plan");
     applyPlanBtns.forEach(btn => {

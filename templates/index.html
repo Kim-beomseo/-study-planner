@@ -232,108 +232,287 @@
         <div class="container section-inner">
             <div class="section-heading">
                 <span class="section-badge">국가공인 자격증</span>
-                <h2>🏆 에듀윌 대표 자격증 단기합격 커리큘럼</h2>
-                <p>원하는 자격증을 선택하면 [AI 플래너]에 시험 정보가 자동 입력되어 즉시 맞춤 계획을 세울 수 있습니다.</p>
+                <h2>🏆 에듀윌 전체 자격증 단기합격 커리큘럼</h2>
+                <p>원하는 자격증을 선택하면 [AI 플래너]에 시험 정보와 취약 과목이 자동 입력되어 즉시 맞춤 계획을 세울 수 있습니다.</p>
             </div>
 
-            <div class="course-grid">
-                <!-- 카드 1: 재경관리사 -->
-                <div class="course-card">
-                    <div class="card-tag tag-hot">인기 급상승</div>
-                    <h3>재경관리사 (재무·세무·원가)</h3>
-                    <p class="card-desc">삼일회계법인 공인 시험. 비전공자도 2개월 단기합격 가능한 핵심 3과목 압축 커리큘럼.</p>
-                    <ul class="card-specs">
-                        <li><strong>시험 주기:</strong> 연 8회 시행 (1·3·5·6·7·9·11·12월)</li>
-                        <li><strong>합격 기준:</strong> 전 과목 70점 이상 합격</li>
-                        <li><strong>추천 대상:</strong> 대기업/공기업 재무팀 취업 준비생</li>
-                    </ul>
-                    <div class="card-footer">
-                        <button class="btn-apply-plan" data-goal="재경관리사 (삼일회계법인)" data-date="2026-11-21" data-weak="원가관리회계 계산식, 세무조정">
-                            ⚡ 이 과정으로 AI 플랜 세우기
-                        </button>
-                    </div>
-                </div>
+            <!-- 자격증 서브 필터 -->
+            <div class="sub-filter-bar">
+                <button class="sub-filter-btn active" data-subfilter="all">전체 자격증 (16)</button>
+                <button class="sub-filter-btn" data-subfilter="lic-real">부동산·주택 (3)</button>
+                <button class="sub-filter-btn" data-subfilter="lic-acc">회계·세무·금융 (5)</button>
+                <button class="sub-filter-btn" data-subfilter="lic-tech">전기·IT·소방 (4)</button>
+                <button class="sub-filter-btn" data-subfilter="lic-safe">안전·관리·물류 (4)</button>
+            </div>
 
-                <!-- 카드 2: 공인중개사 -->
-                <div class="course-card best-seller">
+            <div class="course-grid" id="licenseGrid">
+                <!-- 1. 공인중개사 동차 -->
+                <div class="course-card best-seller" data-sub="lic-real">
                     <div class="card-tag tag-best">에듀윌 1위</div>
-                    <h3>공인중개사 1·2차 동차</h3>
-                    <p class="card-desc">대한민국 최다 합격자 배출! 10개년 기출 빅데이터와 부동산학개론/민법 1타 교수진 라인업.</p>
+                    <h3>공인중개사 (1·2차 동차)</h3>
+                    <p class="card-desc">대한민국 최다 합격자 배출! 부동산학개론, 민법 및 2차 실무 6과목 동차 합격 커리큘럼.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 주기:</strong> 매년 10월 마지막 주 토요일</li>
+                        <li><strong>시험 일정:</strong> 2026년 10월 31일(토)</li>
                         <li><strong>합격 기준:</strong> 매 과목 40점 이상, 전 과목 평균 60점</li>
-                        <li><strong>추천 대상:</strong> 평생 전문직 및 창업/이직 희망자</li>
+                        <li><strong>추천 대상:</strong> 평생 전문직 및 은퇴/이직 대비</li>
                     </ul>
                     <div class="card-footer">
-                        <button class="btn-apply-plan" data-goal="공인중개사 동차합격" data-date="2026-10-31" data-weak="민법 판례 암기, 부동산공법">
+                        <button class="btn-apply-plan" data-goal="공인중개사 동차합격" data-date="2026-10-31" data-weak="민법 판례 암기, 부동산공법 체계도">
                             ⚡ 이 과정으로 AI 플랜 세우기
                         </button>
                     </div>
                 </div>
 
-                <!-- 카드 3: 정보처리기사 -->
-                <div class="course-card">
-                    <div class="card-tag tag-it">IT/공기업 필수</div>
-                    <h3>정보처리기사 (필기/실기)</h3>
-                    <p class="card-desc">NCS 개정 최신 기준 완벽 반영. C/Java/Python 프로그래밍 및 SQL 완벽 대비.</p>
+                <!-- 2. 공인중개사 1차 집중 -->
+                <div class="course-card" data-sub="lic-real">
+                    <div class="card-tag">단기 3개월</div>
+                    <h3>공인중개사 (1차 합격반)</h3>
+                    <p class="card-desc">시간이 부족한 직장인을 위한 1차 2과목(부동산학개론, 민법 및 민사특별법) 우선 합격 전략.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 주기:</strong> 정기기사 연 3회 시행</li>
-                        <li><strong>합격 기준:</strong> 필기 평균 60점 / 실기 60점 이상</li>
-                        <li><strong>추천 대상:</strong> 공기업 가산점 및 IT 개발 직군 취업자</li>
+                        <li><strong>시험 일정:</strong> 2026년 10월 31일(토)</li>
+                        <li><strong>합격 기준:</strong> 1차 2과목 평균 60점</li>
+                        <li><strong>추천 대상:</strong> 하루 2~3시간 투자 직장인 수험생</li>
                     </ul>
                     <div class="card-footer">
-                        <button class="btn-apply-plan" data-goal="정보처리기사 실기" data-date="2026-10-18" data-weak="프로그래밍 코드 해석, SQL문 작성">
+                        <button class="btn-apply-plan" data-goal="공인중개사 1차 단기합격" data-date="2026-10-31" data-weak="부동산학개론 계산문제, 민법 물권법">
                             ⚡ 이 과정으로 AI 플랜 세우기
                         </button>
                     </div>
                 </div>
 
-                <!-- 카드 4: 전기기사 -->
-                <div class="course-card">
-                    <div class="card-tag tag-power">취업 프리패스</div>
-                    <h3>전기기사 (전기자기학·회로이론)</h3>
-                    <p class="card-desc">이공계 최고 취업률 자격증! 수포자도 이해하는 회로 해석법과 실기 시퀀스 완벽 특강.</p>
+                <!-- 3. 주택관리사 -->
+                <div class="course-card" data-sub="lic-real">
+                    <div class="card-tag">평생직종</div>
+                    <h3>주택관리사(보) (1·2차)</h3>
+                    <p class="card-desc">아파트 관리소장 채용 의무화! 회계원리, 공동주택시설개론, 민법 1차 및 2차 실무 상대평가 대비.</p>
                     <ul class="card-specs">
-                        <li><strong>시험 주기:</strong> 정기기사 연 3회</li>
-                        <li><strong>합격 기준:</strong> 과목당 40점 이상, 평균 60점</li>
-                        <li><strong>추천 대상:</strong> 전기안전관리자 선임 및 공기업 준비생</li>
-                    </ul>
-                    <div class="card-footer">
-                        <button class="btn-apply-plan" data-goal="전기기사 필기/실기" data-date="2026-10-25" data-weak="전기자기학 수학공식, 수변전설비">
-                            ⚡ 이 과정으로 AI 플랜 세우기
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 카드 5: 소방설비기사 -->
-                <div class="course-card">
-                    <div class="card-tag">선임 유망직종</div>
-                    <h3>소방설비기사 (기계 / 전기)</h3>
-                    <p class="card-desc">소방안전관리 강화로 채용 급증! 핵심 화재안전기준(NFPC/NFTC) 완벽 정리.</p>
-                    <ul class="card-specs">
-                        <li><strong>시험 주기:</strong> 정기기사 연 3회</li>
-                        <li><strong>합격 기준:</strong> 평균 60점 이상</li>
-                        <li><strong>추천 대상:</strong> 안전관리자 및 건설/설비 분야</li>
-                    </ul>
-                    <div class="card-footer">
-                        <button class="btn-apply-plan" data-goal="소방설비기사(전기/기계)" data-date="2026-11-08" data-weak="소방원론, 구조원리 암기">
-                            ⚡ 이 과정으로 AI 플랜 세우기
-                        </button>
-                    </div>
-                </div>
-
-                <!-- 카드 6: 주택관리사 -->
-                <div class="course-card">
-                    <div class="card-tag">정년 없는 평생직</div>
-                    <h3>주택관리사(보)</h3>
-                    <p class="card-desc">아파트 관리소장 채용 의무화. 상대평가 체제에서도 안정적 상위 10% 진입 보장 전략.</p>
-                    <ul class="card-specs">
-                        <li><strong>시험 주기:</strong> 1차 7월 / 2차 9월 (연 1회)</li>
-                        <li><strong>합격 기준:</strong> 1차 절대평가, 2차 고득점자순 선발</li>
+                        <li><strong>시험 일정:</strong> 1차 7월 / 2차 9월 시행</li>
+                        <li><strong>합격 기준:</strong> 1차 절대평가(60점), 2차 고득점순</li>
                         <li><strong>추천 대상:</strong> 4060 세컨드 라이프 설계자</li>
                     </ul>
                     <div class="card-footer">
-                        <button class="btn-apply-plan" data-goal="주택관리사 1차/2차" data-date="2026-09-26" data-weak="공동주택관리실무, 회계원리">
+                        <button class="btn-apply-plan" data-goal="주택관리사 1차/2차" data-date="2026-09-26" data-weak="회계원리 분개, 공동주택관리실무">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4. 재경관리사 -->
+                <div class="course-card" data-sub="lic-acc">
+                    <div class="card-tag tag-hot">인기 급상승</div>
+                    <h3>재경관리사 (재무·세무·원가)</h3>
+                    <p class="card-desc">삼일회계법인 주관. 비전공자도 2달 완성 가능한 핵심 재무회계, 세무회계, 원가관리회계 3과목 패스.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 일정:</strong> 연 8회 시행 (11월 21일 예정)</li>
+                        <li><strong>합격 기준:</strong> 전 과목 70점 이상</li>
+                        <li><strong>추천 대상:</strong> 대기업/공기업 재무팀 취업 준비생</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="재경관리사 (삼일회계법인)" data-date="2026-11-21" data-weak="원가관리회계 CVP 분석, 법인세 세무조정">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 5. 회계관리 1급 -->
+                <div class="course-card" data-sub="lic-acc">
+                    <div class="card-tag">회계실무 핵심</div>
+                    <h3>회계관리 1급 (재무·세무)</h3>
+                    <p class="card-desc">재경관리사 전 단계 필수 자격증! 재무회계와 세무회계 기초 실무 이론을 4주 만에 마스터.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 일정:</strong> 연 8회 시행</li>
+                        <li><strong>합격 기준:</strong> 전 과목 70점 이상</li>
+                        <li><strong>추천 대상:</strong> 전공 무관 회계 입문자</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="회계관리 1급" data-date="2026-11-21" data-weak="부가가치세 신고서 작성, 재고자산 평가">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 6. 회계관리 2급 -->
+                <div class="course-card" data-sub="lic-acc">
+                    <div class="card-tag">2주 완성</div>
+                    <h3>회계관리 2급 (회계원리 입문)</h3>
+                    <p class="card-desc">회계의 기초 원리(차변, 대변, 분개, 결산)를 가장 쉽고 빠르게 정리하는 기초 자격증.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 일정:</strong> 연 8회 시행</li>
+                        <li><strong>합격 기준:</strong> 회계원리 70점 이상</li>
+                        <li><strong>추천 대상:</strong> 회포자(회계 포기자) 및 특성화고</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="회계관리 2급 회계원리" data-date="2026-11-21" data-weak="결산 수정분개, 감가상각비 계산">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 7. 전산세무 1급 / 2급 -->
+                <div class="course-card" data-sub="lic-acc">
+                    <div class="card-tag tag-hot">실기 KcLep</div>
+                    <h3>전산세무 1급 / 2급 (실무)</h3>
+                    <p class="card-desc">한국세무사회 주관. 케이렙(KcLep) 프로그램을 활용한 부가가치세, 원천징수, 법인세 실무 집중 훈련.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 일정:</strong> 짝수달 연 6회 시행</li>
+                        <li><strong>합격 기준:</strong> 100점 만점 70점 이상</li>
+                        <li><strong>추천 대상:</strong> 세무사사무소 및 일반기업 경리팀</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="전산세무 2급/1급 합격" data-date="2026-10-11" data-weak="케이렙 부가세 가산세 계산, 연말정산 실무">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 8. 전산회계 1급 / 2급 -->
+                <div class="course-card" data-sub="lic-acc">
+                    <div class="card-tag">취업 필수자격</div>
+                    <h3>전산회계 1급 / 2급</h3>
+                    <p class="card-desc">이론(30%) + 실무프로그램(70%) 배점으로 전표입력, 고정자산등록, 결산자료 입력을 완벽 마스터.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 일정:</strong> 짝수달 연 6회 시행</li>
+                        <li><strong>합격 기준:</strong> 70점 이상 합격</li>
+                        <li><strong>추천 대상:</strong> 사무직 취업을 위한 기초 자격증</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="전산회계 1급" data-date="2026-10-11" data-weak="일반전표 분개오류 수정, 매입매출전표 유형">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 9. 전기기사 -->
+                <div class="course-card" data-sub="lic-tech">
+                    <div class="card-tag tag-power">취업 프리패스</div>
+                    <h3>전기기사 / 전기산업기사</h3>
+                    <p class="card-desc">이공계 최고 취업률! 전기자기학, 전력공학, 회로이론, 전기기기, 전기설비 5과목 수포자 맞춤 풀이.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 일정:</strong> 정기기사 연 3회 (10월 25일 실기)</li>
+                        <li><strong>합격 기준:</strong> 과목당 40점 이상, 평균 60점</li>
+                        <li><strong>추천 대상:</strong> 전기시설관리인 선임 및 공기업</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="전기기사 필기/실기" data-date="2026-10-25" data-weak="전기자기학 미적분 공식, 수변전설비 도면">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 10. 전기공사기사 -->
+                <div class="course-card" data-sub="lic-tech">
+                    <div class="card-tag">쌍기사 도전</div>
+                    <h3>전기공사기사 / 산업기사</h3>
+                    <p class="card-desc">전기기사 취득 후 전기응용 및 공사재료 1과목만 추가 응시하여 취득하는 '전기 쌍기사' 패스.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 일정:</strong> 정기기사 연 3회</li>
+                        <li><strong>합격 기준:</strong> 평균 60점 이상</li>
+                        <li><strong>추천 대상:</strong> 한국전력공사 등 에너지 공기업 가산점</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="전기공사기사" data-date="2026-10-25" data-weak="전기응용 조명계산, 시퀀스 배선 실기">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 11. 정보처리기사 -->
+                <div class="course-card" data-sub="lic-tech">
+                    <div class="card-tag tag-it">IT/공기업 필수</div>
+                    <h3>정보처리기사 / 산업기사</h3>
+                    <p class="card-desc">NCS 개정 최신 기준 100% 반영. C, Java, Python 프로그래밍 언어와 SQL, 소프트웨어 설계/구축.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 일정:</strong> 정기 3회 (10월 18일 실기)</li>
+                        <li><strong>합격 기준:</strong> 필기 60점 / 실기 60점</li>
+                        <li><strong>추천 대상:</strong> IT 개발자 및 공기업 일반직 가산점</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="정보처리기사 실기" data-date="2026-10-18" data-weak="프로그래밍 코드 해석, SQL Join 쿼리">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 12. 소방설비기사 -->
+                <div class="course-card" data-sub="lic-tech">
+                    <div class="card-tag">선임 유망자격</div>
+                    <h3>소방설비기사 (전기 / 기계)</h3>
+                    <p class="card-desc">소방안전관리자 선임 의무화로 수요 폭발! 소방원론, 소방관계법규, 구조원리 완벽 압축 특강.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 일정:</strong> 정기기사 연 3회 (11월 실기)</li>
+                        <li><strong>합격 기준:</strong> 과목당 40점 이상, 평균 60점</li>
+                        <li><strong>추천 대상:</strong> 소방시설 시공 및 건축설비 안전관리</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="소방설비기사(전기/기계)" data-date="2026-11-08" data-weak="소방원론 화재역학, 경보설비 가닥수 산출">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 13. 산업안전기사 -->
+                <div class="course-card" data-sub="lic-safe">
+                    <div class="card-tag tag-hot">중대재해법 필수</div>
+                    <h3>산업안전기사 / 건설안전기사</h3>
+                    <p class="card-desc">안전관리자 채용 의무화로 전 산업군 인기 1위! 필답형+작업형 동영상 시험까지 빈출 500제 엄선.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 일정:</strong> 정기기사 연 3회</li>
+                        <li><strong>합격 기준:</strong> 평균 60점 이상</li>
+                        <li><strong>추천 대상:</strong> 제조업, 건설업, 화학공장 안전관리자</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="산업안전기사 필답형/작업형" data-date="2026-10-18" data-weak="안전관리론 암기, 위험기계 방호장치 실기">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 14. 위험물산업기사 / 기능사 -->
+                <div class="course-card" data-sub="lic-safe">
+                    <div class="card-tag">정유/화학 취업</div>
+                    <h3>위험물산업기사 / 위험물기능사</h3>
+                    <p class="card-desc">제1류~제6류 위험물의 성상과 화학반응식 완전 정복. 정유, 배터리, 석유화학 대기업 생산기술직 필수.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 일정:</strong> 연 3~4회 시행</li>
+                        <li><strong>합격 기준:</strong> 평균 60점 이상</li>
+                        <li><strong>추천 대상:</strong> 2차전지, 정유, 반도체 생산/공정관리</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="위험물산업기사" data-date="2026-11-01" data-weak="위험물 제1~6류 반응식, 소화설비 기준">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 15. 물류관리사 / 유통관리사 -->
+                <div class="course-card" data-sub="lic-safe">
+                    <div class="card-tag">물류/유통 전문</div>
+                    <h3>물류관리사 / 유통관리사 2급</h3>
+                    <p class="card-desc">이커머스/풀필먼트 시대의 필수 자격! 물류관리론, 화물운송론, 보관하역론 및 유통마케팅 단기 완성.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 일정:</strong> 물류관리사 연 1회(7월) / 유통 연 3회</li>
+                        <li><strong>합격 기준:</strong> 과목당 40점 이상, 평균 60점</li>
+                        <li><strong>추천 대상:</strong> 쿠팡, CJ대한통운 등 물류·유통 MD</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="물류관리사/유통관리사" data-date="2026-11-08" data-weak="물류관련법규 암기, 보관하역 설비계산">
+                            ⚡ 이 과정으로 AI 플랜 세우기
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 16. 행정사 / 경비지도사 -->
+                <div class="course-card" data-sub="lic-safe">
+                    <div class="card-tag">전문직 자격</div>
+                    <h3>행정사 / 경비지도사 (일반)</h3>
+                    <p class="card-desc">민원행정 대리 및 특수경비 보안 총괄 자격증! 법학 기초부터 2차 논술/상대평가 고득점 전략.</p>
+                    <ul class="card-specs">
+                        <li><strong>시험 일정:</strong> 매년 가을 시행</li>
+                        <li><strong>합격 기준:</strong> 1차 60점 / 2차 고득점순</li>
+                        <li><strong>추천 대상:</strong> 행정사 사무소 창업 및 공항/항만 보안</li>
+                    </ul>
+                    <div class="card-footer">
+                        <button class="btn-apply-plan" data-goal="행정사/경비지도사" data-date="2026-11-14" data-weak="경비업법 조문 완벽암기, 행정학개론">
                             ⚡ 이 과정으로 AI 플랜 세우기
                         </button>
                     </div>
@@ -342,139 +521,429 @@
         </div>
     </section>
 
-    <!-- [뷰 3] 공무원 과정 상세 안내 -->
+    <!-- [뷰 3] 공무원 과정 상세 안내 (세무직 등 전 직렬 완비) -->
     <section id="view-gov" class="tab-view">
         <div class="container section-inner">
             <div class="section-heading">
-                <span class="section-badge badge-black">공무원 합격관</span>
-                <h2>🏛️ 2026 공무원 단기합격 전문 패스</h2>
-                <p>국가직, 지방직, 경찰, 소방 최신 출제 트렌드를 분석하여 과목별 고득점 플랜을 완성합니다.</p>
+                <span class="section-badge badge-black">공무원 전 직렬 합격관</span>
+                <h2>🏛️ 2026 에듀윌 공무원 단기합격 전문 패스</h2>
+                <p>9급 세무직, 일반행정, 교육행정, 교정직부터 7급 PSAT, 경찰, 소방, 군무원까지 완벽한 직렬별 합격 커리큘럼을 제공합니다.</p>
             </div>
 
-            <div class="gov-grid">
-                <div class="gov-card">
+            <!-- 공무원 서브 필터 -->
+            <div class="sub-filter-bar">
+                <button class="sub-filter-btn active" data-subfilter="all">전체 공무원 (12)</button>
+                <button class="sub-filter-btn" data-subfilter="gov-9th">9급 행정·세무·기술 (7)</button>
+                <button class="sub-filter-btn" data-subfilter="gov-7th">7급 국가직·PSAT (2)</button>
+                <button class="sub-filter-btn" data-subfilter="gov-police">경찰·소방·군무원 (3)</button>
+            </div>
+
+            <div class="gov-grid" id="govGrid">
+                <!-- 1. 9급 세무직 (사용자 강력 요청 반영) -->
+                <div class="gov-card" data-sub="gov-9th" style="border: 2px solid #ffd200;">
+                    <div class="card-tag tag-hot">대규모 채용</div>
+                    <div class="gov-badge">국가직 대세 직렬</div>
+                    <h3>9급 세무직 공무원 (국세청)</h3>
+                    <p class="gov-desc">대규모 채용으로 합격 기회 최대! 국어·영어·한국사 + <strong>세법개론 + 회계학</strong> 고득점 완성반.</p>
+                    <div class="gov-info">
+                        <span>🎯 2026 국가직 4월 시험 예정</span>
+                        <span>📈 필수과목: 국/영/한 + 세법개론 + 회계학</span>
+                        <span>💡 타 직렬 대비 안정적 합격선 형성</span>
+                    </div>
+                    <button class="btn-apply-plan" data-goal="9급 세무직 공무원 합격" data-date="2026-04-11" data-weak="세법개론 조문 암기, 회계학 계산속도 단축">
+                        ⚡ 세무공무원 AI 플랜 세우기
+                    </button>
+                </div>
+
+                <!-- 2. 9급 일반행정직 -->
+                <div class="gov-card" data-sub="gov-9th">
                     <div class="gov-badge">국가직 / 지방직</div>
                     <h3>9급 일반행정직</h3>
-                    <p class="gov-desc">공시생 최선호 직렬! 국어·영어·한국사 + 행정법총론·행정학개론 고득점 5과목 집중 완성.</p>
+                    <p class="gov-desc">공시생 최선호 직렬! 국어·영어·한국사 + <strong>행정법총론 + 행정학개론</strong> 1타 교수진 커리큘럼.</p>
                     <div class="gov-info">
-                        <span>🎯 2026 국가직 4월 / 지방직 6월 예정</span>
-                        <span>📈 최근 합격선: 89~92점 형성</span>
+                        <span>🎯 국가직 4월 / 지방직 6월 예정</span>
+                        <span>📈 최근 합격선: 89~92점 고득점 컷</span>
+                        <span>💡 행정법 판례 최신 지문 완벽 분석</span>
                     </div>
-                    <button class="btn-apply-plan" data-goal="9급 일반행정직 합격" data-date="2026-06-13" data-weak="행정법 판례 최신 지문, 영어 독해">
+                    <button class="btn-apply-plan" data-goal="9급 일반행정직 합격" data-date="2026-06-13" data-weak="행정법총론 최신 판례, 영어 독해 시간단축">
                         ⚡ 일반행정 AI 플랜 세우기
                     </button>
                 </div>
 
-                <div class="gov-card">
+                <!-- 3. 9급 교육행정직 -->
+                <div class="gov-card" data-sub="gov-9th">
                     <div class="gov-badge">워라밸 1위</div>
                     <h3>9급 교육행정직</h3>
-                    <p class="gov-desc">학교 및 교육청 근무로 높은 인기. 교육학개론 및 행정법총론 필수 공략 커리큘럼.</p>
+                    <p class="gov-desc">초·중·고교 및 시도교육청 근무로 인기 최고! <strong>교육학개론 + 행정법총론</strong> 콤보 완성.</p>
                     <div class="gov-info">
-                        <span>🎯 매년 6월 지방직 동시 시행</span>
+                        <span>🎯 매년 6월 지방직/교육청 동시 시행</span>
                         <span>📈 최근 합격선: 90점 이상</span>
+                        <span>💡 교육학 기출 변형 킬러문항 대비</span>
                     </div>
-                    <button class="btn-apply-plan" data-goal="9급 교육행정직" data-date="2026-06-13" data-weak="교육학개론 이론 암기, 국어 문법">
+                    <button class="btn-apply-plan" data-goal="9급 교육행정직" data-date="2026-06-13" data-weak="교육학개론 학자별 이론 암기, 국어 문법">
                         ⚡ 교육행정 AI 플랜 세우기
                     </button>
                 </div>
 
-                <div class="gov-card">
-                    <div class="gov-badge">전문 공직자</div>
-                    <h3>7급 국가직 / 외무영사</h3>
-                    <p class="gov-desc">PSAT(언어논리/자료해석/상황판단) 1차 통과부터 2차 전공 4과목 킬러문항까지 완벽 관리.</p>
+                <!-- 4. 9급 사회복지직 -->
+                <div class="gov-card" data-sub="gov-9th">
+                    <div class="gov-badge">복지사 자격증 필수</div>
+                    <h3>9급 사회복지직 공무원</h3>
+                    <p class="gov-desc">사회복지사 2급 이상 필수 응시로 실질 경쟁률 낮음! <strong>사회복지학개론 + 행정법총론</strong> 초단기 패스.</p>
                     <div class="gov-info">
-                        <span>🎯 1차 PSAT 7월 / 2차 10월</span>
-                        <span>📈 한능검 2급 + 토익 790점 사전 필수</span>
+                        <span>🎯 매년 6월 지방직 시행</span>
+                        <span>📈 타 직렬 대비 합격선 5~8점 여유</span>
+                        <span>💡 사복학 법령 개정사항 완벽 반영</span>
                     </div>
-                    <button class="btn-apply-plan" data-goal="7급 국가직 공무원 (PSAT)" data-date="2026-10-17" data-weak="PSAT 자료해석 연산 속도, 헌법 판례">
-                        ⚡ 7급 국가직 AI 플랜 세우기
+                    <button class="btn-apply-plan" data-goal="9급 사회복지직" data-date="2026-06-13" data-weak="사회복지학개론 최신 복지법령, 영어 기초">
+                        ⚡ 사회복지직 AI 플랜 세우기
                     </button>
                 </div>
 
-                <div class="gov-card">
-                    <div class="gov-badge">체력·필기 동시관리</div>
-                    <h3>경찰공무원 (순경공채)</h3>
-                    <p class="gov-desc">형사법, 경찰학, 헌법 최신 기출 변형 훈련 및 체력검정 루틴 결합 패스.</p>
+                <!-- 5. 9급 교정직 (교도관) -->
+                <div class="gov-card" data-sub="gov-9th">
+                    <div class="gov-badge">낮은 합격선·단기유리</div>
+                    <h3>9급 교정직 공무원 (교도관)</h3>
+                    <p class="gov-desc">교정시설 근무 및 높은 수당 혜택! <strong>교정학개론 + 형사소송법개론</strong> 실전 기출 단권화.</p>
                     <div class="gov-info">
-                        <span>🎯 상반기 3월 / 하반기 8월</span>
-                        <span>📈 검정제(한능검/토익) 사전 충족반</span>
+                        <span>🎯 국가직 4월 필기 + 5월 체력검정</span>
+                        <span>📈 합격선: 60점대 후반~70점대 초반</span>
+                        <span>💡 체력검정(20m 왕복달리기 등) 동시 대비</span>
                     </div>
-                    <button class="btn-apply-plan" data-goal="경찰공무원 순경공채" data-date="2026-08-22" data-weak="형사법 판례 요령, 경찰학 조직법">
+                    <button class="btn-apply-plan" data-goal="9급 교정직 공무원" data-date="2026-04-11" data-weak="교정학개론 형집행법, 형소법 수사/증거파트">
+                        ⚡ 교정직 AI 플랜 세우기
+                    </button>
+                </div>
+
+                <!-- 6. 9급 관세직 -->
+                <div class="gov-card" data-sub="gov-9th">
+                    <div class="gov-badge">공항·항만 근무</div>
+                    <h3>9급 관세직 공무원 (관세청)</h3>
+                    <p class="gov-desc">인천공항 및 주요 세관 근무의 로망! <strong>관세법개론 + 회계원리</strong> 집중 마스터 코스.</p>
+                    <div class="gov-info">
+                        <span>🎯 국가직 4월 시험</span>
+                        <span>📈 무역학과/통상학과 출신 다수 지원</span>
+                        <span>💡 관세평가 및 품목분류 기초 포함</span>
+                    </div>
+                    <button class="btn-apply-plan" data-goal="9급 관세직 공무원" data-date="2026-04-11" data-weak="관세법개론 감면세 조항, 회계원리 계산식">
+                        ⚡ 관세직 AI 플랜 세우기
+                    </button>
+                </div>
+
+                <!-- 7. 9급 전산직 -->
+                <div class="gov-card" data-sub="gov-9th">
+                    <div class="gov-badge">IT 전문직</div>
+                    <h3>9급 전산개발직 공무원</h3>
+                    <p class="gov-desc">국가 정보화 시스템 구축 및 보안 총괄. <strong>컴퓨터일반 + 정보보호론</strong> 전공자/비전공자 단기합격 패스.</p>
+                    <div class="gov-info">
+                        <span>🎯 국가직 4월 / 지방직 6월</span>
+                        <span>📈 응시자격: 정보처리기사 등 자격증 폐지(누구나 응시)</span>
+                        <span>💡 네트워크 보안 및 데이터베이스 킬러 대비</span>
+                    </div>
+                    <button class="btn-apply-plan" data-goal="9급 전산직 공무원" data-date="2026-06-13" data-weak="정보보호론 암호학 수식, 컴퓨터구조 CPU 구조">
+                        ⚡ 전산직 AI 플랜 세우기
+                    </button>
+                </div>
+
+                <!-- 8. 7급 일반행정직 (PSAT) -->
+                <div class="gov-card" data-sub="gov-7th">
+                    <div class="gov-badge">고위 공직자 코스</div>
+                    <h3>7급 국가직 일반행정 (PSAT)</h3>
+                    <p class="gov-desc">1차 PSAT(언어논리/자료해석/상황판단) + 2차 전공 4과목(헌법, 행정법, 행정학, 경제학) 전문 케어.</p>
+                    <div class="gov-info">
+                        <span>🎯 1차 PSAT 7월 / 2차 전공 10월</span>
+                        <span>📈 검정제: 토익 790점 + 한능검 2급 사전 충족</span>
+                        <span>💡 PSAT 유형별 시간 단축 알고리즘</span>
+                    </div>
+                    <button class="btn-apply-plan" data-goal="7급 국가직 일반행정 (PSAT)" data-date="2026-10-17" data-weak="PSAT 자료해석 가평균 연산, 경제학 미시 그래프">
+                        ⚡ 7급 일반행정 AI 플랜 세우기
+                    </button>
+                </div>
+
+                <!-- 9. 7급 세무직 공무원 -->
+                <div class="gov-card" data-sub="gov-7th">
+                    <div class="gov-badge">세무 전문가</div>
+                    <h3>7급 세무직 공무원 (국세청)</h3>
+                    <p class="gov-desc">1차 PSAT 통과 후 <strong>헌법, 세법, 회계학, 경제학</strong> 4대 전공 킬러문항 집중 단련 패스.</p>
+                    <div class="gov-info">
+                        <span>🎯 1차 PSAT 7월 / 2차 전공 10월</span>
+                        <span>📈 회계사/세무사 수험생 출신도 다수 도전</span>
+                        <span>💡 고급회계 및 정부회계 고득점 공략</span>
+                    </div>
+                    <button class="btn-apply-plan" data-goal="7급 세무직 공무원" data-date="2026-10-17" data-weak="회계학 고급회계 지분법, 헌법 통치구조 조문">
+                        ⚡ 7급 세무직 AI 플랜 세우기
+                    </button>
+                </div>
+
+                <!-- 10. 경찰공무원 (순경공채) -->
+                <div class="gov-card" data-sub="gov-police">
+                    <div class="gov-badge">국민의 지팡이</div>
+                    <h3>경찰공무원 (일반순경 공채)</h3>
+                    <p class="gov-desc">필기 개편 완벽 적중! <strong>형사법(40문항), 경찰학(40문항), 헌법(20문항)</strong> + 체력검정 순환식 체계도.</p>
+                    <div class="gov-info">
+                        <span>🎯 상반기 3월 / 하반기 8월 연 2회</span>
+                        <span>📈 검정제: 한능검 3급 + 지텔프/토익 사전 통과</span>
+                        <span>💡 형사법 판례 요령 & 경찰학 조직법 특강</span>
+                    </div>
+                    <button class="btn-apply-plan" data-goal="경찰공무원 순경공채" data-date="2026-08-22" data-weak="형사법 판례 키워드 매칭, 경찰학 행정법 영역">
                         ⚡ 경찰 순경 AI 플랜 세우기
                     </button>
                 </div>
+
+                <!-- 11. 소방공무원 (소방공채) -->
+                <div class="gov-card" data-sub="gov-police">
+                    <div class="gov-badge">생명을 지키는 영웅</div>
+                    <h3>소방공무원 (소방사 공채)</h3>
+                    <p class="gov-desc">소방학개론(25문항), 소방관계법규(25문항), 행정법총론(25문항) 3과목 압축 정복 및 체력 훈련.</p>
+                    <div class="gov-info">
+                        <span>🎯 매년 3~4월 필기시험</span>
+                        <span>📈 필기 50% + 체력 25% + 면접 25% 반영</span>
+                        <span>💡 화재안전성능기준(NFPC) 최신 개정특강</span>
+                    </div>
+                    <button class="btn-apply-plan" data-goal="소방공무원 공채" data-date="2026-04-04" data-weak="소방학개론 위험물 성상, 소방관계법규 벌칙">
+                        ⚡ 소방공무원 AI 플랜 세우기
+                    </button>
+                </div>
+
+                <!-- 12. 군무원 9급 -->
+                <div class="gov-card" data-sub="gov-police">
+                    <div class="gov-badge">국방부·육해공군</div>
+                    <h3>군무원 9급 (행정직 / 군수직)</h3>
+                    <p class="gov-desc">영어·한국사는 검정제로 대체! 단 <strong>3과목(국어, 행정법, 행정학/경영학)</strong>만 집중 공부하는 최단기 루트.</p>
+                    <div class="gov-info">
+                        <span>🎯 매년 7월 전국 동시 시행</span>
+                        <span>📈 필기 과목 단 3개로 수험 부담 최소화</span>
+                        <span>💡 지엽적인 군무원 국어 문법 완벽 대비</span>
+                    </div>
+                    <button class="btn-apply-plan" data-goal="군무원 9급 행정직/군수직" data-date="2026-07-11" data-weak="군무원 특유의 지엽적 국어문법, 행정학 조직론">
+                        ⚡ 군무원 AI 플랜 세우기
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- [뷰 4] 토익/취업 자격증 -->
+    <!-- [뷰 4] 토익(점수대별) & 취업 자격증(1급/2급 분리) -->
     <section id="view-toeic" class="tab-view">
         <div class="container section-inner">
             <div class="section-heading">
-                <span class="section-badge">어학 & 공기업·대기업 취업</span>
-                <h2>📈 스펙 완성! 토익 & 취업 올인원</h2>
-                <p>단기간에 목표 점수를 취득할 수 있는 스펙 완성 코칭을 제공합니다.</p>
+                <span class="section-badge">어학 & 공기업·대기업 취업스펙</span>
+                <h2>📈 토익 점수대별 & 취업자격증(1급/2급) 완성관</h2>
+                <p>토익은 내 목표 점수대(550~950+)에 맞춰, 한능검/컴활은 1급·2급 급수별로 최적화된 로드맵을 제공합니다.</p>
             </div>
 
-            <div class="toeic-grid">
-                <div class="toeic-item">
+            <!-- 토익/취업 서브 필터 -->
+            <div class="sub-filter-bar">
+                <button class="sub-filter-btn active" data-subfilter="all">전체 커리큘럼 (12)</button>
+                <button class="sub-filter-btn" data-subfilter="toeic-score">토익 점수대별 (4)</button>
+                <button class="sub-filter-btn" data-subfilter="toeic-license">한능검·컴활 급수별 (4)</button>
+                <button class="sub-filter-btn" data-subfilter="toeic-ncs">NCS & 전공필기 (4)</button>
+            </div>
+
+            <div class="toeic-grid" id="toeicGrid">
+                <!-- 1. 토익 550+ -->
+                <div class="toeic-item" data-sub="toeic-score">
+                    <div class="toeic-header">
+                        <span class="icon">🌱</span>
+                        <div>
+                            <span class="tag-sub">노베이스 전용</span>
+                            <h4>토익 550+ 첫토익 입문 기초반</h4>
+                        </div>
+                    </div>
+                    <p>영포자도 이해하는 왕초보 8품사 문법 + LC 파트 1, 2 의문사 청취 훈련 4주 완성.</p>
+                    <button class="btn-apply-plan btn-sm" data-goal="토익 550점 입문 달성" data-date="2026-11-15" data-weak="기초 영어문법(품사/시제), LC 파트 2 빠른 속도">
+                        ⚡ 550+ 플랜 생성
+                    </button>
+                </div>
+
+                <!-- 2. 토익 700+ -->
+                <div class="toeic-item" data-sub="toeic-score">
                     <div class="toeic-header">
                         <span class="icon">🎯</span>
-                        <h4>토익 (TOEIC) 850+ 단기 완성</h4>
+                        <div>
+                            <span class="tag-sub">공기업/졸업 요건</span>
+                            <h4>토익 700+ 중급 속성 완성반</h4>
+                        </div>
                     </div>
-                    <p>Part 5/6 문법 10초 풀이법과 Part 7 이중/삼중 지문 시간 관리 훈련.</p>
-                    <button class="btn-apply-plan btn-sm" data-goal="토익 850점 달성" data-date="2026-11-15" data-weak="Part 7 긴 독해 시간 부족, LC 호주/영국 발음">
-                        플랜 생성
+                    <p>Part 5/6 문법 10초 공식 + Part 3/4 시각자료 연계문항 핵심 전략으로 700점대 돌파.</p>
+                    <button class="btn-apply-plan btn-sm" data-goal="토익 700점 속성 달성" data-date="2026-11-15" data-weak="Part 5 준동사/접속사 구별, Part 4 화자의 의도">
+                        ⚡ 700+ 플랜 생성
                     </button>
                 </div>
 
-                <div class="toeic-item">
+                <!-- 3. 토익 850+ -->
+                <div class="toeic-item" data-sub="toeic-score">
+                    <div class="toeic-header">
+                        <span class="icon">🚀</span>
+                        <div>
+                            <span class="tag-sub">대기업 취업 필수</span>
+                            <h4>토익 850+ 실전 완성 마스터반</h4>
+                        </div>
+                    </div>
+                    <p>Part 7 이중/삼중 지문 속독 패러프레이징 스킬 + LC 영국/호주 고난도 발음 100% 정복.</p>
+                    <button class="btn-apply-plan btn-sm" data-goal="토익 850점 실전 완성" data-date="2026-11-15" data-weak="Part 7 독해 시간 부족(마지막 15문제 찍음), LC 호주발음">
+                        ⚡ 850+ 플랜 생성
+                    </button>
+                </div>
+
+                <!-- 4. 토익 950+ 만점 -->
+                <div class="toeic-item" data-sub="toeic-score">
+                    <div class="toeic-header">
+                        <span class="icon">👑</span>
+                        <div>
+                            <span class="tag-sub">CPA/로스쿨/전문직</span>
+                            <h4>토익 950+ 만점 킬러특강반</h4>
+                        </div>
+                    </div>
+                    <p>미세 함정 오답 소거법, 난해한 비즈니스 관용표현 및 기출 변형 1000제 고난도 파이널.</p>
+                    <button class="btn-apply-plan btn-sm" data-goal="토익 950점 만점 도전" data-date="2026-11-15" data-weak="Part 5 고난도 어휘 문제, Part 7 동의어/의도파악">
+                        ⚡ 950+ 플랜 생성
+                    </button>
+                </div>
+
+                <!-- 5. 한능검 심화 (1급/2급) -->
+                <div class="toeic-item" data-sub="toeic-license">
                     <div class="toeic-header">
                         <span class="icon">📜</span>
-                        <h4>한국사능력검정시험 (한능검 1급)</h4>
+                        <div>
+                            <span class="tag-sub">공무원/공기업 가산점</span>
+                            <h4>한능검 심화 (1급·2급 목표반)</h4>
+                        </div>
                     </div>
-                    <p>2주 초단기 완성! 시대별 흐름 마인드맵과 빈출 사료 100선 완벽 정리.</p>
-                    <button class="btn-apply-plan btn-sm" data-goal="한국사능력검정시험 심화 1급" data-date="2026-10-24" data-weak="근현대사 단체명 암기, 조선후기 문화사">
-                        플랜 생성
+                    <p>80점 이상 1급 합격! 시대별 흐름 마인드맵과 빈출 사료 100선 및 근현대사 단체 단권화 2주 완성.</p>
+                    <button class="btn-apply-plan btn-sm" data-goal="한국사능력검정시험 심화 1급" data-date="2026-10-24" data-weak="근현대사 무장독립운동 단체, 조선후기 문화사 유물">
+                        ⚡ 한능검 1급 플랜 생성
                     </button>
                 </div>
 
-                <div class="toeic-item">
+                <!-- 6. 한능검 기본 (3급/4급) -->
+                <div class="toeic-item" data-sub="toeic-license">
+                    <div class="toeic-header">
+                        <span class="icon">📖</span>
+                        <div>
+                            <span class="tag-sub">초중고/기초검정</span>
+                            <h4>한능검 기본 (3급·4급·5급 목표반)</h4>
+                        </div>
+                    </div>
+                    <p>기초 역사 상식과 주요 문화재, 핵심 인물 중심의 스토리텔링 강의로 부담 없이 3급 패스.</p>
+                    <button class="btn-apply-plan btn-sm" data-goal="한국사능력검정시험 기본 3급" data-date="2026-10-24" data-weak="삼국시대 전성기 왕 업적, 고려 대외 항쟁사">
+                        ⚡ 한능검 기본 플랜 생성
+                    </button>
+                </div>
+
+                <!-- 7. 컴활 1급 -->
+                <div class="toeic-item" data-sub="toeic-license">
                     <div class="toeic-header">
                         <span class="icon">💻</span>
-                        <h4>컴퓨터활용능력 1급 (컴활 실기)</h4>
+                        <div>
+                            <span class="tag-sub">취업 끝판왕 자격</span>
+                            <h4>컴퓨터활용능력 1급 (필기+실기)</h4>
+                        </div>
                     </div>
-                    <p>엑셀 함수식 계산작업 및 액세스 프로시저 1:1 오류 디버깅 맞춤 코칭.</p>
-                    <button class="btn-apply-plan btn-sm" data-goal="컴퓨터활용능력 1급 실기" data-date="2026-10-30" data-weak="엑셀 배열수식/Lookup 함수, 액세스 쿼리">
-                        플랜 생성
+                    <p>합격률 10%대 실기 정복! 스프레드시트(엑셀 배열수식/프로시저) + 데이터베이스(액세스 쿼리/폼) 1:1 코칭.</p>
+                    <button class="btn-apply-plan btn-sm" data-goal="컴퓨터활용능력 1급 실기" data-date="2026-10-30" data-weak="엑셀 배열수식/INDEX/MATCH 함수, 액세스 ADO 개체">
+                        ⚡ 컴활 1급 플랜 생성
                     </button>
                 </div>
 
-                <div class="toeic-item">
+                <!-- 8. 컴활 2급 -->
+                <div class="toeic-item" data-sub="toeic-license">
+                    <div class="toeic-header">
+                        <span class="icon">🖱️</span>
+                        <div>
+                            <span class="tag-sub">단기 2주 완성</span>
+                            <h4>컴퓨터활용능력 2급 (필기+실기)</h4>
+                        </div>
+                    </div>
+                    <p>액세스 없이 엑셀 실기만 응시! 기본 함수(SUM, AVERAGE, IF 등)와 피벗 테이블 단기 100% 합격.</p>
+                    <button class="btn-apply-plan btn-sm" data-goal="컴퓨터활용능력 2급 실기" data-date="2026-10-30" data-weak="엑셀 HLOOKUP/VLOOKUP 함수, 조건부 서식">
+                        ⚡ 컴활 2급 플랜 생성
+                    </button>
+                </div>
+
+                <!-- 9. 공기업 NCS 모듈형 -->
+                <div class="toeic-item" data-sub="toeic-ncs">
                     <div class="toeic-header">
                         <span class="icon">🏢</span>
-                        <h4>NCS 직업기초능력평가 (공기업)</h4>
+                        <div>
+                            <span class="tag-sub">산인공 워크북 완벽</span>
+                            <h4>공기업 NCS 직업기초능력 (모듈형)</h4>
+                        </div>
                     </div>
-                    <p>의사소통·수리·문제해결능력 1문항 1분 돌파 스킬 및 모듈형 완벽 대비.</p>
-                    <button class="btn-apply-plan btn-sm" data-goal="공기업 NCS 직업기초능력" data-date="2026-11-28" data-weak="수리능력 응용수리 계산, 문제해결 조건추리">
-                        플랜 생성
+                    <p>서울교통공사, 가스공사 등 모듈형 출제 공기업 대비. 10대 직업기초능력 개념 암기 및 빈출 OX 1000제.</p>
+                    <button class="btn-apply-plan btn-sm" data-goal="공기업 NCS 직업기초 (모듈형)" data-date="2026-11-28" data-weak="직업윤리 암기, 대인관계능력 갈등관리 이론">
+                        ⚡ NCS 모듈형 플랜 생성
+                    </button>
+                </div>
+
+                <!-- 10. 공기업 NCS PSAT형 -->
+                <div class="toeic-item" data-sub="toeic-ncs">
+                    <div class="toeic-header">
+                        <span class="icon">📊</span>
+                        <div>
+                            <span class="tag-sub">한전/코레일/인국공</span>
+                            <h4>공기업 NCS 직업기초능력 (PSAT형)</h4>
+                        </div>
+                    </div>
+                    <p>의사소통 중심독해, 수리능력(응용수리/자료해석 연산스킬), 문제해결능력(조건추리/참거짓) 1문항 1분 돌파.</p>
+                    <button class="btn-apply-plan btn-sm" data-goal="공기업 NCS 직업기초 (PSAT형)" data-date="2026-11-28" data-weak="수리영역 응용수리 속도, 문제해결 명제논리">
+                        ⚡ NCS 피셋형 플랜 생성
+                    </button>
+                </div>
+
+                <!-- 11. 전공필기 경영학 -->
+                <div class="toeic-item" data-sub="toeic-ncs">
+                    <div class="toeic-header">
+                        <span class="icon">📚</span>
+                        <div>
+                            <span class="tag-sub">사무직 통합전공</span>
+                            <h4>공기업/금융공기업 전공필기: 경영학</h4>
+                        </div>
+                    </div>
+                    <p>경영관리, 마케팅, 생산운영관리, 인사조직 + 재무관리/회계원리 기본까지 단권화 핵심 요약.</p>
+                    <button class="btn-apply-plan btn-sm" data-goal="공기업 전공필기 경영학 단권화" data-date="2026-11-28" data-weak="재무관리 CAPM 이론, 생산운영관리 재고관리 모형">
+                        ⚡ 전공필기 경영학 플랜
+                    </button>
+                </div>
+
+                <!-- 12. 전공필기 경제학 -->
+                <div class="toeic-item" data-sub="toeic-ncs">
+                    <div class="toeic-header">
+                        <span class="icon">📉</span>
+                        <div>
+                            <span class="tag-sub">금공/한국은행/산은</span>
+                            <h4>공기업 전공필기: 경제학 (미시·거시)</h4>
+                        </div>
+                    </div>
+                    <p>미시경제학 소비자/생산자이론 계산식과 거시경제학 IS-LM, AD-AS 모형 및 국제무역이론 8주 완성.</p>
+                    <button class="btn-apply-plan btn-sm" data-goal="공기업 전공필기 경제학" data-date="2026-11-28" data-weak="미시경제학 독점시장 가격차별 계산, 거시 IS-LM 곡선">
+                        ⚡ 전공필기 경제학 플랜
                     </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- [뷰 5] 교재/수험서 베스트셀러 스토어 -->
+    <!-- [뷰 5] 교재/수험서 베스트셀러 스토어 (모든 자격증/공무원/취업 도서 완비) -->
     <section id="view-books" class="tab-view">
         <div class="container section-inner">
             <div class="section-heading">
                 <span class="section-badge">예스24 / 교보문고 1위</span>
-                <h2>📚 2026 에듀윌 합격 수험서 베스트셀러</h2>
-                <p>10년 연속 합격자 수 1위 에듀윌의 적중률 높은 수험서 라인업을 만나보세요.</p>
+                <h2>📚 2026 에듀윌 전 과정 합격 수험서 베스트셀러</h2>
+                <p>10년 연속 합격자 수 1위 에듀윌의 적중률 높은 수험서 라인업을 만나보세요. 교재 선택 시 맞춤 플랜이 자동 연동됩니다.</p>
             </div>
 
-            <div class="book-grid">
-                <div class="book-card">
+            <!-- 교재 서브 필터 -->
+            <div class="sub-filter-bar">
+                <button class="sub-filter-btn active" data-subfilter="all">전체 도서 (16)</button>
+                <button class="sub-filter-btn" data-subfilter="book-lic">자격증 수험서 (8)</button>
+                <button class="sub-filter-btn" data-subfilter="book-gov">공무원 수험서 (4)</button>
+                <button class="sub-filter-btn" data-subfilter="book-toeic">토익·취업·NCS (4)</button>
+            </div>
+
+            <div class="book-grid" id="bookGrid">
+                <!-- 1. 재경관리사 한권끝장 -->
+                <div class="book-card" data-sub="book-lic">
                     <div class="book-cover book-c1">
                         <span class="book-label">2026 신간</span>
                         <h4>재경관리사<br>한권끝장 기본서</h4>
@@ -487,7 +956,8 @@
                     </div>
                 </div>
 
-                <div class="book-card">
+                <!-- 2. 공인중개사 1차 요약집 -->
+                <div class="book-card" data-sub="book-lic">
                     <div class="book-cover book-c2">
                         <span class="book-label">베스트 1위</span>
                         <h4>공인중개사<br>1차 핵심요약집</h4>
@@ -500,9 +970,38 @@
                     </div>
                 </div>
 
-                <div class="book-card">
+                <!-- 3. 공인중개사 2차 실무 -->
+                <div class="book-card" data-sub="book-lic">
+                    <div class="book-cover book-c2">
+                        <span class="book-label">동차합격 필수</span>
+                        <h4>공인중개사<br>2차 기출문제집</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>2026 공인중개사 2차 10개년 단원별 기출문제집</h5>
+                        <p class="book-author">중개사법 임선정 / 공법 오시훈</p>
+                        <p class="book-price"><strong>32,400원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="2026 공인중개사 2차 기출문제집">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+
+                <!-- 4. 주택관리사 1차 -->
+                <div class="book-card" data-sub="book-lic">
+                    <div class="book-cover book-c4">
+                        <span class="book-label">상대평가 대비</span>
+                        <h4>주택관리사<br>1차 회계원리 기본서</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>2026 에듀윌 주택관리사 1차 회계원리</h5>
+                        <p class="book-author">회계원리 윤재옥 편저</p>
+                        <p class="book-price"><strong>29,700원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="주택관리사 1차 회계원리 기본서">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+
+                <!-- 5. 정보처리기사 실기 -->
+                <div class="book-card" data-sub="book-lic">
                     <div class="book-cover book-c3">
-                        <span class="book-label">실기적중</span>
+                        <span class="book-label">실기적중 1위</span>
                         <h4>정보처리기사<br>실기 기출 10회</h4>
                     </div>
                     <div class="book-body">
@@ -513,16 +1012,157 @@
                     </div>
                 </div>
 
-                <div class="book-card">
+                <!-- 6. 전기기사 필기 5개년 -->
+                <div class="book-card" data-sub="book-lic">
+                    <div class="book-cover book-c1">
+                        <span class="book-label">최다판매</span>
+                        <h4>전기기사 필기<br>CBT 7개년 기출</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>2026 에듀윌 전기기사 필기 CBT 기출문제집</h5>
+                        <p class="book-author">전기공학 김영복 / 이찬우</p>
+                        <p class="book-price"><strong>35,100원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="2026 전기기사 필기 CBT 7개년">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+
+                <!-- 7. 소방설비기사 전기 -->
+                <div class="book-card" data-sub="book-lic">
+                    <div class="book-cover book-c3">
+                        <span class="book-label">개정법규 반영</span>
+                        <h4>소방설비기사<br>전기분야 필기+실기</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>2026 에듀윌 소방설비기사(전기) 초단기완성</h5>
+                        <p class="book-author">소방기술연구소 유정석 편저</p>
+                        <p class="book-price"><strong>33,300원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="소방설비기사 전기분야 초단기">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+
+                <!-- 8. 산업안전기사 필답형 -->
+                <div class="book-card" data-sub="book-lic">
+                    <div class="book-cover book-c2">
+                        <span class="book-label">안전관리자 1위</span>
+                        <h4>산업안전기사<br>실기 필답형+작업형</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>2026 산업안전기사 실기 한권끝장 (동영상 포함)</h5>
+                        <p class="book-author">안전공학 이원희 편저</p>
+                        <p class="book-price"><strong>37,800원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="산업안전기사 실기 한권끝장">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+
+                <!-- 9. 9급 세무직 세법개론 (공무원) -->
+                <div class="book-card" data-sub="book-gov">
+                    <div class="book-cover book-c1">
+                        <span class="book-label">세무공시 필독</span>
+                        <h4>9급 세무직<br>세법개론 기본서</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>2026 에듀윌 공무원 세법개론 이론+기출 1500제</h5>
+                        <p class="book-author">세법 1타 노희양 편저</p>
+                        <p class="book-price"><strong>36,000원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="2026 9급 세무직 세법개론">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+
+                <!-- 10. 9급 행정법총론 OX (공무원) -->
+                <div class="book-card" data-sub="book-gov">
                     <div class="book-cover book-c4">
-                        <span class="book-label">공시생 필독</span>
-                        <h4>9급 공무원<br>행정법총론 기본서</h4>
+                        <span class="book-label">공시생 베스트</span>
+                        <h4>9급 공무원<br>행정법총론 기출 OX</h4>
                     </div>
                     <div class="book-body">
                         <h5>2026 에듀윌 9급 행정법총론 기출 OX 2000제</h5>
                         <p class="book-author">행정법 1타 강성민 편저</p>
                         <p class="book-price"><strong>31,500원</strong> <span class="discount">10%↓</span></p>
                         <button class="btn-book-order" data-title="2026 9급 행정법총론 기출 OX">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+
+                <!-- 11. 경찰 형사법 (공무원) -->
+                <div class="book-card" data-sub="gov-police">
+                    <div class="book-cover book-c4">
+                        <span class="book-label">경찰공채 적중</span>
+                        <h4>경찰공무원<br>형사법 핵심판례 1000</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>2026 에듀윌 경찰 형사법 최신 3개년 판례정리</h5>
+                        <p class="book-author">형사법 정주형 교수</p>
+                        <p class="book-price"><strong>30,600원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="2026 경찰 형사법 핵심판례 1000">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+
+                <!-- 12. 7급 국가직 PSAT (공무원) -->
+                <div class="book-card" data-sub="book-gov">
+                    <div class="book-cover book-c3">
+                        <span class="book-label">PSAT 1차</span>
+                        <h4>7급 국가직<br>PSAT 10개년 기출</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>2026 에듀윌 7급 국가직 PSAT 3영역 기출해설</h5>
+                        <p class="book-author">에듀윌 공무원 PSAT 연구소</p>
+                        <p class="book-price"><strong>38,700원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="7급 국가직 PSAT 10개년 기출">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+
+                <!-- 13. 토익 실전 1000제 (어학) -->
+                <div class="book-card" data-sub="book-toeic">
+                    <div class="book-cover book-c1">
+                        <span class="book-label">토익 850+ 목표</span>
+                        <h4>토익 실전 LC+RC<br>모의고사 5회분</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>에듀윌 토익 실전 1000제 (LC/RC 최신 기출경향)</h5>
+                        <p class="book-author">에듀윌 어학연구소 편저</p>
+                        <p class="book-price"><strong>19,800원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="에듀윌 토익 실전 1000제">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+
+                <!-- 14. 한능검 심화 1급 (취업) -->
+                <div class="book-card" data-sub="book-toeic">
+                    <div class="book-cover book-c2">
+                        <span class="book-label">2주 합격 1위</span>
+                        <h4>한국사능력검정시험<br>심화(1·2·3급) 2주끝장</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>2026 에듀윌 한능검 심화(1·2·3급) 2주끝장 기본서</h5>
+                        <p class="book-author">한국사 은동진 / 조현수</p>
+                        <p class="book-price"><strong>23,400원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="한능검 심화 2주끝장 기본서">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+
+                <!-- 15. 컴활 1급 실기 (취업) -->
+                <div class="book-card" data-sub="book-toeic">
+                    <div class="book-cover book-c3">
+                        <span class="book-label">엑셀+액세스</span>
+                        <h4>컴퓨터활용능력<br>1급 실기 3주완성</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>2026 에듀윌 컴활 1급 실기 스프레드시트/DB</h5>
+                        <p class="book-author">컴퓨터자격연구팀 편저</p>
+                        <p class="book-price"><strong>27,000원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="컴활 1급 실기 3주완성">🛒 바로구매 / 플랜 연동</button>
+                    </div>
+                </div>
+
+                <!-- 16. 공기업 NCS 기본서 (취업) -->
+                <div class="book-card" data-sub="book-toeic">
+                    <div class="book-cover book-c4">
+                        <span class="book-label">공기업 통합</span>
+                        <h4>NCS 직업기초능력<br>통합 기본서+기출</h4>
+                    </div>
+                    <div class="book-body">
+                        <h5>2026 에듀윌 공기업 NCS 통합기본서 (모듈+PSAT형)</h5>
+                        <p class="book-author">에듀윌 취업연구소</p>
+                        <p class="book-price"><strong>25,200원</strong> <span class="discount">10%↓</span></p>
+                        <button class="btn-book-order" data-title="공기업 NCS 통합기본서">🛒 바로구매 / 플랜 연동</button>
                     </div>
                 </div>
             </div>
