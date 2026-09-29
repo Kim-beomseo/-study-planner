@@ -146,8 +146,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // 교재 클릭 시 플랜 연동
-    const bookOrderBtns = document.querySelectorAll(".btn-book-order");
-    bookOrderBtns.forEach(btn => {
+    const bookPlanBtns = document.querySelectorAll(".btn-book-plan");
+    bookPlanBtns.forEach(btn => {
         btn.addEventListener("click", () => {
             const bookTitle = btn.getAttribute("data-title") || "";
             switchTab("view-planner");
@@ -157,78 +157,290 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // -------------------------------------------------------------
-    // 3. 합격예측 풀서비스 실시간 시뮬레이터
+    // 3. 에듀윌 합격예측 풀서비스 실시간 다과목 정밀 진단 시스템
     // -------------------------------------------------------------
-    const calcPredictBtn = document.getElementById("calcPredictBtn");
-    const predScoreInput = document.getElementById("predScore");
-    const predExamSelect = document.getElementById("predExam");
-    const predictResultBox = document.getElementById("predictResultBox");
-    const predBadge = document.getElementById("predBadge");
-    const predTitle = document.getElementById("predTitle");
-    const predComment = document.getElementById("predComment");
-    const predMeterBar = document.getElementById("predMeterBar");
-    const predToPlanBtn = document.getElementById("predToPlanBtn");
-
-    if (calcPredictBtn) {
-        calcPredictBtn.addEventListener("click", () => {
-            const score = parseInt(predScoreInput.value);
-            const exam = predExamSelect.value;
-
-            if (isNaN(score) || score < 0 || score > 100) {
-                alert("0점에서 100점 사이의 점수를 올바르게 입력해 주세요.");
-                return;
+    const examConfigs = {
+        "gov_tax": {
+            name: "9급 세무직 공무원 (국세청)",
+            cutoff: 82.0,
+            standard: "과목당 40점 이상, 전 과목 평균 82점 이상 합격선",
+            subjects: [
+                { name: "국어", avg: 76.5, defaultScore: 85 },
+                { name: "영어", avg: 72.0, defaultScore: 80 },
+                { name: "한국사", avg: 85.5, defaultScore: 90 },
+                { name: "세법개론", avg: 68.0, defaultScore: 75 },
+                { name: "회계학", avg: 64.5, defaultScore: 85 }
+            ],
+            advice: {
+                high: "세법과 회계학 전공과목에서 80점 이상을 획득하여 국세청 세무직 합격이 매우 안정적입니다. 면접 스터디 준비를 병행하세요!",
+                border: "회계학 또는 세법개론의 시간 배분 부족으로 합격선 근처에 머물고 있습니다. 계산식 문제 풀이 속도를 20초 단축하는 훈련이 필요합니다.",
+                low: "전공과목(세법/회계학) 점수가 부족합니다. 1타 교수진의 기출 OX 단권화 특강으로 필수 조문과 분개 패턴을 집중 보강하세요."
             }
-
-            // 합격선 기준 계산
-            let cutOff = 60;
-            if (exam === "재경관리사") cutOff = 70;
-            else if (exam === "9급일반행정") cutOff = 88;
-
-            let prob = 50;
-            let status = "합격 유력";
-            let badgeColor = "#10b981";
-            let comment = "";
-
-            if (score >= cutOff + 10) {
-                prob = Math.min(98, 85 + (score - cutOff));
-                status = "👑 확실 합격권";
-                badgeColor = "#10b981";
-                comment = `합격선(${cutOff}점)보다 여유 있게 상회하고 있습니다. 상위 5% 이내 고득점 합격이 매우 유력합니다!`;
-            } else if (score >= cutOff) {
-                prob = 75 + (score - cutOff) * 2;
-                status = "🟢 합격 안정권";
-                badgeColor = "#3b82f6";
-                comment = `현재 합격선(${cutOff}점)을 넘어서고 있습니다. 오답률 높은 킬러문항만 점검하면 충분히 합격 가능합니다.`;
-            } else if (score >= cutOff - 10) {
-                prob = 45 + (score - (cutOff - 10)) * 2;
-                status = "🟡 합격 경계선 (보완 필요)";
-                badgeColor = "#f59e0b";
-                comment = `합격선(${cutOff}점)까지 앞으로 약 ${cutOff - score}점 부족합니다. 취약 영역 집중 보완이 시급합니다!`;
-            } else {
-                prob = Math.max(15, 30 - (cutOff - score));
-                status = "🔴 집중 트레이닝 필요";
-                badgeColor = "#ef4444";
-                comment = `기본기 재정립이 필요합니다. 에듀윌 핵심요약 인강과 스파르타 플랜으로 개념을 다시 다져보세요.`;
+        },
+        "gov_admin": {
+            name: "9급 일반행정직 공무원",
+            cutoff: 89.0,
+            standard: "과목당 40점 이상, 전 과목 평균 89점 고득점 컷",
+            subjects: [
+                { name: "국어", avg: 80.0, defaultScore: 90 },
+                { name: "영어", avg: 75.5, defaultScore: 85 },
+                { name: "한국사", avg: 88.0, defaultScore: 95 },
+                { name: "행정법총론", avg: 78.5, defaultScore: 90 },
+                { name: "행정학개론", avg: 74.0, defaultScore: 85 }
+            ],
+            advice: {
+                high: "일반행정직 고득점 합격권입니다. 행정법 최신 판례 3개년만 최종 확인하면 필기 수석 합격도 기대됩니다.",
+                border: "합격선(89점)과 근소한 차이입니다. 행정법 판례 키워드 매칭과 영어 독해 시간 단축에 집중하세요.",
+                low: "행정학 조직론/재무행정론 파트와 국어 문법 영역 기본서를 다시 1회독 정독해야 합니다."
             }
+        },
+        "real_estate_1": {
+            name: "공인중개사 1차 시험",
+            cutoff: 60.0,
+            standard: "과목당 40점 이상 과락 없이, 2과목 평균 60점 이상 합격",
+            subjects: [
+                { name: "부동산학개론", avg: 62.5, defaultScore: 70 },
+                { name: "민법 및 민사특별법", avg: 58.0, defaultScore: 65 }
+            ],
+            advice: {
+                high: "1차 2과목 평균이 65점을 넘어 무난한 합격 안정권입니다. 이제 2차 실무 과목 암기에 집중하세요!",
+                border: "민법 과락(40점 미만)은 피했으나 평균 60점 경계선입니다. 개론의 계산문제 3문항만 더 맞히면 확실합니다.",
+                low: "민법 판례 조문 이해가 부족하여 과락 위험이 있습니다. 심정욱 교수님의 핵심 그림판례 특강 수강을 강력 권장합니다."
+            }
+        },
+        "cta_1": {
+            name: "세무사 (CTA) 1차 시험",
+            cutoff: 60.0,
+            standard: "과목당 40점 이상 과락 없이, 4과목 평균 60점 이상",
+            subjects: [
+                { name: "재정학", avg: 62.0, defaultScore: 75 },
+                { name: "세법학개론", avg: 56.5, defaultScore: 65 },
+                { name: "회계학개론", avg: 52.0, defaultScore: 60 },
+                { name: "행정소송법(선택법)", avg: 70.5, defaultScore: 80 }
+            ],
+            advice: {
+                high: "회계학 과락을 방어하고 선택법과 재정학에서 고득점을 받아 세무사 1차 합격이 확실시됩니다. 2차 주관식을 즉시 시작하세요!",
+                border: "회계학개론 점수가 50점대 초반으로 불안합니다. 재정학에서 75점 이상을 확보하는 전략적 시간 배분이 필요합니다.",
+                low: "세법학과 회계학 기본서 예제 회독 수가 부족합니다. 에듀윌 세무사 1차 파이널 모의고사로 실전 감각을 끌어올리세요."
+            }
+        },
+        "financial_mgr": {
+            name: "재경관리사 (삼일회계법인)",
+            cutoff: 70.0,
+            standard: "과목별 과락 70점 기준 (3과목 모두 각각 70점 이상 합격)",
+            subjects: [
+                { name: "재무회계", avg: 68.0, defaultScore: 75 },
+                { name: "세무회계", avg: 65.5, defaultScore: 72 },
+                { name: "원가관리회계", avg: 62.0, defaultScore: 78 }
+            ],
+            advice: {
+                high: "3과목 모두 70점을 넘어 단기 합격이 확실합니다. 삼일회계법인 공인 자격증 취득을 축하드립니다!",
+                border: "1~2개 과목이 60점대에 머물러 과락(70점 미만) 위험이 있습니다. 세무회계 서식과 원가 CVP 공식을 재점검하세요.",
+                low: "원가관리회계 종합원가계산과 재무회계 기준서 말문제를 10개년 기출로 무한 반복하셔야 합니다."
+            }
+        },
+        "elec_engineer": {
+            name: "전기기사 필기",
+            cutoff: 60.0,
+            standard: "과목당 40점 이상, 5과목 평균 60점 이상 합격",
+            subjects: [
+                { name: "전기자기학", avg: 54.0, defaultScore: 60 },
+                { name: "전력공학", avg: 66.5, defaultScore: 75 },
+                { name: "전기기기", avg: 58.0, defaultScore: 65 },
+                { name: "회로이론 및 제어공학", avg: 60.5, defaultScore: 70 },
+                { name: "전기설비기술기준", avg: 72.0, defaultScore: 85 }
+            ],
+            advice: {
+                high: "전력공학과 법규에서 75점 이상을 확보하여 전기기사 필기 합격이 확정적입니다. 즉시 2차 실기 시퀀스 도면을 준비하세요!",
+                border: "전기자기학 40점 과락 경계선입니다. 유도 공식은 과감히 생략하고 최종 결과 공식 암기 위주로 선회하세요.",
+                low: "회로이론 교류 전력 계산과 자기학 기초가 흔들리고 있습니다. 에듀윌 기초수학/CBT 기출 5개년 반복이 필수입니다."
+            }
+        }
+    };
 
-            predBadge.innerText = status;
-            predBadge.style.backgroundColor = badgeColor;
-            predTitle.innerText = `합격 확률 약 ${prob}% 예상`;
-            predComment.innerText = comment;
-            predMeterBar.style.width = `${prob}%`;
+    const predExamType = document.getElementById("predExamType");
+    const subjectInputsContainer = document.getElementById("subjectInputsContainer");
+    const runFullPredictBtn = document.getElementById("runFullPredictBtn");
 
-            predictResultBox.style.display = "block";
+    const reportTargetBadge = document.getElementById("reportTargetBadge");
+    const myAvgScore = document.getElementById("myAvgScore");
+    const expectedCutoff = document.getElementById("expectedCutoff");
+    const scoreDiff = document.getElementById("scoreDiff");
+    const finalVerdict = document.getElementById("finalVerdict");
+    const predictTableBody = document.getElementById("predictTableBody");
+    const rankBox = document.getElementById("rankBox");
+    const rankText = document.getElementById("rankText");
+    const reportMeterBar = document.getElementById("reportMeterBar");
+    const adviceBox = document.getElementById("adviceBox");
+    const profCommentText = document.getElementById("profCommentText");
+    const applyDeficitPlanBtn = document.getElementById("applyDeficitPlanBtn");
+
+    let currentLowestSubject = "";
+    let currentExamName = "";
+
+    // 과목 입력창 동적 생성 함수
+    function renderSubjectInputs(examKey) {
+        const config = examConfigs[examKey];
+        if (!config || !subjectInputsContainer) return;
+
+        currentExamName = config.name;
+        subjectInputsContainer.innerHTML = "";
+
+        config.subjects.forEach((subj, idx) => {
+            const div = document.createElement("div");
+            div.className = "subj-input-item";
+            div.innerHTML = `
+                <label for="subj_${idx}">${subj.name} (평균 ${subj.avg}점)</label>
+                <input type="number" id="subj_${idx}" min="0" max="100" value="${subj.defaultScore}" placeholder="점수">
+            `;
+            subjectInputsContainer.appendChild(div);
         });
     }
 
-    if (predToPlanBtn) {
-        predToPlanBtn.addEventListener("click", () => {
-            const exam = predExamSelect.value;
-            const score = predScoreInput.value || "미정";
+    if (predExamType) {
+        predExamType.addEventListener("change", (e) => {
+            renderSubjectInputs(e.target.value);
+        });
+        // 초기 로드 시 9급 세무직 과목 렌더링
+        renderSubjectInputs(predExamType.value);
+    }
+
+    if (runFullPredictBtn) {
+        runFullPredictBtn.addEventListener("click", () => {
+            const examKey = predExamType.value;
+            const config = examConfigs[examKey];
+            if (!config) return;
+
+            let total = 0;
+            let count = config.subjects.length;
+            let hasFail = false; // 40점 미만 과락
+            let scores = [];
+            let lowestScore = 999;
+            let lowestSubjName = "";
+
+            // 재경관리사는 70점 미만이면 과락
+            const failStandard = (examKey === "financial_mgr") ? 70 : 40;
+
+            for (let i = 0; i < count; i++) {
+                const input = document.getElementById(`subj_${i}`);
+                const val = parseInt(input.value);
+
+                if (isNaN(val) || val < 0 || val > 100) {
+                    alert(`[${config.subjects[i].name}] 점수를 0~100 사이로 입력해 주세요.`);
+                    return;
+                }
+
+                total += val;
+                const isSubjectFail = val < failStandard;
+                if (isSubjectFail) hasFail = true;
+
+                if (val < lowestScore) {
+                    lowestScore = val;
+                    lowestSubjName = config.subjects[i].name;
+                }
+
+                scores.push({
+                    name: config.subjects[i].name,
+                    score: val,
+                    avg: config.subjects[i].avg,
+                    isFail: isSubjectFail
+                });
+            }
+
+            currentLowestSubject = lowestSubjName;
+            const avg = Math.round((total / count) * 10) / 10;
+            const cutoff = config.cutoff;
+            const diff = Math.round((avg - cutoff) * 10) / 10;
+
+            // 상단 요약 업데이트
+            reportTargetBadge.innerText = config.name;
+            myAvgScore.innerText = `${avg} 점`;
+            expectedCutoff.innerText = `${cutoff} 점`;
+
+            if (diff >= 0) {
+                scoreDiff.innerText = `+${diff} 점 (상회)`;
+                scoreDiff.style.color = "#10b981";
+            } else {
+                scoreDiff.innerText = `${diff} 점 (미달)`;
+                scoreDiff.style.color = "#ef4444";
+            }
+
+            // 합격 판정 로직
+            let verdictText = "";
+            let verdictClass = "";
+            let percentile = 50;
+            let adviceContent = "";
+
+            if (hasFail) {
+                verdictText = "과락 불합격 위험";
+                verdictClass = "verdict-pass-fail";
+                percentile = 25;
+                adviceContent = `⚠️ [${lowestSubjName}] 과목이 과락 기준(${failStandard}점) 미만으로 나타났습니다. 평균 점수와 무관하게 한 과목이라도 과락이면 불합격 처리되므로, 해당 과목의 기본 개념을 즉시 보강해야 합니다.`;
+            } else if (diff >= 5) {
+                verdictText = "👑 확실 합격권";
+                verdictClass = "verdict-pass-sure";
+                percentile = 92;
+                adviceContent = config.advice.high;
+            } else if (diff >= 0) {
+                verdictText = "🟢 합격 안정권";
+                verdictClass = "verdict-pass-safe";
+                percentile = 78;
+                adviceContent = config.advice.border;
+            } else if (diff >= -5) {
+                verdictText = "🟡 합격 경계선 (보완필요)";
+                verdictClass = "verdict-pass-border";
+                percentile = 55;
+                adviceContent = config.advice.border;
+            } else {
+                verdictText = "🔴 집중 트레이닝 요망";
+                verdictClass = "verdict-pass-fail";
+                percentile = 35;
+                adviceContent = config.advice.low;
+            }
+
+            finalVerdict.innerText = verdictText;
+            finalVerdict.className = `verdict-tag ${verdictClass}`;
+
+            // 테이블 렌더링
+            predictTableBody.innerHTML = "";
+            scores.forEach(s => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td style="font-weight: 700;">${s.name}</td>
+                    <td style="font-size: 15px; font-weight: 800; color: ${s.isFail ? '#dc2626' : '#111111'};">${s.score}점</td>
+                    <td style="color: #64748b;">${s.avg}점</td>
+                    <td>
+                        <span class="${s.isFail ? 'tag-fail' : 'tag-pass'}">
+                            ${s.isFail ? '과락 (' + s.score + '점)' : 'PASS'}
+                        </span>
+                    </td>
+                `;
+                predictTableBody.appendChild(tr);
+            });
+
+            // 누적 석차 및 백분위 미터바
+            const totalApplicants = 34812;
+            const rankEstimate = Math.max(1, Math.round(totalApplicants * (1 - (percentile / 100))));
+            rankText.innerHTML = `상위 ${(100 - percentile).toFixed(1)}% (약 ${rankEstimate.toLocaleString()}등 / ${totalApplicants.toLocaleString()}명 중)`;
+            reportMeterBar.style.width = `${percentile}%`;
+            rankBox.style.display = "block";
+
+            // 교수진 총평 및 AI 플랜 연동 버튼
+            profCommentText.innerHTML = adviceContent;
+            adviceBox.style.display = "block";
+
+            // 결과창으로 스크롤 이동
+            document.getElementById("fullPredictReport").scrollIntoView({ behavior: "smooth" });
+        });
+    }
+
+    if (applyDeficitPlanBtn) {
+        applyDeficitPlanBtn.addEventListener("click", () => {
             switchTab("view-planner");
-            document.getElementById("goal").value = `${exam} 단기합격 점수 향상`;
-            document.getElementById("current_level").value = `현재 모의고사 약 ${score}점 수준, 합격선 돌파 목표`;
-            alert(`🎯 [${exam}] 예측 결과가 AI 플래너 폼에 반영되었습니다. 세부 플랜을 생성해 보세요!`);
+            document.getElementById("goal").value = `${currentExamName} 합격선 돌파`;
+            document.getElementById("weak_point").value = `${currentLowestSubject} 점수 향상 및 킬러문항 보완`;
+            document.getElementById("current_level").value = "에듀윌 실시간 합격예측 가채점 완료 (취약 단원 보완 필요)";
+            alert(`🎯 [${currentExamName}]의 취약 과목인 [${currentLowestSubject}] 정보가 AI 플래너 폼에 자동으로 채워졌습니다!\n세부 플랜을 생성해 보세요.`);
         });
     }
 

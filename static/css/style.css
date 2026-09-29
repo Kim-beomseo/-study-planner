@@ -1073,84 +1073,296 @@ body {
     margin-left: 6px;
 }
 
-.btn-book-order {
-    width: 100%;
-    padding: 10px;
-    background: #f1f5f9;
+.book-action-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.btn-buy-yes24 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0050d8;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 9px 8px;
+    border-radius: 6px;
+    text-align: center;
+    transition: background 0.2s;
+}
+
+.btn-buy-yes24:hover {
+    background-color: #003bb5;
+}
+
+.btn-book-plan {
+    background-color: #f1f5f9;
     color: #1e293b;
     border: 1px solid #cbd5e1;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 9px 8px;
     border-radius: 6px;
-    font-weight: 700;
-    font-size: 13px;
     cursor: pointer;
     transition: all 0.2s;
     font-family: inherit;
 }
 
-.btn-book-order:hover {
-    background: #ffd200;
+.btn-book-plan:hover {
+    background-color: #ffd200;
     color: #111111;
     border-color: #ffd200;
 }
 
 /* ==========================================================
-   추가 섹션 5: 합격예측 풀서비스 (.predict-box)
+   추가 섹션 5: 에듀윌 합격예측 풀서비스 대시보드
    ========================================================== */
-.predict-box {
-    max-width: 680px;
-    margin: 0 auto;
-    background: #ffffff;
-    border-radius: 16px;
-    border: 1px solid #e2e8f0;
-    padding: 36px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-}
-
-.predict-result {
-    margin-top: 30px;
-    padding-top: 26px;
-    border-top: 2px dashed #e2e8f0;
+.predict-stat-banner {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    background: #1e2024;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 28px;
+    color: #ffffff;
     text-align: center;
 }
 
-.result-badge {
-    display: inline-block;
-    background-color: #10b981;
-    color: #ffffff;
-    font-weight: 800;
-    font-size: 13px;
-    padding: 4px 14px;
-    border-radius: 20px;
-    margin-bottom: 12px;
-}
-
-.predict-result h3 {
+.p-stat .p-num {
+    display: block;
     font-size: 24px;
     font-weight: 900;
+    color: #ffd200;
+    margin-bottom: 2px;
+}
+
+.p-stat .p-lbl {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.predict-full-layout {
+    display: grid;
+    grid-template-columns: 460px 1fr;
+    gap: 28px;
+    align-items: start;
+}
+
+@media (max-width: 1024px) {
+    .predict-full-layout {
+        grid-template-columns: 1fr;
+    }
+    .predict-stat-banner {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.input-guide-text {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 18px;
+}
+
+.subject-inputs-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.subj-input-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.subj-input-item label {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #1e293b;
+    flex-grow: 1;
+    margin-bottom: 0;
+}
+
+.subj-input-item input {
+    width: 90px;
+    text-align: center;
+    padding: 8px 10px;
+    font-weight: 800;
+    font-size: 15px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 6px;
+    background: #ffffff;
+}
+
+.subj-input-item input:focus {
+    border-color: #ffd200;
+    outline: none;
+}
+
+/* 리포트 카드 */
+.predict-result-card {
+    min-height: 520px;
+}
+
+.report-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #111111;
+    padding-bottom: 14px;
+}
+
+.report-header h3 {
+    font-size: 19px;
+    font-weight: 900;
+    color: #111111;
+}
+
+.score-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.score-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+}
+
+.score-box .sb-label {
+    display: block;
+    font-size: 11.5px;
+    color: #64748b;
+    margin-bottom: 4px;
+}
+
+.score-box .sb-val {
+    font-size: 20px;
+    font-weight: 900;
+    color: #111111;
+}
+
+.score-box .text-blue {
+    color: #2563eb;
+}
+
+.verdict-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 900;
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.verdict-pass-sure { background: #10b981; color: #ffffff; }
+.verdict-pass-safe { background: #3b82f6; color: #ffffff; }
+.verdict-pass-border { background: #f59e0b; color: #ffffff; }
+.verdict-pass-fail { background: #ef4444; color: #ffffff; }
+
+/* 과목별 분석 테이블 */
+.subject-table-wrap h4 {
+    font-size: 15px;
+    font-weight: 800;
+    color: #111111;
+    margin-bottom: 10px;
+}
+
+.predict-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin-bottom: 20px;
+}
+
+.predict-table th {
+    background: #f1f5f9;
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+    font-weight: 800;
+    color: #334155;
+    text-align: center;
+}
+
+.predict-table td {
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    color: #1e293b;
+}
+
+.tag-pass {
+    display: inline-block;
+    background: #dcfce7;
+    color: #15803d;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.tag-fail {
+    display: inline-block;
+    background: #fee2e2;
+    color: #b91c1c;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.rank-analysis-box {
+    background: #fffdf5;
+    border: 1px solid #fed7aa;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.rank-info-line {
+    font-size: 14px;
+    color: #9a3412;
+}
+
+.rank-info-line strong {
+    color: #ea580c;
+    font-size: 16px;
+}
+
+.professor-advice-box {
+    background: #f8fafc;
+    border-left: 4px solid #ffd200;
+    border-radius: 0 10px 10px 0;
+    padding: 18px;
+}
+
+.professor-advice-box h4 {
+    font-size: 15px;
+    font-weight: 800;
     color: #111111;
     margin-bottom: 8px;
 }
 
-.predict-result p {
-    font-size: 14px;
-    color: #64748b;
-    max-width: 480px;
-    margin: 0 auto 20px;
-}
-
-.pred-meter {
-    width: 100%;
-    height: 12px;
-    background-color: #e2e8f0;
-    border-radius: 9999px;
-    overflow: hidden;
-    margin: 0 auto;
-}
-
-.meter-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #ffd200, #10b981);
-    transition: width 0.8s ease;
+.prof-comment {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: #475569;
 }
 
 /* ==========================================================
