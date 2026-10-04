@@ -1475,27 +1475,76 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // PWA 설치 실행 함수
+    // PWA 설치 실행 함수 (모든 기기/브라우저 완벽 대응)
     async function triggerPwaInstall() {
         const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        
+        const pwaGuideModal = document.getElementById("pwaGuideModal");
+
         if (deferredPwaPrompt) {
-            deferredPwaPrompt.prompt();
-            const choiceResult = await deferredPwaPrompt.userChoice;
-            if (choiceResult.outcome === "accepted") {
-                console.log("User accepted PWA install");
-                if (pwaInstallBanner) pwaInstallBanner.style.display = "none";
+            try {
+                deferredPwaPrompt.prompt();
+                const choiceResult = await deferredPwaPrompt.userChoice;
+                if (choiceResult.outcome === "accepted") {
+                    console.log("User accepted PWA install");
+                    if (pwaInstallBanner) pwaInstallBanner.style.display = "none";
+                }
+                deferredPwaPrompt = null;
+                return;
+            } catch (err) {
+                console.warn("PWA prompt error:", err);
             }
-            deferredPwaPrompt = null;
-        } else if (isIos) {
-            // iOS Safari는 수동 안내 모달 노출
-            if (pwaIosModal) {
-                pwaIosModal.classList.add("show");
+        }
+
+        // 브라우저 자체 프롬프트가 지원되지 않거나 iOS/PC인 경우 즉시 친절한 가이드 모달 팝업 오픈
+        if (pwaGuideModal) {
+            // 디바이스 자동 감지하여 탭 선택
+            const iosTab = document.querySelector('.pdev-btn[data-pdev="ios"]');
+            const androidTab = document.querySelector('.pdev-btn[data-pdev="android"]');
+            const pcTab = document.querySelector('.pdev-btn[data-pdev="pc"]');
+            const iosBox = document.getElementById("pdev-ios-box");
+            const androidBox = document.getElementById("pdev-android-box");
+            const pcBox = document.getElementById("pdev-pc-box");
+
+            document.querySelectorAll(".pdev-btn").forEach(b => b.classList.remove("active"));
+            document.querySelectorAll(".pdev-content").forEach(c => c.style.display = "none");
+
+            if (isIos) {
+                if (iosTab) iosTab.classList.add("active");
+                if (iosBox) iosBox.style.display = "block";
+            } else if (/Android/i.test(navigator.userAgent)) {
+                if (androidTab) androidTab.classList.add("active");
+                if (androidBox) androidBox.style.display = "block";
+            } else {
+                if (pcTab) pcTab.classList.add("active");
+                if (pcBox) pcBox.style.display = "block";
             }
+
+            pwaGuideModal.classList.add("show");
         } else {
             alert("📲 브라우저 상단 주소창의 [설치] 아이콘 또는 메뉴(⋮)에서 [홈 화면에 추가 / 앱 설치]를 선택해 주세요!");
         }
     }
+
+    // 모든 PWA 설치 버튼에 이벤트 연결 (게이트 버튼, 헤더 버튼, 플로팅 버튼, 배너 버튼, 상단 바)
+    const gatePwaBtn = document.getElementById("gatePwaInstallBtn");
+    const floatingPwaBtn = document.getElementById("floatingPwaBtn");
+    const topPwaBtn = document.getElementById("topPwaInstallBtn");
+
+    if (gatePwaBtn) gatePwaBtn.addEventListener("click", triggerPwaInstall);
+    if (floatingPwaBtn) floatingPwaBtn.addEventListener("click", triggerPwaInstall);
+    if (topPwaBtn) topPwaBtn.addEventListener("click", triggerPwaInstall);
+
+    // 가이드 모달 디바이스 탭 전환 리스너
+    document.querySelectorAll(".pdev-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const dev = btn.getAttribute("data-pdev");
+            document.querySelectorAll(".pdev-btn").forEach(b => b.classList.remove("active"));
+            document.querySelectorAll(".pdev-content").forEach(c => c.style.display = "none");
+            btn.classList.add("active");
+            const targetBox = document.getElementById(`pdev-${dev}-box`);
+            if (targetBox) targetBox.style.display = "block";
+        });
+    });
 
     if (pwaInstallBtn) pwaInstallBtn.addEventListener("click", triggerPwaInstall);
     if (pwaBannerInstallBtn) pwaBannerInstallBtn.addEventListener("click", triggerPwaInstall);

@@ -80,7 +80,13 @@
             </form>
 
             <div class="passcode-footer">
-                <span class="shield-badge">🛡️ 256-bit SSL 암호화 보안 시스템</span>
+                <button type="button" id="gatePwaInstallBtn" class="btn-gate-pwa">
+                    <span class="pwa-icon">📲</span>
+                    <span>홈 화면에 <strong>에듀위 앱 설치하기</strong></span>
+                </button>
+                <div class="shield-badge-wrap">
+                    <span class="shield-badge">🛡️ 256-bit SSL 암호화 보안 시스템</span>
+                </div>
             </div>
         </div>
     </div>
@@ -102,6 +108,8 @@
                 <a href="javascript:void(0);" class="nav-tab-trigger" data-target="view-reviews">실시간 합격수기</a>
                 <span class="bar">|</span>
                 <a href="javascript:void(0);" class="nav-tab-trigger highlight mypage-quick-link" data-target="view-mypage">🎓 마이학습룸</a>
+                <span class="bar">|</span>
+                <a href="javascript:void(0);" id="topPwaInstallBtn" class="top-pwa-btn">📲 앱 설치</a>
                 <span class="bar">|</span>
                 <a href="javascript:void(0);" id="topLockBtn" class="top-lock-btn">🔒 잠금</a>
             </div>
@@ -128,7 +136,13 @@
                 <a href="javascript:void(0);" class="nav-item nav-tab-trigger nav-mypage-tab" data-target="view-mypage">마이학습룸 🎓</a>
             </nav>
             <div class="header-right">
-                <span class="badge-gemini">Gemini 3.5 & Serper 연동</span>
+                <button id="pwaInstallBtn" class="btn-pwa-install" title="에듀위 앱 홈 화면에 설치">
+                    <span class="pwa-ico">📲</span><span class="pwa-txt">앱 설치</span>
+                </button>
+                <button id="lockScreenBtn" class="btn-header-lock" title="화면 잠금">
+                    <span class="lock-ico">🔒</span><span class="lock-txt">잠금</span>
+                </button>
+                <span class="badge-gemini">Gemini 3.5 & Serper</span>
             </div>
         </div>
     </header>
@@ -2087,6 +2101,82 @@
                     <p>우측 상단의 <strong>[추가]</strong>를 누르면 홈 화면에 에듀위 앱이 설치됩니다!</p>
                 </div>
                 <button class="btn-eduwe-cta modal-close-btn" style="margin-top: 16px; width: 100%;">확인 완료</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 플로팅 PWA 앱 설치 버튼 (화면 우측 하단 고정, 항상 눈에 띔) -->
+    <button id="floatingPwaBtn" class="floating-pwa-btn" title="에듀위 앱 홈 화면에 설치하기">
+        <span class="fpwa-icon">📲</span>
+        <span class="fpwa-text">에듀위 앱 설치</span>
+    </button>
+
+    <!-- 종합 PWA 앱 설치 가이드 모달 (전 기기 대응) -->
+    <div id="pwaGuideModal" class="modal-overlay">
+        <div class="modal-box pwa-guide-box">
+            <div class="modal-header">
+                <div class="modal-title-wrap">
+                    <span class="modal-badge">PWA APP INSTALL</span>
+                    <h3>📲 에듀위 앱 간편 설치 가이드</h3>
+                </div>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body pwa-guide-body">
+                <div class="pwa-device-tabs">
+                    <button type="button" class="pdev-btn active" data-pdev="ios">🍎 아이폰 (Safari)</button>
+                    <button type="button" class="pdev-btn" data-pdev="android">🤖 갤럭시/안드로이드</button>
+                    <button type="button" class="pdev-btn" data-pdev="pc">💻 PC (Chrome/Edge)</button>
+                </div>
+                
+                <div class="pdev-content" id="pdev-ios-box">
+                    <div class="guide-step">
+                        <span class="gstep-num">1</span>
+                        <p>사파리(Safari) 브라우저 하단 중앙의 <strong>[공유]</strong> 아이콘(<span class="ios-share-icon">⎋</span>)을 누릅니다.</p>
+                    </div>
+                    <div class="guide-step">
+                        <span class="gstep-num">2</span>
+                        <p>메뉴를 아래로 스크롤하여 <strong>[홈 화면에 추가]</strong> (+) 버튼을 선택합니다.</p>
+                    </div>
+                    <div class="guide-step">
+                        <span class="gstep-num">3</span>
+                        <p>우측 상단의 <strong>[추가]</strong>를 누르면 스마트폰 홈 화면에 에듀위 정식 앱이 설치됩니다!</p>
+                    </div>
+                </div>
+
+                <div class="pdev-content" id="pdev-android-box" style="display: none;">
+                    <div class="guide-step">
+                        <span class="gstep-num">1</span>
+                        <p>크롬(Chrome) 또는 삼성인터넷 상단/하단 <strong>메뉴 [⋮]</strong>를 누릅니다.</p>
+                    </div>
+                    <div class="guide-step">
+                        <span class="gstep-num">2</span>
+                        <p><strong>[앱 설치]</strong> 또는 <strong>[현재 페이지 추가 ➔ 홈 화면]</strong>을 터치합니다.</p>
+                    </div>
+                    <div class="guide-step">
+                        <span class="gstep-num">3</span>
+                        <p><strong>[설치]</strong> 버튼을 누르면 홈 화면에 앱 아이콘이 등록되고 즉시 실행 가능합니다!</p>
+                    </div>
+                </div>
+
+                <div class="pdev-content" id="pdev-pc-box" style="display: none;">
+                    <div class="guide-step">
+                        <span class="gstep-num">1</span>
+                        <p>브라우저(Chrome/Edge/Whale) 상단 <strong>주소창 우측의 [설치 ⊕]</strong> 아이콘을 클릭합니다.</p>
+                    </div>
+                    <div class="guide-step">
+                        <span class="gstep-num">2</span>
+                        <p>팝업 안내창에서 <strong>[설치]</strong> 버튼을 클릭합니다.</p>
+                    </div>
+                    <div class="guide-step">
+                        <span class="gstep-num">3</span>
+                        <p>바탕화면 및 시작메뉴에 등록되어 별도 웹 창 없이 독립된 PC 앱으로 실행됩니다!</p>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-eduwe-cta modal-close-btn" style="margin-top: 18px; width: 100%;">
+                    확인 완료 (닫기)
+                </button>
             </div>
         </div>
     </div>
