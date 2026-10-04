@@ -1451,6 +1451,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
             navigator.serviceWorker.register("/sw.js").then((reg) => {
+                reg.update();
                 console.log("eduwe PWA Service Worker Registered:", reg.scope);
             }).catch((err) => {
                 console.warn("eduwe PWA SW Registration Failed:", err);
