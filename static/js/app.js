@@ -486,14 +486,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const footerCsBtn = document.getElementById("footerCsBtn");
     const switchToRegister = document.getElementById("switchToRegister");
 
-    const modalCloses = document.querySelectorAll(".modal-close");
-
+    // 모든 모달 닫기 공통 함수
     function closeModal() {
-        if (loginModal) loginModal.classList.remove("show");
-        if (registerModal) registerModal.classList.remove("show");
-        if (csModal) csModal.classList.remove("show");
-        if (reviewModal) reviewModal.classList.remove("show");
+        document.querySelectorAll(".modal-overlay").forEach(m => {
+            m.classList.remove("show");
+        });
     }
+    window.closeModal = closeModal;
 
     if (openLoginBtn) openLoginBtn.addEventListener("click", () => loginModal.classList.add("show"));
     if (openRegisterBtn) openRegisterBtn.addEventListener("click", () => registerModal.classList.add("show"));
@@ -507,14 +506,28 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    modalCloses.forEach(btn => btn.addEventListener("click", closeModal));
+    // .modal-close 및 .modal-close-btn 클래스를 가진 모든 닫기 버튼에 이벤트 바인딩
+    document.querySelectorAll(".modal-close, .modal-close-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            closeModal();
+        });
+    });
 
-    // 배경 클릭 시 모달 닫기
-    [loginModal, registerModal, csModal, reviewModal].forEach(modal => {
-        if (modal) {
-            modal.addEventListener("click", (e) => {
-                if (e.target === modal) closeModal();
-            });
+    // 모든 모달 오버레이 배경 클릭 시 닫기
+    document.querySelectorAll(".modal-overlay").forEach(modal => {
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    });
+
+    // ESC 키로 모달 닫기
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            closeModal();
         }
     });
 

@@ -15,7 +15,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23ffd200'/><text x='50' y='68' font-size='56' font-weight='900' font-family='sans-serif' text-anchor='middle' fill='%23111111'>W</text></svg>" type="image/x-icon">
     <!-- Web Font (Pretendard) -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=2.2">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=2.3">
     <!-- 마크다운 렌더링 라이브러리 (Marked.js) -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
@@ -2039,7 +2039,7 @@
         </div>
     </footer>
 
-    <script src="{{ url_for('static', filename='js/app.js') }}?v=2.2"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}?v=2.3"></script>
 
     <!-- ========================================================================= -->
     <!-- 모바일 전용 앱 독 바 (Mobile Bottom Navigation Bar) -->
@@ -2085,7 +2085,7 @@
         <div class="modal-box pwa-ios-box">
             <div class="modal-header">
                 <h3>📲 홈 화면에 에듀위 앱 추가 (iOS)</h3>
-                <button class="modal-close">&times;</button>
+                <button type="button" class="modal-close" onclick="closeModal()" aria-label="닫기">&times;</button>
             </div>
             <div class="modal-body pwa-ios-body">
                 <div class="ios-step">
@@ -2100,7 +2100,7 @@
                     <span class="step-num">3</span>
                     <p>우측 상단의 <strong>[추가]</strong>를 누르면 홈 화면에 에듀위 앱이 설치됩니다!</p>
                 </div>
-                <button class="btn-eduwe-cta modal-close-btn" style="margin-top: 16px; width: 100%;">확인 완료</button>
+                <button type="button" class="btn-eduwe-cta modal-close-btn" onclick="closeModal()" style="margin-top: 16px; width: 100%;">확인 완료</button>
             </div>
         </div>
     </div>
@@ -2120,7 +2120,7 @@
                     <span class="modal-badge">PWA APP INSTALL</span>
                     <h3>📲 에듀위 앱 간편 설치 가이드</h3>
                 </div>
-                <button class="modal-close">&times;</button>
+                <button type="button" class="modal-close" onclick="closeModal()" aria-label="닫기">&times;</button>
             </div>
             <div class="modal-body pwa-guide-body">
                 <div class="pwa-device-tabs">
@@ -2174,7 +2174,7 @@
                     </div>
                 </div>
 
-                <button type="button" class="btn-eduwe-cta modal-close-btn" style="margin-top: 18px; width: 100%;">
+                <button type="button" class="btn-eduwe-cta modal-close-btn" onclick="closeModal()" style="margin-top: 18px; width: 100%;">
                     확인 완료 (닫기)
                 </button>
             </div>
