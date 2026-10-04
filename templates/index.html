@@ -2,8 +2,15 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>에듀위 AI 맞춤형 학습 플래너 | 단기합격 커리큘럼 & 종합 수험센터</title>
+    <!-- PWA Settings -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#ffd200">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="에듀위">
+    <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23ffd200'/><text x='50' y='68' font-size='56' font-weight='900' font-family='sans-serif' text-anchor='middle' fill='%23111111'>W</text></svg>" type="image/x-icon">
     <!-- Web Font (Pretendard) -->
@@ -11,8 +18,72 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <!-- 마크다운 렌더링 라이브러리 (Marked.js) -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        (function() {
+            if (sessionStorage.getItem('eduwe_unlocked') === '0904' || localStorage.getItem('eduwe_unlocked') === '0904') {
+                document.documentElement.classList.add('unlocked');
+            }
+        })();
+    </script>
 </head>
 <body>
+    <!-- ========================================================================= -->
+    <!-- 0. 보안 접속 게이트 (비밀번호: 0904 인증 화면) -->
+    <!-- ========================================================================= -->
+    <div id="passcodeGate" class="passcode-overlay">
+        <div class="passcode-box">
+            <div class="passcode-logo">
+                <span class="logo-symbol">eduwe</span>
+                <span class="logo-service">AI 학습플래너</span>
+            </div>
+            <div class="passcode-header">
+                <div class="lock-icon-wrap">
+                    <span class="lock-emoji">🔒</span>
+                </div>
+                <h2>에듀위 VIP 수험생 보안 인증</h2>
+                <p>본 서비스는 승인된 수험생 전용 시스템입니다.<br>접속 비밀번호 4자리를 입력해 주세요.</p>
+            </div>
+            
+            <form id="passcodeForm" autocomplete="off">
+                <!-- PIN 코드 시각 인디케이터 (4개 도트) -->
+                <div class="pin-dots" id="pinDots">
+                    <span class="pin-dot"></span>
+                    <span class="pin-dot"></span>
+                    <span class="pin-dot"></span>
+                    <span class="pin-dot"></span>
+                </div>
+
+                <div class="passcode-input-wrap">
+                    <input type="password" id="passcodeInput" maxlength="4" pattern="[0-9]*" inputmode="numeric" placeholder="비밀번호 4자리" autofocus required>
+                    <button type="submit" id="passcodeSubmitBtn" class="btn-unlock">입장하기 ➔</button>
+                </div>
+
+                <div id="passcodeError" class="passcode-error-msg" style="display: none;">
+                    ⚠️ 비밀번호가 일치하지 않습니다. (4자리 숫자를 확인해주세요)
+                </div>
+
+                <!-- 터치 친화적 숫자 키패드 (모바일 & 데스크톱) -->
+                <div class="pin-keypad" id="pinKeypad">
+                    <button type="button" class="key-btn" data-key="1">1</button>
+                    <button type="button" class="key-btn" data-key="2">2</button>
+                    <button type="button" class="key-btn" data-key="3">3</button>
+                    <button type="button" class="key-btn" data-key="4">4</button>
+                    <button type="button" class="key-btn" data-key="5">5</button>
+                    <button type="button" class="key-btn" data-key="6">6</button>
+                    <button type="button" class="key-btn" data-key="7">7</button>
+                    <button type="button" class="key-btn" data-key="8">8</button>
+                    <button type="button" class="key-btn" data-key="9">9</button>
+                    <button type="button" class="key-btn key-clear" data-action="clear">전체삭제</button>
+                    <button type="button" class="key-btn" data-key="0">0</button>
+                    <button type="button" class="key-btn key-back" data-action="back">⌫</button>
+                </div>
+            </form>
+
+            <div class="passcode-footer">
+                <span class="shield-badge">🛡️ 256-bit SSL 암호화 보안 시스템</span>
+            </div>
+        </div>
+    </div>
     <!-- 1. 에듀위 최상단 유틸리티 GNB 바 -->
     <div class="top-util-bar">
         <div class="container util-container">
@@ -31,6 +102,8 @@
                 <a href="javascript:void(0);" class="nav-tab-trigger" data-target="view-reviews">실시간 합격수기</a>
                 <span class="bar">|</span>
                 <a href="javascript:void(0);" class="nav-tab-trigger highlight mypage-quick-link" data-target="view-mypage">🎓 마이학습룸</a>
+                <span class="bar">|</span>
+                <a href="javascript:void(0);" id="topLockBtn" class="top-lock-btn">🔒 잠금</a>
             </div>
         </div>
     </div>
@@ -1953,5 +2026,70 @@
     </footer>
 
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+    <!-- ========================================================================= -->
+    <!-- 모바일 전용 앱 독 바 (Mobile Bottom Navigation Bar) -->
+    <!-- ========================================================================= -->
+    <nav class="mobile-bottom-bar" id="mobileBottomBar">
+        <a href="javascript:void(0);" class="m-bottom-item nav-tab-trigger active" data-target="view-planner">
+            <span class="m-bottom-icon">🏠</span>
+            <span class="m-bottom-label">홈 플래너</span>
+        </a>
+        <a href="javascript:void(0);" class="m-bottom-item nav-tab-trigger" data-target="view-license">
+            <span class="m-bottom-icon">📜</span>
+            <span class="m-bottom-label">자격증</span>
+        </a>
+        <a href="javascript:void(0);" class="m-bottom-item nav-tab-trigger" data-target="view-gov">
+            <span class="m-bottom-icon">🏛️</span>
+            <span class="m-bottom-label">공무원</span>
+        </a>
+        <a href="javascript:void(0);" class="m-bottom-item nav-tab-trigger" data-target="view-predict">
+            <span class="m-bottom-icon">🎯</span>
+            <span class="m-bottom-label">합격예측</span>
+        </a>
+        <a href="javascript:void(0);" class="m-bottom-item nav-tab-trigger" data-target="view-mypage">
+            <span class="m-bottom-icon">🎓</span>
+            <span class="m-bottom-label">마이룸</span>
+        </a>
+    </nav>
+
+    <!-- 모바일 PWA 앱 설치 유도 플로팅 배너 -->
+    <div id="pwaInstallBanner" class="pwa-banner" style="display: none;">
+        <div class="pwa-banner-content">
+            <div class="pwa-banner-icon">🎓</div>
+            <div class="pwa-banner-text">
+                <strong>에듀위 앱으로 더 편리하게!</strong>
+                <span>홈 화면에 추가하고 1초 만에 플랜 확인</span>
+            </div>
+            <button id="pwaBannerInstallBtn" class="btn-pwa-banner-install">앱 설치</button>
+            <button id="pwaBannerCloseBtn" class="btn-pwa-banner-close" aria-label="닫기">&times;</button>
+        </div>
+    </div>
+
+    <!-- iOS Safari 설치 가이드 모달 -->
+    <div id="pwaIosModal" class="modal-overlay">
+        <div class="modal-box pwa-ios-box">
+            <div class="modal-header">
+                <h3>📲 홈 화면에 에듀위 앱 추가 (iOS)</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body pwa-ios-body">
+                <div class="ios-step">
+                    <span class="step-num">1</span>
+                    <p>사파리(Safari) 화면 하단의 <strong>[공유]</strong> 아이콘(<span class="ios-share-icon">⎋</span>)을 터치합니다.</p>
+                </div>
+                <div class="ios-step">
+                    <span class="step-num">2</span>
+                    <p>아래 메뉴를 스크롤하여 <strong>[홈 화면에 추가]</strong>(+) 항목을 누릅니다.</p>
+                </div>
+                <div class="ios-step">
+                    <span class="step-num">3</span>
+                    <p>우측 상단의 <strong>[추가]</strong>를 누르면 홈 화면에 에듀위 앱이 설치됩니다!</p>
+                </div>
+                <button class="btn-eduwe-cta modal-close-btn" style="margin-top: 16px; width: 100%;">확인 완료</button>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

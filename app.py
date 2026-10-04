@@ -1,7 +1,7 @@
 import os
 import json
 import requests
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory, make_response
 from dotenv import load_dotenv
 from google import genai
 
@@ -147,6 +147,18 @@ def generate_study_plan(user_data, search_context):
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+@app.route("/manifest.json")
+def manifest():
+    return send_from_directory("static", "manifest.json", mimetype="application/manifest+json")
+
+
+@app.route("/sw.js")
+def service_worker():
+    response = make_response(send_from_directory("static", "sw.js", mimetype="application/javascript"))
+    response.headers["Service-Worker-Allowed"] = "/"
+    return response
 
 
 @app.route("/generate", methods=["POST"])

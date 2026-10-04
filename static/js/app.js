@@ -70,6 +70,15 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+        // 모바일 하단 앱 독 바 액티브 상태 동기화
+        document.querySelectorAll(".m-bottom-item").forEach(item => {
+            if (item.getAttribute("data-target") === targetId) {
+                item.classList.add("active");
+            } else {
+                item.classList.remove("active");
+            }
+        });
+
         // 히어로 배너 내용 업데이트
         if (heroContents[targetId]) {
             heroTag.innerHTML = heroContents[targetId].tag;
@@ -1276,5 +1285,233 @@ document.addEventListener("DOMContentLoaded", () => {
         cb.addEventListener("change", updateTodoProgress);
     });
     updateTodoProgress();
+
+
+    // =========================================================================
+    // 14. 보안 접속 게이트 (비밀번호: 0904 인증 시스템)
+    // =========================================================================
+    const passcodeGate = document.getElementById("passcodeGate");
+    const passcodeForm = document.getElementById("passcodeForm");
+    const passcodeInput = document.getElementById("passcodeInput");
+    const passcodeError = document.getElementById("passcodeError");
+    const pinDots = document.querySelectorAll("#pinDots .pin-dot");
+    const pinKeypad = document.getElementById("pinKeypad");
+    const lockScreenBtn = document.getElementById("lockScreenBtn");
+    const topLockBtn = document.getElementById("topLockBtn");
+    const CORRECT_PIN = "0904";
+
+    function isUnlocked() {
+        return sessionStorage.getItem("eduwe_unlocked") === CORRECT_PIN || 
+               localStorage.getItem("eduwe_unlocked") === CORRECT_PIN;
+    }
+
+    function updatePinDotsVisual(len) {
+        pinDots.forEach((dot, idx) => {
+            if (idx < len) {
+                dot.classList.add("filled");
+            } else {
+                dot.classList.remove("filled", "error", "success");
+            }
+        });
+    }
+
+    function checkPasscode(pinVal) {
+        if (pinVal === CORRECT_PIN) {
+            // 성공: 초록색 불 들어오고 게이트 해제
+            pinDots.forEach(dot => {
+                dot.classList.remove("error");
+                dot.classList.add("success");
+            });
+            if (passcodeError) passcodeError.style.display = "none";
+            
+            sessionStorage.setItem("eduwe_unlocked", CORRECT_PIN);
+            localStorage.setItem("eduwe_unlocked", CORRECT_PIN);
+            document.documentElement.classList.add("unlocked");
+
+            if (passcodeGate) {
+                passcodeGate.classList.add("unlocking");
+                setTimeout(() => {
+                    passcodeGate.style.display = "none";
+                }, 350);
+            }
+        } else {
+            // 실패: 흔들림 애니메이션 및 에러 출력
+            pinDots.forEach(dot => {
+                dot.classList.remove("success");
+                dot.classList.add("error");
+            });
+            const box = document.querySelector(".passcode-box");
+            if (box) {
+                box.classList.remove("shake");
+                void box.offsetWidth; // 재실행 트리거
+                box.classList.add("shake");
+            }
+            if (passcodeError) {
+                passcodeError.style.display = "block";
+            }
+            setTimeout(() => {
+                if (passcodeInput) passcodeInput.value = "";
+                updatePinDotsVisual(0);
+                if (passcodeInput) passcodeInput.focus();
+            }, 600);
+        }
+    }
+
+    if (passcodeGate) {
+        if (isUnlocked()) {
+            document.documentElement.classList.add("unlocked");
+            passcodeGate.style.display = "none";
+        } else {
+            document.documentElement.classList.remove("unlocked");
+            passcodeGate.style.display = "flex";
+            if (passcodeInput) {
+                setTimeout(() => passcodeInput.focus(), 150);
+            }
+        }
+    }
+
+    if (passcodeInput) {
+        passcodeInput.addEventListener("input", (e) => {
+            const val = passcodeInput.value.replace(/[^0-9]/g, "").slice(0, 4);
+            passcodeInput.value = val;
+            updatePinDotsVisual(val.length);
+            if (val.length === 4) {
+                checkPasscode(val);
+            }
+        });
+    }
+
+    if (passcodeForm) {
+        passcodeForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            if (passcodeInput) {
+                checkPasscode(passcodeInput.value);
+            }
+        });
+    }
+
+    // 터치 키패드 클릭 리스너
+    if (pinKeypad && passcodeInput) {
+        pinKeypad.addEventListener("click", (e) => {
+            const btn = e.target.closest("button");
+            if (!btn) return;
+            const key = btn.getAttribute("data-key");
+            const action = btn.getAttribute("data-action");
+
+            let cur = passcodeInput.value;
+            if (key !== null) {
+                if (cur.length < 4) {
+                    cur += key;
+                }
+            } else if (action === "clear") {
+                cur = "";
+            } else if (action === "back") {
+                cur = cur.slice(0, -1);
+            }
+
+            passcodeInput.value = cur;
+            updatePinDotsVisual(cur.length);
+            if (cur.length === 4) {
+                checkPasscode(cur);
+            }
+        });
+    }
+
+    // 잠금 버튼 클릭 시 즉시 화면 잠금
+    function lockScreenNow() {
+        sessionStorage.removeItem("eduwe_unlocked");
+        localStorage.removeItem("eduwe_unlocked");
+        document.documentElement.classList.remove("unlocked");
+        if (passcodeGate) {
+            passcodeGate.classList.remove("unlocking");
+            passcodeGate.style.display = "flex";
+            if (passcodeInput) {
+                passcodeInput.value = "";
+                updatePinDotsVisual(0);
+                setTimeout(() => passcodeInput.focus(), 100);
+            }
+            if (passcodeError) passcodeError.style.display = "none";
+        }
+    }
+
+    if (lockScreenBtn) lockScreenBtn.addEventListener("click", lockScreenNow);
+    if (topLockBtn) topLockBtn.addEventListener("click", lockScreenNow);
+
+    // =========================================================================
+    // 15. PWA (Progressive Web App) 앱 설치 & 서비스 워커 연동
+    // =========================================================================
+    let deferredPwaPrompt = null;
+    const pwaInstallBtn = document.getElementById("pwaInstallBtn");
+    const pwaInstallBanner = document.getElementById("pwaInstallBanner");
+    const pwaBannerInstallBtn = document.getElementById("pwaBannerInstallBtn");
+    const pwaBannerCloseBtn = document.getElementById("pwaBannerCloseBtn");
+    const pwaIosModal = document.getElementById("pwaIosModal");
+
+    // 서비스 워커 등록
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/sw.js").then((reg) => {
+                console.log("eduwe PWA Service Worker Registered:", reg.scope);
+            }).catch((err) => {
+                console.warn("eduwe PWA SW Registration Failed:", err);
+            });
+        });
+    }
+
+    // PWA 설치 프롬프트 가로채기
+    window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredPwaPrompt = e;
+        
+        // 상단 설치 버튼 활성화
+        if (pwaInstallBtn) {
+            pwaInstallBtn.style.display = "inline-flex";
+        }
+        // 모바일 화면이면 하단 플로팅 배너 노출
+        if (window.innerWidth <= 768 && pwaInstallBanner) {
+            if (!sessionStorage.getItem("pwa_banner_closed")) {
+                pwaInstallBanner.style.display = "block";
+            }
+        }
+    });
+
+    // PWA 설치 실행 함수
+    async function triggerPwaInstall() {
+        const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        
+        if (deferredPwaPrompt) {
+            deferredPwaPrompt.prompt();
+            const choiceResult = await deferredPwaPrompt.userChoice;
+            if (choiceResult.outcome === "accepted") {
+                console.log("User accepted PWA install");
+                if (pwaInstallBanner) pwaInstallBanner.style.display = "none";
+            }
+            deferredPwaPrompt = null;
+        } else if (isIos) {
+            // iOS Safari는 수동 안내 모달 노출
+            if (pwaIosModal) {
+                pwaIosModal.classList.add("show");
+            }
+        } else {
+            alert("📲 브라우저 상단 주소창의 [설치] 아이콘 또는 메뉴(⋮)에서 [홈 화면에 추가 / 앱 설치]를 선택해 주세요!");
+        }
+    }
+
+    if (pwaInstallBtn) pwaInstallBtn.addEventListener("click", triggerPwaInstall);
+    if (pwaBannerInstallBtn) pwaBannerInstallBtn.addEventListener("click", triggerPwaInstall);
+
+    if (pwaBannerCloseBtn) {
+        pwaBannerCloseBtn.addEventListener("click", () => {
+            if (pwaInstallBanner) pwaInstallBanner.style.display = "none";
+            sessionStorage.setItem("pwa_banner_closed", "true");
+        });
+    }
+
+    // 앱 설치 완료 감지
+    window.addEventListener("appinstalled", () => {
+        if (pwaInstallBanner) pwaInstallBanner.style.display = "none";
+        if (pwaInstallBtn) pwaInstallBtn.style.display = "none";
+        alert("🎉 에듀위(eduwe) 앱이 홈 화면에 성공적으로 설치되었습니다! 언제든 편리하게 학습을 이어가세요.");
+    });
 
 });

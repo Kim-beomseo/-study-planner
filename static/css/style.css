@@ -2862,3 +2862,545 @@ body {
         grid-template-columns: 1fr 1fr 40px;
     }
 }
+
+
+/* ==========================================================
+   0. 보안 접속 게이트 (비밀번호: 0904 인증 화면)
+   ========================================================== */
+html.unlocked #passcodeGate {
+    display: none !important;
+}
+
+.passcode-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    background: radial-gradient(circle at 50% 35%, #1e293b 0%, #0f172a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.passcode-overlay.unlocking {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.passcode-box {
+    background: rgba(30, 41, 59, 0.95);
+    border: 1.5px solid rgba(255, 210, 0, 0.35);
+    border-radius: 24px;
+    padding: 32px 24px;
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+    color: #ffffff;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 210, 0, 0.12);
+    animation: passcodePop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes passcodePop {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.passcode-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.passcode-logo .logo-symbol {
+    color: #ffffff;
+    font-size: 26px;
+}
+
+.passcode-header .lock-icon-wrap {
+    width: 58px;
+    height: 58px;
+    background: rgba(255, 210, 0, 0.15);
+    border: 1px solid rgba(255, 210, 0, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin: 0 auto 14px;
+}
+
+.passcode-header h2 {
+    font-size: 19px;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+}
+
+.passcode-header p {
+    font-size: 12.5px;
+    color: #94a3b8;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* PIN 도트 시각화 */
+.pin-dots {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 18px 0 20px;
+}
+
+.pin-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #475569;
+    background: transparent;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pin-dot.filled {
+    background: #ffd200;
+    border-color: #ffd200;
+    box-shadow: 0 0 12px rgba(255, 210, 0, 0.7);
+    transform: scale(1.2);
+}
+
+.pin-dot.error {
+    background: #ef4444;
+    border-color: #ef4444;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+}
+
+.pin-dot.success {
+    background: #10b981;
+    border-color: #10b981;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+}
+
+.passcode-input-wrap {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.passcode-input-wrap input {
+    flex: 1;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: #ffffff;
+    font-size: 18px;
+    letter-spacing: 6px;
+    text-align: center;
+    font-weight: 800;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.passcode-input-wrap input:focus {
+    border-color: #ffd200;
+    box-shadow: 0 0 0 2px rgba(255, 210, 0, 0.2);
+}
+
+.btn-unlock {
+    background: #ffd200;
+    color: #111111;
+    border: none;
+    border-radius: 10px;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.btn-unlock:hover {
+    background: #ffbe00;
+    transform: translateY(-1px);
+}
+
+.passcode-error-msg {
+    color: #ef4444;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    background: rgba(239, 68, 68, 0.1);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* 터치 키패드 */
+.pin-keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.key-btn {
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: #f1f5f9;
+    border-radius: 12px;
+    height: 48px;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.key-btn:hover {
+    background: #334155;
+    color: #ffd200;
+    border-color: #ffd200;
+}
+
+.key-btn:active {
+    transform: scale(0.94);
+    background: #ffd200;
+    color: #111111;
+}
+
+.key-clear, .key-back {
+    font-size: 13px;
+    font-weight: 700;
+    color: #94a3b8;
+}
+
+.passcode-footer {
+    margin-top: 20px;
+}
+
+.shield-badge {
+    font-size: 11px;
+    color: #64748b;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+@keyframes shakeError {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+
+.shake {
+    animation: shakeError 0.4s ease-in-out;
+}
+
+/* ==========================================================
+   PWA 앱 설치 버튼 & 모바일 배너 & 잠금 버튼
+   ========================================================== */
+.btn-pwa-install {
+    background: linear-gradient(135deg, #ffd200, #ffb700);
+    color: #111111;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 8px rgba(255, 210, 0, 0.3);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    font-family: inherit;
+}
+
+.btn-pwa-install:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 210, 0, 0.45);
+}
+
+.btn-pwa-install:active {
+    transform: scale(0.96);
+}
+
+.btn-header-lock {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 11.5px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s;
+    font-family: inherit;
+    white-space: nowrap;
+}
+
+.btn-header-lock:hover {
+    background: #111111;
+    color: #ffd200;
+    border-color: #111111;
+}
+
+.top-lock-btn {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.top-lock-btn:hover {
+    color: #ffd200 !important;
+}
+
+/* PWA 모바일 플로팅 설치 배너 */
+.pwa-banner {
+    position: fixed;
+    bottom: 74px;
+    left: 16px;
+    right: 16px;
+    z-index: 998;
+    background: #111827;
+    border: 1px solid rgba(255, 210, 0, 0.4);
+    border-radius: 14px;
+    padding: 12px 16px;
+    color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    animation: bannerSlideUp 0.3s ease-out;
+}
+
+@keyframes bannerSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.pwa-banner-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pwa-banner-icon {
+    font-size: 24px;
+    background: #ffd200;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.pwa-banner-text {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.pwa-banner-text strong {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+.pwa-banner-text span {
+    font-size: 11.5px;
+    color: #94a3b8;
+}
+
+.btn-pwa-banner-install {
+    background: #ffd200;
+    color: #111111;
+    border: none;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.15s;
+}
+
+.btn-pwa-banner-install:active {
+    transform: scale(0.95);
+}
+
+.btn-pwa-banner-close {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+}
+
+/* iOS Safari 모달 */
+.pwa-ios-box {
+    max-width: 360px;
+    text-align: left;
+}
+
+.pwa-ios-body .ios-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+    background: #f8fafc;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #edf2f7;
+}
+
+.ios-step .step-num {
+    background: #ffd200;
+    color: #111111;
+    font-weight: 900;
+    font-size: 13px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.ios-step p {
+    font-size: 13px;
+    color: #334155;
+    line-height: 1.45;
+    margin: 0;
+}
+
+.ios-share-icon {
+    font-size: 15px;
+    border: 1px solid #cbd5e1;
+    padding: 1px 4px;
+    border-radius: 4px;
+}
+
+/* ==========================================================
+   모바일 전용 하단 앱 독 바 (Mobile Bottom Navigation Bar)
+   ========================================================== */
+.mobile-bottom-bar {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    /* 모바일 하단 바 노출 */
+    .mobile-bottom-bar {
+        display: flex !important;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: #ffffff;
+        border-top: 1px solid #e2e8f0;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 1000;
+        box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.06);
+        padding-bottom: env(safe-area-inset-bottom);
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        padding-bottom: calc(68px + env(safe-area-inset-bottom)) !important;
+    }
+
+    .m-bottom-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #64748b;
+        font-size: 11px;
+        font-weight: 700;
+        gap: 3px;
+        flex: 1;
+        padding: 6px 0;
+        transition: all 0.15s ease;
+    }
+
+    .m-bottom-icon {
+        font-size: 18px;
+        line-height: 1;
+        display: inline-block;
+        transition: transform 0.15s ease;
+    }
+
+    .m-bottom-label {
+        font-size: 10.5px;
+        line-height: 1;
+        white-space: nowrap;
+    }
+
+    .m-bottom-item:active {
+        transform: scale(0.92);
+    }
+
+    .m-bottom-item.active {
+        color: #111111;
+        font-weight: 900;
+    }
+
+    .m-bottom-item.active .m-bottom-icon {
+        transform: scale(1.15);
+    }
+
+    .m-bottom-item.active .m-bottom-label {
+        color: #111111;
+    }
+
+    /* 모바일 폼 터치 줌 방지 & 터치 타겟 48px 최적화 */
+    input[type="text"],
+    input[type="date"],
+    input[type="password"],
+    input[type="tel"],
+    select,
+    textarea {
+        font-size: 16px !important; /* iOS 자동 줌 방지 */
+        min-height: 48px;
+        touch-action: manipulation;
+    }
+
+    /* 모바일 테이블 가로 스크롤 터치 친화 */
+    .table-responsive,
+    .predict-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 8px;
+    }
+
+    /* PWA 설치 버튼 모바일 노출 */
+    .header-right {
+        display: flex !important;
+        gap: 6px;
+    }
+    .badge-gemini {
+        display: none !important;
+    }
+    .btn-pwa-install .pwa-txt {
+        display: inline;
+    }
+}
