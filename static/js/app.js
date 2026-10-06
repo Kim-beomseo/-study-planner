@@ -45,6 +45,11 @@ document.addEventListener("DOMContentLoaded", () => {
             title: "꿈을 현실로 만든 생생한 기록,<br><span class='hero-highlight'>에듀위 실시간 합격수기</span>",
             desc: "비전공자, 직장인, 주부 수험생들의 실제 공부시간과<br>합격 비결을 확인하고 동기부여를 얻으세요."
         },
+        "view-schedule": {
+            tag: "2026-2027 국가공인 1개년 캘린더",
+            title: "원서접수부터 최종합격까지 한눈에,<br><span class='hero-highlight'>1개년 공인 시험일정 & D-Day 통합 센터</span>",
+            desc: "세무사, 회계사, 공인중개사, 9급 공무원, 토익 등 30대 주요 시험의 공식 일정을 확인하고<br>클릭 한 번으로 최적의 AI 합격 마스터플랜을 100% 자동 완성하세요."
+        },
         "view-mypage": {
             tag: "2026 합격 케어 센터",
             title: "나만의 합격 학습 대시보드,<br><span class='hero-highlight'>마이학습룸 (My Study Room)</span>",
@@ -129,33 +134,278 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // -------------------------------------------------------------
-    // 2-1. 1-Click AI 플랜 연동 기능 (자격증, 공무원, 토익 카드 버튼)
+    // 2-1. 국가공인 시험별 초정밀 마스터 프리셋 데이터베이스
     // -------------------------------------------------------------
+    const EXAM_MASTER_PRESETS = {
+        "세무사": {
+            goal: "세무사 (CTA) 1차·2차 전문직 단기합격",
+            date: "2026-04-25",
+            level: "비전공자 초시생 (회계학·세법 노베이스)",
+            dailyTime: "전업 8시간 (오전 3h, 오후 3.5h, 야간 1.5h)",
+            weakPoint: "회계학개론(원가회계 계산속도), 세법학개론(법인세/소득세 계산구조 암기)",
+            studyStyle: "기본서 정독 + 진도별 기출 풀이 병행",
+            persona: "sparta"
+        },
+        "공인회계사": {
+            goal: "공인회계사 (KICPA) 1차·2차 단기합격",
+            date: "2026-02-28",
+            level: "경영/경제 복수전공 베이스 (수험 1년차)",
+            dailyTime: "수험 몰입 10시간 (오전 3.5h, 오후 4h, 야간 2.5h)",
+            weakPoint: "중급/고급회계 연결회계 분개, 경제원론 미시수식, 재무관리 공식",
+            studyStyle: "기본서 정독 + 진도별 기출 풀이 병행",
+            persona: "sparta"
+        },
+        "공인중개사": {
+            goal: "공인중개사 제37회 1·2차 동차합격",
+            date: "2026-10-31",
+            level: "직장인/주부 비전공자 (완전 노베이스 초시)",
+            dailyTime: "평일 4시간 / 주말 8시간 (직장 병행형)",
+            weakPoint: "민법 및 민사특별법 판례 조문, 부동산공법 체계도 암기",
+            studyStyle: "인강 + 핵심 요약 복습",
+            persona: "mentor"
+        },
+        "감정평가사": {
+            goal: "감정평가사 제37회 1차 합격",
+            date: "2026-04-11",
+            level: "비전공자 초시생 (경제학/회계학 노베이스)",
+            dailyTime: "일일 7시간 (오전 3h, 오후 3h, 야간 1h)",
+            weakPoint: "회계학 계산속도, 경제학원론 미시 계산문제",
+            studyStyle: "기본서 정독 + 진도별 기출 풀이 병행",
+            persona: "sparta"
+        },
+        "주택관리사": {
+            goal: "주택관리사(보) 제29회 1·2차 합격",
+            date: "2026-07-11",
+            level: "시설관리 비전공 입문자",
+            dailyTime: "평일 4시간 / 주말 7시간",
+            weakPoint: "회계원리 분개 및 감가상각, 공동주택시설개론",
+            studyStyle: "인강 + 핵심 요약 복습",
+            persona: "mentor"
+        },
+        "재경관리사": {
+            goal: "재경관리사 (삼일회계법인) 단기합격",
+            date: "2026-05-23",
+            level: "경영학 비전공자 / 회계원리 1회독 수준",
+            dailyTime: "평일 3시간 / 주말 6시간",
+            weakPoint: "원가관리회계 CVP 분석, 법인세 세무조정",
+            studyStyle: "기출문제 다회독 + 오답노트",
+            persona: "sparta"
+        },
+        "전산세무회계": {
+            goal: "전산세무 2급/1급 & 전산회계 1급 합격",
+            date: "2026-06-07",
+            level: "상경계열 취준생 (케이렙 실무 초보)",
+            dailyTime: "일일 4시간 (이론 1h + 실무입력 3h)",
+            weakPoint: "케이렙 부가세 가산세 계산, 연말정산 실무",
+            studyStyle: "기출문제 다회독 + 오답노트",
+            persona: "mentor"
+        },
+        "9급일반행정": {
+            goal: "9급 국가직/지방직 일반행정직 합격",
+            date: "2026-03-28",
+            level: "초시생 (한국사 베이스 유, 행정법/행정학 노베이스)",
+            dailyTime: "전업 9시간 (오전 3h, 오후 3.5h, 야간 2.5h)",
+            weakPoint: "행정법총론 최신 판례 암기, 영어 독해 시간 부족",
+            studyStyle: "기본서 정독 + 진도별 기출 풀이 병행",
+            persona: "sparta"
+        },
+        "9급세무직": {
+            goal: "9급 세무직 공무원 (국세청) 단기합격",
+            date: "2026-03-28",
+            level: "비전공 초시생 (세법/회계학 노베이스)",
+            dailyTime: "전업 9시간 (세법 3h, 회계 3h, 공통과목 3h)",
+            weakPoint: "세법개론 조문 암기, 회계학 계산속도 단축",
+            studyStyle: "기본서 정독 + 진도별 기출 풀이 병행",
+            persona: "sparta"
+        },
+        "7급일반행정": {
+            goal: "7급 국가직 일반행정 (PSAT & 2차)",
+            date: "2026-07-18",
+            level: "PSAT 입문자 / 헌법·행정법 기본강의 수강",
+            dailyTime: "전업 10시간 (PSAT 4h + 2차 6h)",
+            weakPoint: "PSAT 자료해석 가평균 연산, 경제학 미시 그래프",
+            studyStyle: "기본서 정독 + 진도별 기출 풀이 병행",
+            persona: "sparta"
+        },
+        "경찰순경": {
+            goal: "경찰공무원 순경공채 필기 합격",
+            date: "2026-03-21",
+            level: "초시생 (형사법/경찰학 기본서 1회독)",
+            dailyTime: "필기 8시간 + 체력운동 2시간",
+            weakPoint: "형사법 판례 키워드 매칭, 경찰학 행정법 영역",
+            studyStyle: "기출문제 다회독 + 오답노트",
+            persona: "sparta"
+        },
+        "소방공무원": {
+            goal: "소방공무원 공채 필기 합격",
+            date: "2026-03-28",
+            level: "소방학/관계법규 초시생",
+            dailyTime: "필기 7.5시간 + 체력운동 2시간",
+            weakPoint: "소방학개론 위험물 성상, 소방관계법규 벌칙 조항",
+            studyStyle: "기본서 정독 + 진도별 기출 풀이 병행",
+            persona: "sparta"
+        },
+        "전기기사": {
+            goal: "전기기사 필기 및 실기 단기 동차합격",
+            date: "2026-03-08",
+            level: "비전공자/수포자 (전기이론 기초 부족)",
+            dailyTime: "평일 5시간 / 주말 9시간",
+            weakPoint: "전기자기학 미적분 공식, 수변전설비 단선도 실기",
+            studyStyle: "기출문제 다회독 + 오답노트",
+            persona: "sparta"
+        },
+        "정보처리기사": {
+            goal: "정보처리기사 실기 단기합격",
+            date: "2026-04-26",
+            level: "비전공 코딩 입문자 (필기 합격 완료)",
+            dailyTime: "일일 4~5시간 (프로그래밍 실습 병행)",
+            weakPoint: "C/Java 포인터·상속 코드 해석, SQL 복합 Join 쿼리",
+            studyStyle: "기출문제 다회독 + 오답노트",
+            persona: "mentor"
+        },
+        "산업안전기사": {
+            goal: "산업안전기사 필답형/작업형 합격",
+            date: "2026-03-08",
+            level: "이공계 비전공 직장인",
+            dailyTime: "평일 3.5시간 / 주말 7시간",
+            weakPoint: "안전관리론 암기, 위험기계 방호장치 실기 동영상",
+            studyStyle: "요약본 암기 + 실전 모의고사 반복",
+            persona: "mentor"
+        },
+        "토익850": {
+            goal: "토익 850+ 단기속성 완성",
+            date: "2026-04-26",
+            level: "토익 600점대 정체기 (수능 3등급 수준)",
+            dailyTime: "일일 4시간 (LC 1.5h + RC 2.5h)",
+            weakPoint: "RC Part 7 독해 시간 부족, LC 호주/영국 발음 연음",
+            studyStyle: "기출문제 다회독 + 오답노트",
+            persona: "sparta"
+        },
+        "한능검1급": {
+            goal: "한국사능력검정시험 심화 1급 (80점 이상)",
+            date: "2026-05-23",
+            level: "한국사 흐름만 아는 초보자 (2주 완성 목표)",
+            dailyTime: "일일 4시간 (인강 2h + 기출 2h)",
+            weakPoint: "근현대사 무장독립운동 단체, 조선후기 문화사 유물",
+            studyStyle: "인강 + 핵심 요약 복습",
+            persona: "mentor"
+        },
+        "컴활1급": {
+            goal: "컴퓨터활용능력 1급 실기 단기합격",
+            date: "2026-04-30",
+            level: "필기 합격 후 실기 첫 도전 (엑셀 기본만 가능)",
+            dailyTime: "일일 3.5시간 (엑셀 2h + 액세스 1.5h)",
+            weakPoint: "엑셀 배열수식/INDEX/MATCH 함수, 액세스 ADO 개체",
+            studyStyle: "기출문제 다회독 + 오답노트",
+            persona: "sparta"
+        },
+        "공기업NCS": {
+            goal: "공기업 NCS 직업기초 & 전공필기 완성",
+            date: "2026-04-18",
+            level: "공기업 취준 6개월차 (서류 통과 베이스)",
+            dailyTime: "일일 7시간 (NCS 3h + 전공 4h)",
+            weakPoint: "수리영역 응용수리 속도, 문제해결 명제논리, 경영학 CAPM",
+            studyStyle: "기본서 정독 + 진도별 기출 풀이 병행",
+            persona: "sparta"
+        }
+    };
+
+    // -------------------------------------------------------------
+    // 2-2. 1-Click 원클릭 AI 플랜 자동 완성 엔진 (초보자 0단계 즉시 완성)
+    // -------------------------------------------------------------
+    function triggerOneClickPlan(examKeyOrGoal, customDate, customWeak) {
+        let preset = null;
+        if (examKeyOrGoal && EXAM_MASTER_PRESETS[examKeyOrGoal]) {
+            preset = EXAM_MASTER_PRESETS[examKeyOrGoal];
+        } else if (examKeyOrGoal) {
+            const keys = Object.keys(EXAM_MASTER_PRESETS);
+            for (const k of keys) {
+                if (examKeyOrGoal.includes(k) || k.includes(examKeyOrGoal)) {
+                    preset = EXAM_MASTER_PRESETS[k];
+                    break;
+                }
+            }
+        }
+
+        const goalVal = preset ? preset.goal : (examKeyOrGoal || "에듀위 맞춤 합격 플랜");
+        const dateVal = (preset && preset.date) ? preset.date : (customDate || "2026-10-31");
+        const levelVal = preset ? preset.level : "비전공자 초시생 (노베이스 맞춤)";
+        const dailyVal = preset ? preset.dailyTime : "일일 6~8시간 몰입형 수험";
+        const weakVal = (preset && preset.weakPoint) ? preset.weakPoint : (customWeak || "핵심 계산 및 지엽적 조문 암기");
+        const styleVal = preset ? preset.studyStyle : "기본서 정독 + 진도별 기출 풀이 병행";
+        const personaVal = preset ? preset.persona : "sparta";
+
+        // 폼 필드 100% 자동 채우기
+        const goalInput = document.getElementById("goal");
+        const dateInput = document.getElementById("exam_date");
+        const levelInput = document.getElementById("current_level");
+        const dailyInput = document.getElementById("daily_time");
+        const weakInput = document.getElementById("weak_point");
+        const styleSelect = document.getElementById("study_style");
+        const personaRadios = document.querySelectorAll('input[name="persona"]');
+
+        if (goalInput) goalInput.value = goalVal;
+        if (dateInput) dateInput.value = dateVal;
+        if (levelInput) levelInput.value = levelVal;
+        if (dailyInput) dailyInput.value = dailyVal;
+        if (weakInput) weakInput.value = weakVal;
+        if (styleSelect) styleSelect.value = styleVal;
+        personaRadios.forEach(r => {
+            r.checked = (r.value === personaVal);
+        });
+
+        // 플래너 탭으로 전환
+        switchTab("view-planner");
+
+        // 폼 펄스 시각 피드백
+        const formCard = document.querySelector(".form-card");
+        if (formCard) {
+            formCard.style.outline = "3px solid #ffd200";
+            setTimeout(() => { formCard.style.outline = "none"; }, 1200);
+        }
+
+        // 즉시 AI 플랜 자동 생성 트리거
+        const plannerForm = document.getElementById("plannerForm");
+        if (plannerForm) {
+            plannerForm.dispatchEvent(new Event("submit", { cancelable: true }));
+        }
+    }
+    window.triggerOneClickPlan = triggerOneClickPlan;
+
+    // 1-Click 퀵 칩/카드 클릭 이벤트 바인딩
+    document.querySelectorAll(".q-exam-card").forEach(card => {
+        card.addEventListener("click", () => {
+            const examKey = card.getAttribute("data-exam-key");
+            triggerOneClickPlan(examKey);
+        });
+    });
+
+    // 시험일정 카드 내 [⚡ 이 시험으로 AI 맞춤 플랜 자동 완성] 클릭
+    document.querySelectorAll(".btn-sch-apply").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const examKey = btn.getAttribute("data-exam-key");
+            triggerOneClickPlan(examKey);
+        });
+    });
+
+    // 기존 자격증/공무원/토익 카드 내 [AI 플랜 세우기] 버튼 클릭
     const applyPlanBtns = document.querySelectorAll(".btn-apply-plan");
     applyPlanBtns.forEach(btn => {
         btn.addEventListener("click", () => {
             const goal = btn.getAttribute("data-goal") || "";
             const date = btn.getAttribute("data-date") || "";
             const weak = btn.getAttribute("data-weak") || "";
+            triggerOneClickPlan(goal, date, weak);
+        });
+    });
 
-            // 플래너 탭으로 전환
-            switchTab("view-planner");
-
-            // 폼 필드 자동 입력
-            if (goal) document.getElementById("goal").value = goal;
-            if (date) document.getElementById("exam_date").value = date;
-            if (weak) document.getElementById("weak_point").value = weak;
-
-            // 시각적 강조 피드백
-            const formCard = document.querySelector(".form-card");
-            if (formCard) {
-                formCard.style.outline = "3px solid #ffd200";
-                setTimeout(() => {
-                    formCard.style.outline = "none";
-                }, 1500);
-            }
-
-            alert(`📌 [${goal}] 시험 정보가 폼에 자동 입력되었습니다!\n나머지 정보를 확인하고 생성 버튼을 눌러주세요.`);
+    // 소셜 프루프 카드 내 [⚡ 이 루틴 적용] 버튼 클릭
+    document.querySelectorAll(".btn-sp-use").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const goal = btn.getAttribute("data-goal") || "";
+            const date = btn.getAttribute("data-date") || "";
+            const weak = btn.getAttribute("data-weak") || "";
+            triggerOneClickPlan(goal, date, weak);
         });
     });
 
@@ -164,11 +414,101 @@ document.addEventListener("DOMContentLoaded", () => {
     bookPlanBtns.forEach(btn => {
         btn.addEventListener("click", () => {
             const bookTitle = btn.getAttribute("data-title") || "";
-            switchTab("view-planner");
-            document.getElementById("goal").value = `${bookTitle} 마스터 플랜`;
-            alert(`📖 [${bookTitle}] 교재 학습 플랜 생성을 위해 폼에 연동되었습니다.`);
+            triggerOneClickPlan(bookTitle);
         });
     });
+
+    // -------------------------------------------------------------
+    // 2-3. 플래너 듀얼 입력 모드 스위처 (초보자 원클릭 vs 수기 입력)
+    // -------------------------------------------------------------
+    const modeQuickBtn = document.getElementById("modeQuickBtn");
+    const modeCustomBtn = document.getElementById("modeCustomBtn");
+    const quickPlanPanel = document.getElementById("quickPlanPanel");
+
+    if (modeQuickBtn && modeCustomBtn) {
+        modeQuickBtn.addEventListener("click", () => {
+            modeQuickBtn.classList.add("active");
+            modeCustomBtn.classList.remove("active");
+            if (quickPlanPanel) quickPlanPanel.style.display = "block";
+        });
+
+        modeCustomBtn.addEventListener("click", () => {
+            modeCustomBtn.classList.add("active");
+            modeQuickBtn.classList.remove("active");
+            if (quickPlanPanel) quickPlanPanel.style.display = "none";
+            const goalInput = document.getElementById("goal");
+            if (goalInput) {
+                goalInput.focus();
+                goalInput.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+        });
+    }
+
+    // -------------------------------------------------------------
+    // 2-4. 1개년 시험일정 D-Day 자동 계산 & 검색/필터링
+    // -------------------------------------------------------------
+    function updateDdayBadges() {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        document.querySelectorAll(".dday-badge[data-date]").forEach(badge => {
+            const targetDateStr = badge.getAttribute("data-date");
+            if (!targetDateStr) return;
+            const targetDate = new Date(targetDateStr);
+            targetDate.setHours(0, 0, 0, 0);
+
+            const diffTime = targetDate - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            if (diffDays > 0) {
+                badge.textContent = `D-${diffDays}`;
+                badge.className = "dday-badge dday-future";
+            } else if (diffDays === 0) {
+                badge.textContent = "D-Day 오늘 시험!";
+                badge.className = "dday-badge dday-today";
+            } else {
+                badge.textContent = "접수·차기대비";
+                badge.className = "dday-badge dday-passed";
+            }
+        });
+    }
+    updateDdayBadges();
+
+    // 시험일정 서브 카테고리 필터
+    const schFilterBtns = document.querySelectorAll(".schedule-filter-bar .sub-filter-btn");
+    schFilterBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            schFilterBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            const filterVal = btn.getAttribute("data-schfilter");
+            const cards = document.querySelectorAll("#scheduleGrid .schedule-card");
+            cards.forEach(c => {
+                const cardSch = c.getAttribute("data-sch");
+                if (filterVal === "all" || cardSch === filterVal) {
+                    c.style.display = "";
+                } else {
+                    c.style.display = "none";
+                }
+            });
+        });
+    });
+
+    // 시험일정 실시간 키워드 검색
+    const schSearchInput = document.getElementById("scheduleSearchInput");
+    if (schSearchInput) {
+        schSearchInput.addEventListener("input", (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            const cards = document.querySelectorAll("#scheduleGrid .schedule-card");
+            cards.forEach(c => {
+                const text = c.textContent.toLowerCase();
+                if (!query || text.includes(query)) {
+                    c.style.display = "";
+                } else {
+                    c.style.display = "none";
+                }
+            });
+        });
+    }
 
     // -------------------------------------------------------------
     // 3. 에듀위 합격예측 풀서비스 실시간 다과목 정밀 진단 시스템

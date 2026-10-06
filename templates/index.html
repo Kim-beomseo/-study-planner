@@ -15,7 +15,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23ffd200'/><text x='50' y='68' font-size='56' font-weight='900' font-family='sans-serif' text-anchor='middle' fill='%23111111'>W</text></svg>" type="image/x-icon">
     <!-- Web Font (Pretendard) -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=2.3">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=2.4">
     <!-- 마크다운 렌더링 라이브러리 (Marked.js) -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
@@ -127,6 +127,7 @@
             </div>
             <nav class="main-nav">
                 <a href="javascript:void(0);" class="nav-item nav-tab-trigger active" data-target="view-planner">AI 맞춤 플래너</a>
+                <a href="javascript:void(0);" class="nav-item nav-tab-trigger nav-schedule-tab" data-target="view-schedule">📅 1개년 시험일정</a>
                 <a href="javascript:void(0);" class="nav-item nav-tab-trigger" data-target="view-license">자격증 과정</a>
                 <a href="javascript:void(0);" class="nav-item nav-tab-trigger" data-target="view-gov">공무원 과정</a>
                 <a href="javascript:void(0);" class="nav-item nav-tab-trigger" data-target="view-toeic">토익/취업</a>
@@ -201,8 +202,91 @@
             <section class="card form-card">
                 <div class="form-header">
                     <span class="section-badge">STEP 01</span>
-                    <h2>📋 합격 진단 및 학습 정보 입력</h2>
-                    <p class="section-desc">정확한 정보를 입력할수록 나에게 최적화된 플랜이 완성됩니다.</p>
+                    <h2>📋 합격 진단 및 맞춤 플랜 설계</h2>
+                    <p class="section-desc">원하는 과정을 클릭만 하면 최적의 공부법·시간표·D-Day가 100% 자동 완성됩니다.</p>
+                </div>
+
+                <!-- 듀얼 입력 모드 스위처 (초보자 원클릭 vs 직접 수기 입력) -->
+                <div class="planner-mode-tabs">
+                    <button type="button" class="mode-tab-btn active" id="modeQuickBtn" data-mode="quick">
+                        ⚡ 초보자·원클릭 추천 플랜
+                        <span class="mode-badge">노베이스 추천</span>
+                    </button>
+                    <button type="button" class="mode-tab-btn" id="modeCustomBtn" data-mode="custom">
+                        ✍️ 직접 수기 입력 (맞춤 커스텀)
+                    </button>
+                </div>
+
+                <!-- [모드 1] 초보자·원클릭 퀵 셀렉터 패널 -->
+                <div class="quick-plan-panel" id="quickPlanPanel">
+                    <div class="quick-plan-banner">
+                        <div class="quick-banner-txt">
+                            <strong>🎯 준비하시는 시험을 터치하세요!</strong>
+                            <p>실제 2026 공인 시험일정과 비전공자 노베이스 맞춤 과목별 공부법·인강 테크트리·순공시간표가 1초 만에 자동 완성됩니다.</p>
+                        </div>
+                        <button type="button" class="btn-sch-quick-link nav-tab-trigger" data-target="view-schedule">
+                            📅 1개년 시험일정표 전체보기 ➔
+                        </button>
+                    </div>
+
+                    <div class="quick-exam-grid">
+                        <button type="button" class="q-exam-card hot" data-exam-key="세무사">
+                            <span class="q-tag gold">8대 전문직 1위</span>
+                            <h4>세무사 (CTA)</h4>
+                            <span class="q-date">1차 2026.04.25</span>
+                            <span class="q-desc">재정학·세법·회계학 과락방지 전략</span>
+                            <span class="q-action">⚡ 1클릭 플랜 완성 ➔</span>
+                        </button>
+                        <button type="button" class="q-exam-card hot" data-exam-key="공인회계사">
+                            <span class="q-tag black">금융·회계 최고봉</span>
+                            <h4>공인회계사 (CPA)</h4>
+                            <span class="q-date">1차 2026.02.28</span>
+                            <span class="q-desc">경영·경제·상법·세법·회계학 5과목</span>
+                            <span class="q-action">⚡ 1클릭 플랜 완성 ➔</span>
+                        </button>
+                        <button type="button" class="q-exam-card hot" data-exam-key="공인중개사">
+                            <span class="q-tag gold">에듀위 최다합격</span>
+                            <h4>공인중개사 (1·2차)</h4>
+                            <span class="q-date">2026.10.31 동차</span>
+                            <span class="q-desc">민법·부동산학·공법 체계도 회독</span>
+                            <span class="q-action">⚡ 1클릭 플랜 완성 ➔</span>
+                        </button>
+                        <button type="button" class="q-exam-card" data-exam-key="9급일반행정">
+                            <span class="q-tag">공무원 1위</span>
+                            <h4>9급 일반행정직</h4>
+                            <span class="q-date">국가직 03.28 / 지방직 06.20</span>
+                            <span class="q-desc">행정법 판례 암기 & 국어·영어 안정권</span>
+                            <span class="q-action">⚡ 1클릭 플랜 완성 ➔</span>
+                        </button>
+                        <button type="button" class="q-exam-card" data-exam-key="9급세무직">
+                            <span class="q-tag">국세청 공채</span>
+                            <h4>9급 세무직 공무원</h4>
+                            <span class="q-date">2026.03.28 필기</span>
+                            <span class="q-desc">세법개론 조문 & 회계학 계산속도 단축</span>
+                            <span class="q-action">⚡ 1클릭 플랜 완성 ➔</span>
+                        </button>
+                        <button type="button" class="q-exam-card" data-exam-key="토익850">
+                            <span class="q-tag">취업 필수</span>
+                            <h4>토익 850+ 단기속성</h4>
+                            <span class="q-date">매월 정기시험</span>
+                            <span class="q-desc">RC 파트 5/7 시간단축 & LC 호주발음</span>
+                            <span class="q-action">⚡ 1클릭 플랜 완성 ➔</span>
+                        </button>
+                        <button type="button" class="q-exam-card" data-exam-key="전기기사">
+                            <span class="q-tag">국가기술 탑</span>
+                            <h4>전기기사 (필기/실기)</h4>
+                            <span class="q-date">2026 정기 1~3회</span>
+                            <span class="q-desc">전기자기학 공식 & 수변전 단선도</span>
+                            <span class="q-action">⚡ 1클릭 플랜 완성 ➔</span>
+                        </button>
+                        <button type="button" class="q-exam-card" data-exam-key="정보처리기사">
+                            <span class="q-tag">IT 필수자격</span>
+                            <h4>정보처리기사 실기</h4>
+                            <span class="q-date">2026 정기 1~3회</span>
+                            <span class="q-desc">프로그래밍 C/Java/Python & SQL</span>
+                            <span class="q-action">⚡ 1클릭 플랜 완성 ➔</span>
+                        </button>
+                    </div>
                 </div>
 
                 <form id="plannerForm">
@@ -422,6 +506,597 @@
         </div>
 
     </main>
+
+    <!-- ========================================================================= -->
+    <!-- [뷰 1-2] 1개년 시험일정 캘린더 대시보드 (2026-2027 공인 시험 일정 & D-Day 센터) -->
+    <!-- ========================================================================= -->
+    <section id="view-schedule" class="tab-view">
+        <div class="container section-inner">
+            <div class="schedule-hero">
+                <span class="schedule-badge">2026 - 2027 OFFICIAL CALENDAR</span>
+                <h2>📅 국가공인 자격증·공무원·토익·취업 1개년 공식 시험일정표</h2>
+                <p>한국산업인력공단(Q-Net), 인사혁신처, 금융감독원, YBM 공식 일정 기반 1개년 D-Day 실시간 조회 및 원클릭 AI 플랜 연동 시스템</p>
+                
+                <div class="schedule-search-wrap">
+                    <span class="sch-search-icon">🔍</span>
+                    <input type="text" id="scheduleSearchInput" placeholder="준비하시는 시험명을 검색하세요 (예: 세무사, CPA, 공인중개사, 9급 일반행정, 토익, 전기기사)...">
+                </div>
+            </div>
+
+            <!-- 시험일정 서브 필터 -->
+            <div class="sub-filter-bar schedule-filter-bar">
+                <button class="sub-filter-btn active" data-schfilter="all">전체 일정 (32)</button>
+                <button class="sub-filter-btn" data-schfilter="sch-prof">전문직·금융·세무 (8)</button>
+                <button class="sub-filter-btn" data-schfilter="sch-gov">공무원·경찰·소방 (10)</button>
+                <button class="sub-filter-btn" data-schfilter="sch-tech">국가기술·기사 (6)</button>
+                <button class="sub-filter-btn" data-schfilter="sch-job">토익·한능검·취업·NCS (8)</button>
+            </div>
+
+            <!-- 시험일정 카드 그리드 -->
+            <div class="schedule-grid" id="scheduleGrid">
+                <!-- 1. 세무사 (CTA) -->
+                <div class="schedule-card hot-exam" data-sch="sch-prof" data-exam-key="세무사">
+                    <div class="sch-card-top">
+                        <span class="sch-org">한국산업인력공단 (Q-Net)</span>
+                        <span class="dday-badge" data-date="2026-04-25">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag gold">8대 전문직 1위</span>
+                            <h3>세무사 (CTA 63회)</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">📝 원서 접수</span><span class="tl-val">2026.03.16(월) ~ 03.20(금)</span></li>
+                            <li><span class="tl-label">🎯 1차 시험일</span><span class="tl-val highlight">2026.04.25 (토)</span></li>
+                            <li><span class="tl-label">🎯 2차 시험일</span><span class="tl-val">2026.08.08 (토)</span></li>
+                            <li><span class="tl-label">📢 합격자 발표</span><span class="tl-val">1차 05.27 / 2차 11.11</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 1차 과목:</strong> 재정학, 세법학개론, 회계학개론, 선택법(상법/민법/행소법 중 택1) | 과목당 40점 이상, 전 과목 평균 60점 이상
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="세무사">
+                            ⚡ 세무사 맞춤 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. 공인회계사 (KICPA) -->
+                <div class="schedule-card hot-exam" data-sch="sch-prof" data-exam-key="공인회계사">
+                    <div class="sch-card-top">
+                        <span class="sch-org">금융감독원 (FSS)</span>
+                        <span class="dday-badge" data-date="2026-02-28">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag black">금융·회계 최고봉</span>
+                            <h3>공인회계사 (KICPA 1차·2차)</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">📝 원서 접수</span><span class="tl-val">2026.01.05(월) ~ 01.16(금)</span></li>
+                            <li><span class="tl-label">🎯 1차 시험일</span><span class="tl-val highlight">2026.02.28 (토)</span></li>
+                            <li><span class="tl-label">🎯 2차 시험일</span><span class="tl-val">2026.06.27(토) ~ 06.28(일)</span></li>
+                            <li><span class="tl-label">📢 합격자 발표</span><span class="tl-val">1차 04.03 / 2차 08.28</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 1차 과목:</strong> 경영학(100), 경제원론(100), 상법(100), 세법개론(100), 회계학(150) | 총점 550점 만점 상대평가 선발
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="공인회계사">
+                            ⚡ 공인회계사 맞춤 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3. 공인중개사 (37회) -->
+                <div class="schedule-card hot-exam" data-sch="sch-prof" data-exam-key="공인중개사">
+                    <div class="sch-card-top">
+                        <span class="sch-org">한국산업인력공단 (Q-Net)</span>
+                        <span class="dday-badge" data-date="2026-10-31">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag gold">에듀위 최다합격</span>
+                            <h3>공인중개사 (제37회 1·2차 동차)</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">📝 원서 접수</span><span class="tl-val">2026.08.10(월) ~ 08.14(금)</span></li>
+                            <li><span class="tl-label">🎯 동차 시험일</span><span class="tl-val highlight">2026.10.31 (토)</span></li>
+                            <li><span class="tl-label">📢 가답안 공개</span><span class="tl-val">2026.10.31 시험 당일 18:00</span></li>
+                            <li><span class="tl-label">📢 최종 합격발표</span><span class="tl-val">2026.12.02 (수)</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 시험 과목:</strong> 1차(부동산학개론, 민법) / 2차(중개사법, 부동산공법, 공시세법) | 매 과목 40점, 평균 60점 이상
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="공인중개사">
+                            ⚡ 공인중개사 맞춤 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4. 감정평가사 (제37회) -->
+                <div class="schedule-card" data-sch="sch-prof" data-exam-key="감정평가사">
+                    <div class="sch-card-top">
+                        <span class="sch-org">한국산업인력공단 (Q-Net)</span>
+                        <span class="dday-badge" data-date="2026-04-11">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag">부동산 전문직</span>
+                            <h3>감정평가사 (제37회 1차·2차)</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">📝 1차 접수</span><span class="tl-val">2026.02.09(월) ~ 02.13(금)</span></li>
+                            <li><span class="tl-label">🎯 1차 시험일</span><span class="tl-val highlight">2026.04.11 (토)</span></li>
+                            <li><span class="tl-label">🎯 2차 시험일</span><span class="tl-val">2026.07.18 (토)</span></li>
+                            <li><span class="tl-label">📢 최종 발표</span><span class="tl-val">2026.10.21 (수)</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 1차 과목:</strong> 민법, 경제학원론, 부동산학원론, 감정평가관계법규, 회계학 | 공인영어 700점 대체
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="감정평가사">
+                            ⚡ 감정평가사 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 5. 주택관리사 (보) 제29회 -->
+                <div class="schedule-card" data-sch="sch-prof" data-exam-key="주택관리사">
+                    <div class="sch-card-top">
+                        <span class="sch-org">한국산업인력공단 (Q-Net)</span>
+                        <span class="dday-badge" data-date="2026-07-11">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag">관리 전문직</span>
+                            <h3>주택관리사(보) 제29회</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">📝 1차 접수</span><span class="tl-val">2026.05.18(월) ~ 05.22(금)</span></li>
+                            <li><span class="tl-label">🎯 1차 시험일</span><span class="tl-val highlight">2026.07.11 (토)</span></li>
+                            <li><span class="tl-label">🎯 2차 시험일</span><span class="tl-val">2026.09.26 (토)</span></li>
+                            <li><span class="tl-label">📢 최종 발표</span><span class="tl-val">2026.12.09 (수)</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 과목:</strong> 1차(회계원리, 공동주택시설개론, 민법) / 2차(주택관리관계법규, 공동주택관리실무 상대평가)
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="주택관리사">
+                            ⚡ 주택관리사 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 6. 재경관리사 5월/9월 정기시험 -->
+                <div class="schedule-card" data-sch="sch-prof" data-exam-key="재경관리사">
+                    <div class="sch-card-top">
+                        <span class="sch-org">삼일회계법인 국가공인</span>
+                        <span class="dday-badge" data-date="2026-05-23">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag">재무회계 필수</span>
+                            <h3>재경관리사 (2026 정기 3회/5회)</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">📝 3회 접수</span><span class="tl-val">2026.04.27 ~ 05.08</span></li>
+                            <li><span class="tl-label">🎯 3회 시험일</span><span class="tl-val highlight">2026.05.23 (토)</span></li>
+                            <li><span class="tl-label">🎯 5회 시험일</span><span class="tl-val">2026.09.19 (토)</span></li>
+                            <li><span class="tl-label">📢 합격 발표</span><span class="tl-val">시험 후 익주 금요일</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 시험 과목:</strong> 재무회계, 세무회계, 원가관리회계 (각 40문항, 120문항 객관식 70점 이상 합격)
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="재경관리사">
+                            ⚡ 재경관리사 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 7. 전산세무 1급/2급 및 전산회계 1급 -->
+                <div class="schedule-card" data-sch="sch-prof" data-exam-key="전산세무회계">
+                    <div class="sch-card-top">
+                        <span class="sch-org">한국세무사회 국가공인</span>
+                        <span class="dday-badge" data-date="2026-06-07">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag">실무 실기자격</span>
+                            <h3>전산세무 2급·1급 / 전산회계 1급</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">📝 원서 접수</span><span class="tl-val">2026.05.07 ~ 05.13</span></li>
+                            <li><span class="tl-label">🎯 시험 일자</span><span class="tl-val highlight">2026.06.07 (일)</span></li>
+                            <li><span class="tl-label">🎯 다음 회차</span><span class="tl-val">2026.08.02 (일) / 10.11(일)</span></li>
+                            <li><span class="tl-label">📢 합격 발표</span><span class="tl-val">시험 2주 후 발표</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 시험 구성:</strong> 이론 30% (객관식) + KcLep 케이렙 실무 70% (전표입력, 결산, 부가세/연말정산 70점 이상)
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="전산세무회계">
+                            ⚡ 전산세무회계 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 8. 9급 국가직 공무원 (일반행정/세무직) -->
+                <div class="schedule-card hot-exam" data-sch="sch-gov" data-exam-key="9급일반행정">
+                    <div class="sch-card-top">
+                        <span class="sch-org">인사혁신처 사이버국가고시</span>
+                        <span class="dday-badge" data-date="2026-03-28">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag gold">공무원 최다응시</span>
+                            <h3>9급 국가직 공무원 공채</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">📝 원서 접수</span><span class="tl-val">2026.01.18(일) ~ 01.22(목)</span></li>
+                            <li><span class="tl-label">🎯 필기 시험</span><span class="tl-val highlight">2026.03.28 (토)</span></li>
+                            <li><span class="tl-label">🗣️ 면접 시험</span><span class="tl-val">2026.05.27 ~ 06.02</span></li>
+                            <li><span class="tl-label">📢 최종 발표</span><span class="tl-val">2026.06.19 (금)</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 행정직 5과목:</strong> 국어, 영어, 한국사, 행정법총론, 행정학개론 | 과목당 20문항 100분 풀이
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="9급일반행정">
+                            ⚡ 9급 국가직 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 9. 9급 지방직 공무원 (지자체 통합) -->
+                <div class="schedule-card hot-exam" data-sch="sch-gov" data-exam-key="9급일반행정">
+                    <div class="sch-card-top">
+                        <span class="sch-org">17개 시·도 지자체 통합</span>
+                        <span class="dday-badge" data-date="2026-06-20">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag gold">지역 인재 공채</span>
+                            <h3>9급 지방직 공무원 공채</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">📝 원서 접수</span><span class="tl-val">2026.03.23(월) ~ 03.27(금)</span></li>
+                            <li><span class="tl-label">🎯 필기 시험</span><span class="tl-val highlight">2026.06.20 (토)</span></li>
+                            <li><span class="tl-label">🗣️ 면접 시험</span><span class="tl-val">2026.07월 ~ 08월 지자체별</span></li>
+                            <li><span class="tl-label">📢 최종 발표</span><span class="tl-val">2026.08월 말 ~ 09월 초</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 과목:</strong> 국어, 영어, 한국사, 행정법총론, 행정학개론 (거주지 제한 요건 필수 확인)
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="9급일반행정">
+                            ⚡ 9급 지방직 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 10. 9급 세무직 공무원 (국세청) -->
+                <div class="schedule-card" data-sch="sch-gov" data-exam-key="9급세무직">
+                    <div class="sch-card-top">
+                        <span class="sch-org">국세청 인사혁신처</span>
+                        <span class="dday-badge" data-date="2026-03-28">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag">대규모 채용직렬</span>
+                            <h3>9급 세무직 공무원 (국가직)</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">📝 원서 접수</span><span class="tl-val">2026.01.18 ~ 01.22</span></li>
+                            <li><span class="tl-label">🎯 필기 시험</span><span class="tl-val highlight">2026.03.28 (토)</span></li>
+                            <li><span class="tl-label">🗣️ 면접 시험</span><span class="tl-val">2026.05.27 ~ 06.02</span></li>
+                            <li><span class="tl-label">📢 최종 발표</span><span class="tl-val">2026.06.19 (금)</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 전문 5과목:</strong> 국어, 영어, 한국사, 세법개론, 회계학(재무/원가) | 과락 방지 및 계산속도 핵심
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="9급세무직">
+                            ⚡ 9급 세무직 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 11. 7급 국가직 공무원 (1차 PSAT / 2차) -->
+                <div class="schedule-card" data-sch="sch-gov" data-exam-key="7급일반행정">
+                    <div class="sch-card-top">
+                        <span class="sch-org">인사혁신처 국가직 7급</span>
+                        <span class="dday-badge" data-date="2026-07-18">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag">중앙부처 공채</span>
+                            <h3>7급 국가직 공무원 (PSAT & 2차)</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">📝 원서 접수</span><span class="tl-val">2026.05.11(월) ~ 05.15(금)</span></li>
+                            <li><span class="tl-label">🎯 1차 PSAT</span><span class="tl-val highlight">2026.07.18 (토)</span></li>
+                            <li><span class="tl-label">🎯 2차 필기</span><span class="tl-val">2026.09.19 (토)</span></li>
+                            <li><span class="tl-label">📢 최종 발표</span><span class="tl-val">2026.11.27 (금)</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 1차:</strong> 언어논리, 상황판단, 자료해석(PSAT) / <strong>2차:</strong> 헌법, 행정법, 행정학, 경제학 (토익 790점/한능검 2급 대체)
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="7급일반행정">
+                            ⚡ 7급 국가직 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 12. 경찰공무원 순경 공채 (1차 / 2차) -->
+                <div class="schedule-card" data-sch="sch-gov" data-exam-key="경찰순경">
+                    <div class="sch-card-top">
+                        <span class="sch-org">경찰청 공채</span>
+                        <span class="dday-badge" data-date="2026-03-21">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag">치안 경찰관</span>
+                            <h3>경찰공무원 (순경 상반기/하반기)</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">🎯 1차 필기</span><span class="tl-val highlight">2026.03.21 (토)</span></li>
+                            <li><span class="tl-label">🎯 2차 필기</span><span class="tl-val">2026.08.22 (토)</span></li>
+                            <li><span class="tl-label">🏃 체력/적성</span><span class="tl-val">1차: 4~5월 / 2차: 9~10월</span></li>
+                            <li><span class="tl-label">📢 최종 발표</span><span class="tl-val">1차 06.12 / 2차 11.27</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 필기 3과목:</strong> 헌법(50점), 형사법(100점), 경찰학(100점) | 검정제(토익 550점, 한능검 3급)
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="경찰순경">
+                            ⚡ 경찰공무원 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 13. 소방공무원 공채 -->
+                <div class="schedule-card" data-sch="sch-gov" data-exam-key="소방공무원">
+                    <div class="sch-card-top">
+                        <span class="sch-org">소방청 119</span>
+                        <span class="dday-badge" data-date="2026-03-28">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag">소방관 채용</span>
+                            <h3>소방공무원 공개채용 (소방사)</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">📝 원서 접수</span><span class="tl-val">2026.02.16 ~ 02.20</span></li>
+                            <li><span class="tl-label">🎯 필기 시험</span><span class="tl-val highlight">2026.03.28 (토)</span></li>
+                            <li><span class="tl-label">🏃 체력 시험</span><span class="tl-val">2026.04.28 ~ 05.15</span></li>
+                            <li><span class="tl-label">📢 최종 발표</span><span class="tl-val">2026.07.17 (금)</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 필기 3과목:</strong> 소방학개론(25문항), 소방관계법규(25문항), 행정법총론(25문항) (영어/한국사 검정제)
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="소방공무원">
+                            ⚡ 소방공무원 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 14. 전기기사 2026 정기 1회/2회 -->
+                <div class="schedule-card hot-exam" data-sch="sch-tech" data-exam-key="전기기사">
+                    <div class="sch-card-top">
+                        <span class="sch-org">한국산업인력공단 (Q-Net)</span>
+                        <span class="dday-badge" data-date="2026-03-08">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag gold">국가기술 기사 1위</span>
+                            <h3>전기기사 (2026 정기 1회·2회)</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">🎯 1회 필기</span><span class="tl-val highlight">2026.03.08 (CBT)</span></li>
+                            <li><span class="tl-label">🎯 1회 실기</span><span class="tl-val">2026.04.26 (일)</span></li>
+                            <li><span class="tl-label">🎯 2회 필기</span><span class="tl-val">2026.05.24 (CBT)</span></li>
+                            <li><span class="tl-label">🎯 2회 실기</span><span class="tl-val">2026.07.12 (일)</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 필기 5과목:</strong> 전자기학, 전력공학, 전기기기, 회로이론/제어공학, 전기설비판단기준 | 실기 필답형
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="전기기사">
+                            ⚡ 전기기사 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 15. 정보처리기사 2026 정기 1회/2회 -->
+                <div class="schedule-card hot-exam" data-sch="sch-tech" data-exam-key="정보처리기사">
+                    <div class="sch-card-top">
+                        <span class="sch-org">한국산업인력공단 (Q-Net)</span>
+                        <span class="dday-badge" data-date="2026-03-02">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag">IT 개발/공기업 필수</span>
+                            <h3>정보처리기사 (2026 정기 1회·2회)</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">🎯 1회 필기</span><span class="tl-val highlight">2026.03.02 (CBT)</span></li>
+                            <li><span class="tl-label">🎯 1회 실기</span><span class="tl-val">2026.04.26 (일)</span></li>
+                            <li><span class="tl-label">🎯 2회 필기</span><span class="tl-val">2026.05.17 (CBT)</span></li>
+                            <li><span class="tl-label">🎯 2회 실기</span><span class="tl-val">2026.07.26 (일)</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 필기:</strong> 소프트웨어설계/개발, DB구축, 프로그래밍언어, 정보시스템 | 실기 프로그래밍 & SQL 주관식
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="정보처리기사">
+                            ⚡ 정보처리기사 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 16. 산업안전기사 2026 정기 1회/2회 -->
+                <div class="schedule-card" data-sch="sch-tech" data-exam-key="산업안전기사">
+                    <div class="sch-card-top">
+                        <span class="sch-org">한국산업인력공단 (Q-Net)</span>
+                        <span class="dday-badge" data-date="2026-03-08">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag">중대재해처벌법 필수</span>
+                            <h3>산업안전기사 (2026 정기 1회·2회)</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">🎯 1회 필기</span><span class="tl-val highlight">2026.03.08 (CBT)</span></li>
+                            <li><span class="tl-label">🎯 1회 실기</span><span class="tl-val">2026.04.26 (필답) / 05.03(작업)</span></li>
+                            <li><span class="tl-label">🎯 2회 필기</span><span class="tl-val">2026.05.24 (CBT)</span></li>
+                            <li><span class="tl-label">🎯 2회 실기</span><span class="tl-val">2026.07.12 (필답/작업)</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 필기 6과목:</strong> 안전관리론, 인간공학, 기계/전기/화학/건설안전 | 실기 복합형(필답 55점 + 작업 45점)
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="산업안전기사">
+                            ⚡ 산업안전기사 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 17. 토익 (TOEIC) 정기시험 상반기 대표 회차 -->
+                <div class="schedule-card hot-exam" data-sch="sch-job" data-exam-key="토익850">
+                    <div class="sch-card-top">
+                        <span class="sch-org">YBM 한국TOEIC위원회</span>
+                        <span class="dday-badge" data-date="2026-04-26">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag gold">어학 스펙 1위</span>
+                            <h3>토익 (TOEIC 534회 / 535회 정기)</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">🎯 4월 정기</span><span class="tl-val highlight">2026.04.26 (일) 오전</span></li>
+                            <li><span class="tl-label">🎯 5월 정기</span><span class="tl-val">2026.05.10 (일) / 05.31(일)</span></li>
+                            <li><span class="tl-label">🎯 여름방학</span><span class="tl-val">2026.07.12 (일) / 07.26(일)</span></li>
+                            <li><span class="tl-label">📢 성적 발표</span><span class="tl-val">시험 후 약 10일 후 (화요일 낮 12시)</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 구성:</strong> LC 100문항(495점 / 45분) + RC 100문항(495점 / 75분) | 990점 만점 상대평가
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="토익850">
+                            ⚡ 토익 850+ 단기속성 AI 플랜 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 18. 한국사능력검정시험 (한능검 제74회/75회) -->
+                <div class="schedule-card" data-sch="sch-job" data-exam-key="한능검1급">
+                    <div class="sch-card-top">
+                        <span class="sch-org">국사편찬위원회</span>
+                        <span class="dday-badge" data-date="2026-05-23">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag">공무원·공기업 필수</span>
+                            <h3>한국사능력검정시험 (심화 74회·75회)</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">📝 74회 접수</span><span class="tl-val">2026.04.21 ~ 04.28</span></li>
+                            <li><span class="tl-label">🎯 74회 시험일</span><span class="tl-val highlight">2026.05.23 (토)</span></li>
+                            <li><span class="tl-label">🎯 75회 시험일</span><span class="tl-val">2026.08.08 (토)</span></li>
+                            <li><span class="tl-label">📢 성적 발표</span><span class="tl-val">시험 2주 후 금요일</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 심화 등급:</strong> 1급(80점 이상), 2급(70~79점), 3급(60~69점) | 50문항 5지선다형 100점 만점
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="한능검1급">
+                            ⚡ 한능검 1급 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 19. 컴퓨터활용능력 1급 실기 (상시시험) -->
+                <div class="schedule-card" data-sch="sch-job" data-exam-key="컴활1급">
+                    <div class="sch-card-top">
+                        <span class="sch-org">대한상공회의소 자격평가</span>
+                        <span class="dday-badge" data-date="2026-04-30">상시시험 진행</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag">공기업 가산점 1위</span>
+                            <h3>컴퓨터활용능력 (1급 실기)</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">📝 원서 접수</span><span class="tl-val">매주 상시 원서 접수 (개설일 4일 전까지)</span></li>
+                            <li><span class="tl-label">🎯 시험 일자</span><span class="tl-val highlight">2026 연중 상시 (원하는 날짜 선택)</span></li>
+                            <li><span class="tl-label">📢 결과 발표</span><span class="tl-val">시험 2주 뒤 금요일 09:00</span></li>
+                            <li><span class="tl-label">💡 유효 기간</span><span class="tl-val">필기 합격 후 2년 내 실기 합격</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 실기 구성:</strong> 엑셀(스프레드시트 45분) + 액세스(데이터베이스 45분) | 두 과목 모두 70점 이상 합격
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="컴활1급">
+                            ⚡ 컴활 1급 실기 AI 플랜 자동 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 20. 2026 상반기 공기업 NCS & 대기업 인적성 시즌 -->
+                <div class="schedule-card" data-sch="sch-job" data-exam-key="공기업NCS">
+                    <div class="sch-card-top">
+                        <span class="sch-org">주요 공기업·대기업 채용</span>
+                        <span class="dday-badge" data-date="2026-04-18">D-Day 계산중</span>
+                    </div>
+                    <div class="sch-card-body">
+                        <div class="sch-title-row">
+                            <span class="sch-cat-tag gold">취업 필기 시즌</span>
+                            <h3>2026 상반기 공기업 NCS & 전공필기</h3>
+                        </div>
+                        <ul class="sch-timeline-list">
+                            <li><span class="tl-label">📝 서류 마감</span><span class="tl-val">2026.03월 중순 ~ 04월 초</span></li>
+                            <li><span class="tl-label">🎯 NCS 필기</span><span class="tl-val highlight">2026.04.18 ~ 05.16 집중</span></li>
+                            <li><span class="tl-label">🗣️ 면접 전형</span><span class="tl-val">2026.05월 말 ~ 06월 중순</span></li>
+                            <li><span class="tl-label">📢 최종 입사</span><span class="tl-val">2026.06월 말 ~ 07월 초</span></li>
+                        </ul>
+                        <div class="sch-subject-box">
+                            <strong>📌 전형:</strong> 의사소통, 수리, 문제해결(PSAT형) + 경영/경제/행정 전공필기 단권화
+                        </div>
+                    </div>
+                    <div class="sch-card-footer">
+                        <button type="button" class="btn-sch-apply" data-exam-key="공기업NCS">
+                            ⚡ 공기업 NCS/전공 AI 플랜 완성하기 ➔
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 
     <!-- [뷰 2] 자격증 과정 상세 안내 및 1-Click 연동 -->
     <section id="view-license" class="tab-view">
@@ -2039,7 +2714,7 @@
         </div>
     </footer>
 
-    <script src="{{ url_for('static', filename='js/app.js') }}?v=2.3"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}?v=2.4"></script>
 
     <!-- ========================================================================= -->
     <!-- 모바일 전용 앱 독 바 (Mobile Bottom Navigation Bar) -->

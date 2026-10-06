@@ -1,11 +1,11 @@
 // eduwe Service Worker
-const CACHE_NAME = 'eduwe-cache-v3';
+const CACHE_NAME = 'eduwe-cache-v4';
 const ASSETS_TO_CACHE = [
   '/',
   '/static/css/style.css',
-  '/static/css/style.css?v=2.3',
+  '/static/css/style.css?v=2.4',
   '/static/js/app.js',
-  '/static/js/app.js?v=2.3',
+  '/static/js/app.js?v=2.4',
   '/static/manifest.json',
   '/static/icons/icon.svg',
   '/static/icons/icon-192.png',
